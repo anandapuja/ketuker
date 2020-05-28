@@ -71,8 +71,8 @@ export const typeDefs = gql`
     register(input: UserRegister): User!
     login(input: UserLogin): User!
 
-    addProduct(id: ID!, input: InputProduct): Product!
-    updateProduct(id: ID!, input: InputProduct): Output!
+    addProduct(input: InputProduct!): Product!
+    updateProduct(id: ID!, input: InputProduct!): Output!
     deleteProduct(id: ID!): Output!
   }
 `;
@@ -97,13 +97,15 @@ export const resolvers = {
     },
 
     getProducts: async () => {
-      const getProducts = JSON.parse(await redis.get('products'));
-      if (getProducts) {
-        return getProducts;
-      } else {
-        const getAllProducts = await Product.find();
-        await redis.set('products', JSON.stringify(getAllProducts));
-      }
+      // await redis.del('products');
+      // const getProducts = JSON.parse(await redis.get('products'));
+      // if (getProducts) {
+      //   return getProducts;
+      // } else {
+      const getAllProducts = await Product.find();
+      // await redis.set('products', JSON.stringify(getAllProducts));
+      // }
+      return getAllProducts;
     },
     getProduct: async (_, { id }) => {
       const getOneProduct = await Product.findOne({ _id: id });
@@ -136,12 +138,12 @@ export const resolvers = {
       }
     },
 
-    addProduct: async (_, { id, input }) => {
+    addProduct: async (_, { input }) => {
       await redis.del('products');
 
-      const { title, description, price, whislist, category, image, submit } = input;
+      const { userId, title, description, price, whislist, category, image, submit } = input;
       const newProduct = new Product({
-        userId: id,
+        userId,
         title,
         description,
         price,
@@ -155,9 +157,7 @@ export const resolvers = {
       const getAllProducts = await Product.find();
       await redis.set('products', JSON.stringify(getAllProducts));
 
-      return {
-        result: 'Successfully added product',
-      };
+      return newProduct;
     },
     updateProduct: async (_, { id, input }) => {
       await redis.del('products');
