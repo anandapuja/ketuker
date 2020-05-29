@@ -6,7 +6,7 @@ import { graphqlTestCall } from './utils/graphqlTestCall';
 const addProduct = `
   mutation addProduct($input: InputProduct!) {
     addProduct(input: $input) {
-      id
+      _id
       title
       description
       price
@@ -38,7 +38,7 @@ const deleteProduct = `
 const registerMutation = `
   mutation registerUser($input: UserRegister) {
     register(input:$input) {
-      id
+      _id
       username
       token
     }
@@ -60,8 +60,8 @@ beforeAll(async () => {
   const res = await graphqlTestCall(registerMutation, { input } );
   const { data: { register: { username } } } = res;
   const { data: { register: { token } } } = res;
-  const { data: { register: { id } } } = res;
-  existId = id;
+  const { data: { register: { _id } } } = res;
+  existId = _id;
   tokenUser = token;
   expect(username).toBe(user.username);
 });
@@ -81,8 +81,8 @@ describe('Test product mutation', () => {
     const input = product;
     const res = await graphqlTestCall(addProduct, { input }, tokenUser);
     const { data: { addProduct: { userId } } } = res;
-    const { data: { addProduct: { id } } } = res;
-    prodId = id;
+    const { data: { addProduct: { _id } } } = res;
+    prodId = _id;
     expect(userId).toEqual(existId);
   });
 

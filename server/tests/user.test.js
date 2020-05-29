@@ -8,7 +8,7 @@ const registerMutation = `
     register(input:$input) {
       token
       username
-      id
+      _id
     }
   }
 `;
@@ -18,7 +18,7 @@ const loginMutation = `
     login(input: $input) {
       token
       username
-      id
+      _id
     }
   }
 `;
@@ -70,8 +70,8 @@ describe('Test Mutation User', () => {
     const input = user;
     const res = await graphqlTestCall(registerMutation, { input } );
     const { data: { register: { username } } } = res;
-    const { data: { register: { id } } } = res;
-    existId = id;
+    const { data: { register: { _id } } } = res;
+    existId = _id;
     expect(username).toBe(user.username);
   });
 

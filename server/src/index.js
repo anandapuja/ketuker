@@ -9,7 +9,21 @@ mongoose.connect('mongodb://localhost:27017/ketuker', {
   useCreateIndex: true,
 });
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({ typeDefs, resolvers,
+  // context: async ({ req }) => {
+  //   if (req) {
+  //     const me = await getUser(req);
+
+  //     return {
+  //       me,
+  //       models: {
+  //         userModel,
+  //         postModel,
+  //       },
+  //     };
+  //   }
+  // },
+});
 
 server.listen().then(({ url }) => {
   console.log(`Listening on port: ${url}`);

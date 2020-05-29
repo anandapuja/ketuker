@@ -10,7 +10,7 @@ import { authen, author } from '../utilities/authenticagtion';
 
 export const typeDefs = gql`
   type User {
-    id: ID!
+    _id: ID!
     username: String!
     email: String!
     password: String!
@@ -35,7 +35,7 @@ export const typeDefs = gql`
   }
 
   type Product {
-    id: ID!
+    _id: ID!
     userId: String!
     title: String!
     description: String!
@@ -147,7 +147,7 @@ export const resolvers = {
       } else {
         const res = await newUser.save();
         const token = jwt.sign({ email }, 'rahasia');
-        return { id: res._id, ...res._doc, token };
+        return { _id: res._id, ...res._doc, token };
       }
     },
     login: async (_, { input }) => {
@@ -163,12 +163,13 @@ export const resolvers = {
           const token = jwt.sign({ email }, 'rahasia');
           const { _id, username, email, avatar, address, phone } = getUser;
           return {
-            id: _id,
+            _id: _id,
             username,
             avatar,
             address,
             phone,
             email,
+            password,
             token
           };
         }
