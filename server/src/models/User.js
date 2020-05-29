@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    min: [6, 'too few charachters'],
+    minlength: [ 6, 'too few charachters' ],
   },
   avatar: {
     type: String,
@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema({
   phone: {
     type: String,
     required: true,
-    min: [10, 'too few charachters'],
+    minlength: [ 10, 'too few charachters' ],
   },
 });
 

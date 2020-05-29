@@ -115,9 +115,18 @@ export const resolvers = {
   Mutation: {
     register: async (_, { input }) => {
       const newUser = new User(input);
-      await newUser.save();
-
-      return newUser;
+      const error = newUser.validateSync();
+      // console.log(error, '<<<<<<<<<<<<');
+      if (error) {
+        if (error.errors.password) {
+          throw new Error (error.errors.password.properties.message);
+        } else {
+          throw new Error (error.errors.phone.properties.message);
+        }
+      } else {
+        await newUser.save();
+        return newUser;
+      }
     },
     login: async (_, { input }) => {
       await redis.flushall();
