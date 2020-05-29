@@ -4,7 +4,11 @@
   "description": "ketuker-server",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --runInBand --detectOpenHandles",
+    "coverage": "jest --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "dev": "nodemon --exec npx babel-node src/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -22,8 +26,12 @@
     "@babel/core": "^7.10.1",
     "@babel/node": "^7.10.1",
     "@babel/preset-env": "^7.10.1",
+    "apollo-boost": "^0.4.9",
+    "babel-polyfill": "^6.26.0",
     "eslint": "^7.1.0",
-    "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-plugin-import": "^2.20.2"
+    "jest": "^26.0.1"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
