@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt';
 import redis from '../utilities/redis';
 import User from '../models/User';
 import Product from '../models/Product';
-import { authen } from '../utilities/authenticagtion';
+import { authen, author } from '../utilities/authenticagtion';
 
 export const typeDefs = gql`
   type User {
@@ -128,7 +128,7 @@ export const resolvers = {
       } else {
         const getOneProduct = await Product.findOne({ _id: id });
         products.push(getOneProduct);
-        redis.set('products', JSON.stringify(products));
+        await redis.set('products', JSON.stringify(products));
         return getOneProduct;
       }
     },
@@ -161,7 +161,6 @@ export const resolvers = {
         } else {
           //kalo secretPrivateKey gw taruh di .env masih error. sementara gtu.
           const token = jwt.sign({ email }, 'rahasia');
-          await redis.set('token', token);
           const { _id, username, email, avatar, address, phone } = getUser;
           return {
             id: _id,
@@ -184,7 +183,7 @@ export const resolvers = {
 
       const userAuth = await authen(token);
       const user = await User.findOne({ email: userAuth.email });
-      if (!user) throw new Error('You have to login');
+      if (!user) throw new Error('You have to login!');
       const newProduct = new Product({
         title,
         description,
@@ -201,11 +200,15 @@ export const resolvers = {
 
       return newProduct;
     },
-    updateProduct: async (_, { id, input }) => {
-      await redis.del('products');
+    updateProduct: async (_, { id, input }, { req }) => {
       const { title, description, price, whislist, category, image, submit } = input;
-      const updateProduct = await Product.findOne({ _id: id });
+      const { token } = req.session;
 
+      const userAuth = await authen(token);
+      const user = await User.findOne({ email: userAuth.email });
+      if (!user) throw new Error('You have to login!');
+      if (!author({ userId: user._id, prodId: id })) throw new Error('You are not authorized!');
+      const updateProduct = await Product.findOne({ _id: id });
       updateProduct.title = title;
       updateProduct.description = description;
       updateProduct.price = price;
@@ -215,19 +218,36 @@ export const resolvers = {
       updateProduct.submit = submit;
 
       await updateProduct.save();
-      const getAllProducts = await Product.find();
-      await redis.set('products', JSON.stringify(getAllProducts));
-
+      const products = JSON.parse(await redis.get('products'));
+      const newProducts = products.filter(el => el._id != id);
+      if (newProducts.length) {
+        newProducts.push(updateProduct);
+        await redis.set('products', JSON.stringify(newProducts));
+      } else {
+        const allProducst = await Product.find();
+        await redis.set('products', JSON.stringify(allProducst));
+      }
       return {
-        result: 'Successfully updated product!',
+        result: 'Succesfully updated product!',
       };
     },
-    deleteProduct: async (_, { id }) => {
-      await redis.del('products');
+    deleteProduct: async (_, { id }, { req }) => {
+      const { token } = req.session;
+      const userAuth = await authen(token);
+      const user = await User.findOne({ email: userAuth.email });
+      if (!user) throw new Error('You have to login!');
+      if (!author({ userId: user._id, prodId: id }));
+
       await Product.deleteOne({ _id: id });
 
-      const getAllProducts = await Product.find();
-      await redis.set('products', JSON.stringify(getAllProducts));
+      const products = JSON.parse(await redis.get('products'));
+      const newProducts = products.filter(el => el._id != id);
+      if (newProducts.length) {
+        await redis.set('products', JSON.stringify(newProducts));
+      } else {
+        const getAllProducts = await Product.find();
+        await redis.set('products', JSON.stringify(getAllProducts));
+      }
       return {
         result: 'Successfully deleted product!',
       };
