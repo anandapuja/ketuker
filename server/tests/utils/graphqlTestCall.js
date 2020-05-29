@@ -13,11 +13,7 @@ export const graphqlTestCall = async (query, variables=null, token=null) => {
     
     // { id },
     {
-      req: {
-        session: {
-          token
-        }
-      },
+      req: { headers: { token } },
       res: {
         clearCookie: () => {}
       }
