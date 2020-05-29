@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect
 } from "react-router-dom";
 import {
   Register,
@@ -11,14 +12,25 @@ import {
 } from './pages';
 
 function App () {
+
+  if(localStorage.getItem('token')){
+    return (
+      <Router>
+        <h3>KEtuker Login Register</h3>
+        <Switch>
+          <Route path="/register" component={ Register } />
+          <Route path="/login" component={ Login } />
+          <Redirect to={`/login`} />
+        </Switch>
+      </Router>
+    );
+  }
+
   return (
-    <Router>
-      <Switch>
-        <Route path="/register" component={ Register } />
-        <Route path="/login" component={ Login } />
-      </Switch>
-    </Router>
-  );
+    <>
+      <div>Ketuker</div>
+    </>
+  )
 }
 
 export default App;
