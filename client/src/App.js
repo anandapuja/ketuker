@@ -4,16 +4,22 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-} from "react-router-dom";
+} from 'react-router-dom';
 import {
   Register,
-  Login
+  Login,
+  Home
 } from './pages';
+import {
+  HeaderMain
+} from './components';
 
 function App () {
   return (
     <Router>
+      <HeaderMain />
       <Switch>
+        <Route exact path="/" component={ Home } />
         <Route path="/register" component={ Register } />
         <Route path="/login" component={ Login } />
       </Switch>
