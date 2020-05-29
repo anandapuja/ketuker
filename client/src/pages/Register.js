@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { storage } from '../src/storage/firebase'
+import {useHistory} from "react-router-dom";
+import { storage } from '../storage/firebase'
 
-function LoginRegister(){
-  const [isRegister, setRegister] = useState(false)
+function Register(){
+
+  const history = useHistory()
+
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -11,45 +14,10 @@ function LoginRegister(){
   const [address, setAddress] = useState('')
   const [phone, setPhone] = useState('')
 
-  function ToRegister(){
-    setRegister(true)
-  }
-
   function ToLogin(){
-    setRegister(false)
+    history.push('/login')
   }
 
-  function onHandleLogin(e){
-    console.log(e.target.value,"-----")
-    let str = e.target.value
-    console.log(str, "---target value")
-    if(str.match(/@/g)){
-      console.log(str,"====email")
-      setEmail(str)
-    } else {
-      console.log(str,"===username")
-      setUsername(str)
-    }
-  }
-  
-  function SubmitLogin(e){
-    e.preventDefault();
-    console.log('submitLogin')
-    console.log(username, "username / email", email)
-    let data
-    if(email){
-      data= {
-        email: email,
-        password: password
-      }
-    } else {
-      data= {
-        username: username,
-        password: password
-      }
-    }
-    console.log(data, "---data")
-  }
 
   function SubmitRegister(e){
     e.preventDefault()
@@ -98,7 +66,6 @@ function LoginRegister(){
 	}
 
 
-  if(isRegister){
     return (
       <div>
         <h3>Page Register</h3>
@@ -144,24 +111,19 @@ function LoginRegister(){
         <button onClick={ToLogin}>Sign in</button>
       </div>
     )
-  }
-
-
-  return (
-    <div>
-      <h3>Page Login</h3>
-      <form onSubmit={SubmitLogin}>
-          <label>Username/ Email</label>
-          <input onChange={onHandleLogin} type='text' placeholder='input your registered  username/email'></input>
-          <label>Password</label>
-          <input onChange={(e)=>setPassword(e.target.value)} type="password"></input>
-          <button>Login</button>
-        </form>
-
-      <button onClick={ToRegister}>Sign Up</button>
-    </div>
-  )
 
 }
 
-export default LoginRegister
+export default Register
+
+
+
+// import React from 'react';
+
+// export default function Register () {
+//   return (
+//     <>
+//       Register
+//     </>
+//   );
+// }
