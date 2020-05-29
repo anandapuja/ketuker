@@ -8,20 +8,24 @@ import {
 import {
   Register,
   Login,
-  Home
+  Home,
+  Category
 } from './pages';
 import {
-  HeaderMain
+  HeaderMain,
+  Navigation
 } from './components';
 
 function App () {
   return (
     <Router>
       <HeaderMain />
+      <Navigation />
       <Switch>
         <Route exact path="/" component={ Home } />
         <Route path="/register" component={ Register } />
         <Route path="/login" component={ Login } />
+        <Route path="/category" component={ Category } />
       </Switch>
     </Router>
   );
