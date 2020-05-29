@@ -11,6 +11,14 @@ const registerMutation = `
   }
 `;
 
+const loginMutation = `
+  mutation loginUser($input: UserLogin) {
+    login(input: $input) {
+      username
+    }
+  }
+`;
+
 beforeAll(async () => await setUpTest());
 
 describe('Test User', () => {
@@ -57,5 +65,38 @@ describe('Test User', () => {
     const res = await graphqlTestCall(registerMutation, { input } );
     const { errors: [ { message } ] } = res;
     expect(message).toEqual('E11000 duplicate key error collection: ketuker_test.users index: email_1 dup key: { email: "almas@fikri.com" }');
+  });
+
+  it('It should not login, password wrong', async () => {
+    const user = {
+      email: 'almas@fikri.com',
+      password: '123'
+    };
+    const input = user;
+    const res = await graphqlTestCall(loginMutation, { input });
+    const { errors: [ { message } ] } = res;
+    expect(message).toEqual('Wrong Password / Wrong Email');
+  });
+
+  it('It should not login, email wrong', async () => {
+    const user = {
+      email: 'asdad@csac.com',
+      password: 'jancok123'
+    };
+    const input = user;
+    const res = await graphqlTestCall(loginMutation, { input });
+    const { errors: [ { message } ] } = res;
+    expect(message).toEqual('Wrong Password / Wrong Email');
+  });
+
+  it('It should login existed user', async () => {
+    const user = {
+      email: 'almas@fikri.com',
+      password: 'jancok123'
+    };
+    const input = user;
+    const res = await graphqlTestCall(loginMutation, { input });
+    const { data: { login: { username } } } = res;
+    expect(username).toEqual('almasfikri');
   });
 });

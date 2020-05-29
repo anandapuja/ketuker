@@ -132,18 +132,19 @@ export const resolvers = {
       await redis.flushall();
       const { email, password } = input;
       const getUser = await User.findOne({ email });
-      const compare = await bcrypt.compare(password, getUser.password);
-
-      if (!compare) {
-        getUser.result = 'Wrong password!';
-
-        return getUser.result;
+      if (getUser) {
+        const compare = await bcrypt.compare(password, getUser.password);
+        if (!compare) {
+          throw new Error ('Wrong Password / Wrong Email');
+        } else {
+          //kalo secretPrivateKey gw taruh di .env masih error. sementara gtu.
+          const token = jwt.sign({ email }, 'rahasia');
+          await redis.set('token', token);
+  
+          return getUser;
+        }
       } else {
-        //kalo secretPrivateKey gw taruh di .env masih error. sementara gtu.
-        const token = jwt.sign({ email }, 'rahasia');
-        await redis.set('token', token);
-
-        return getUser;
+        throw new Error ('Wrong Password / Wrong Email');
       }
     },
 
