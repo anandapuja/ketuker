@@ -15,7 +15,7 @@ import { storage } from '../src/storage/firebase'
 
 function App () {
 
-  if(localStorage.getItem('token')){
+  if(!localStorage.getItem('token')){
     return (
       <Router>
         <h3>KEtuker Login Register</h3>
