@@ -9,7 +9,8 @@ import {
   Register,
   Login,
   Home,
-  Category
+  Category,
+  DetailItemUser
 } from './pages';
 import {
   HeaderMain,
@@ -26,6 +27,7 @@ function App () {
         <Route path="/register" component={ Register } />
         <Route path="/login" component={ Login } />
         <Route path="/category" component={ Category } />
+        <Route path="/barang/:id" component={ DetailItemUser } />
       </Switch>
     </Router>
   );

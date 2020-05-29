@@ -2,10 +2,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: ;
 }
 img{
   width: 100%;
+}
+a{
+  text-decoration: none;
+  color: #5415CE;
 }
 
 /* HEADER SECTION */
@@ -152,4 +155,84 @@ img{
 /* CATEGORY PAGE */
 .home-component h1{
   text-align: center;
+}
+
+/* DETAIL ITEM USER */
+.detail-item-user-container{
+  width: 1024px;
+  margin: 30px auto;
+}
+.detail-item-user-container h1{
+  text-align: center;
+  margin-bottom: 30px;
+  text-decoration: underline;
+  font-size: 50px;
+  color: rgb(51, 4, 145);
+}
+.detail-item-user-picwhis{
+  display: flex;
+  height: 500px !important;
+}
+
+/* DETAIL ITEM USER WHISLIST */
+.detail-item-user-whislist-wrap{
+  display: flex;
+  margin-bottom: 10px;
+}
+.detail-item-user-image{
+  width: 50%;
+}
+.detail-item-user-image img{
+  height: 500px;
+}
+.detail-item-user-descwhis{
+  width: 50%;
+  padding: 0 30px;
+  overflow: scroll;
+}
+.detail-item-user-descwhis h2{
+  margin-bottom: 20px;
+  font-size: 20px;
+  background-color: rgb(51, 4, 145);
+  color: #F9BE06;
+  padding: 10px 20px;
+}
+.item-user-whislist-image{
+  width: 20%;
+}
+.item-user-whislist-description{
+  padding: 0 20px;
+}
+.item-user-whislist-description p{
+  margin-bottom: 10px;
+}
+.detail-item-user-whislist-wrap{
+  border: 1px solid #eee;
+  padding: 10px
+}
+.item-user-whislist-description-title{
+  font-size: 22px;
+  font-weight: bold;
+}
+.detail-item-user-second{
+  width: 600px;
+  margin: 30px auto;
+}
+.detail-item-user-second h1{
+  color: rgb(51, 4, 145);
+}
+.detail-item-user-second p{
+  text-align: center;
+}
+.detail-item-user-second-category{
+  padding: 20px;
+  background-color: rgb(209, 209, 209);
+  margin: 40px 0;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.detail-item-user-second-category:hover{
+  background-color: rgb(187, 187, 187);
+  color: #000000;
+  text-decoration: underline;
 }
