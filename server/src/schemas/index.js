@@ -1,4 +1,5 @@
 import { gql } from 'apollo-server';
+const secret = process.env.JWT_SECRET;
 
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
@@ -6,11 +7,11 @@ import bcrypt from 'bcrypt';
 import redis from '../utilities/redis';
 import User from '../models/User';
 import Product from '../models/Product';
-import { authen } from '../utilities/authenticagtion';
+import { authen, author } from '../utilities/authenticagtion';
 
 export const typeDefs = gql`
   type User {
-    id: ID!
+    _id: ID!
     username: String!
     email: String!
     password: String!
@@ -35,7 +36,7 @@ export const typeDefs = gql`
   }
 
   type Product {
-    id: ID!
+    _id: ID!
     userId: String!
     title: String!
     description: String!
@@ -128,14 +129,13 @@ export const resolvers = {
       } else {
         const getOneProduct = await Product.findOne({ _id: id });
         products.push(getOneProduct);
-        redis.set('products', JSON.stringify(products));
+        await redis.set('products', JSON.stringify(products));
         return getOneProduct;
       }
     },
   },
   Mutation: {
     register: async (_, { input }) => {
-      const { email } = input;
       const newUser = new User(input);
       const error = newUser.validateSync();
       if (error) {
@@ -146,8 +146,8 @@ export const resolvers = {
         }
       } else {
         const res = await newUser.save();
-        const token = jwt.sign({ email }, 'rahasia');
-        return { id: res._id, ...res._doc, token };
+        const token = jwt.sign({ id: newUser._id }, secret);
+        return { _id: res._id, ...res._doc, token };
       }
     },
     login: async (_, { input }) => {
@@ -160,16 +160,16 @@ export const resolvers = {
           throw new Error ('Wrong Password / Wrong Email');
         } else {
           //kalo secretPrivateKey gw taruh di .env masih error. sementara gtu.
-          const token = jwt.sign({ email }, 'rahasia');
-          await redis.set('token', token);
+          const token = jwt.sign({ id: getUser._id }, secret);
           const { _id, username, email, avatar, address, phone } = getUser;
           return {
-            id: _id,
+            _id: _id,
             username,
             avatar,
             address,
             phone,
             email,
+            password,
             token
           };
         }
@@ -178,13 +178,11 @@ export const resolvers = {
       }
     },
 
-    addProduct: async (_, { input }, { req }) => {
+    addProduct: async (_, { input }, { req: { headers: { token } } }) => {
       const { title, description, price, whislist, category, image, submit } = input;
-      const { token } = req.session;
-
       const userAuth = await authen(token);
-      const user = await User.findOne({ email: userAuth.email });
-      if (!user) throw new Error('You have to login');
+      const user = await User.findOne({ _id: userAuth.id });
+      if (!user) throw new Error('You have to login!');
       const newProduct = new Product({
         title,
         description,
@@ -201,11 +199,14 @@ export const resolvers = {
 
       return newProduct;
     },
-    updateProduct: async (_, { id, input }) => {
-      await redis.del('products');
+    updateProduct: async (_, { id, input }, { req: { headers: { token } } }) => {
       const { title, description, price, whislist, category, image, submit } = input;
-      const updateProduct = await Product.findOne({ _id: id });
 
+      const userAuth = await authen(token);
+      const user = await User.findOne({ _id: userAuth.id });
+      if (!user) throw new Error('You have to login!');
+      if (!author({ userId: user._id, prodId: id })) throw new Error('You are not authorized!');
+      const updateProduct = await Product.findOne({ _id: id });
       updateProduct.title = title;
       updateProduct.description = description;
       updateProduct.price = price;
@@ -215,19 +216,35 @@ export const resolvers = {
       updateProduct.submit = submit;
 
       await updateProduct.save();
-      const getAllProducts = await Product.find();
-      await redis.set('products', JSON.stringify(getAllProducts));
-
+      const products = JSON.parse(await redis.get('products'));
+      const newProducts = products.filter(el => el._id != id);
+      if (newProducts.length) {
+        newProducts.push(updateProduct);
+        await redis.set('products', JSON.stringify(newProducts));
+      } else {
+        const allProducst = await Product.find();
+        await redis.set('products', JSON.stringify(allProducst));
+      }
       return {
-        result: 'Successfully updated product!',
+        result: 'Succesfully updated product!',
       };
     },
-    deleteProduct: async (_, { id }) => {
-      await redis.del('products');
+    deleteProduct: async (_, { id }, { req: { headers: { token } } }) => {
+      const userAuth = await authen(token);
+      const user = await User.findOne({ _id: userAuth.id });
+      if (!user) throw new Error('You have to login!');
+      if (!author({ userId: user._id, prodId: id }));
+
       await Product.deleteOne({ _id: id });
 
-      const getAllProducts = await Product.find();
-      await redis.set('products', JSON.stringify(getAllProducts));
+      const products = JSON.parse(await redis.get('products'));
+      const newProducts = products.filter(el => el._id != id);
+      if (newProducts.length) {
+        await redis.set('products', JSON.stringify(newProducts));
+      } else {
+        const getAllProducts = await Product.find();
+        await redis.set('products', JSON.stringify(getAllProducts));
+      }
       return {
         result: 'Successfully deleted product!',
       };
