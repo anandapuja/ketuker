@@ -6,6 +6,7 @@ import { graphqlTestCall } from './utils/graphqlTestCall';
 const registerMutation = `
   mutation registerUser($input: UserRegister) {
     register(input:$input) {
+      id
       username
     }
   }
@@ -19,9 +20,26 @@ const loginMutation = `
   }
 `;
 
+const allUserQuery = `
+  query allUser {
+    getUsers {
+      username
+    }
+  }
+`;
+
+const getUserQuery = `
+  query getUser($id: ID!) {
+    getUser(id: $id) {
+      username
+    }
+  }
+`;
+
+let existId;
 beforeAll(async () => await setUpTest());
 
-describe('Test User', () => {
+describe('Test Mutation User', () => {
   it('It should not create user, password too short', async () => {
     const user = {
       username: 'almasfikri',
@@ -49,6 +67,9 @@ describe('Test User', () => {
     const input = user;
     const res = await graphqlTestCall(registerMutation, { input } );
     const { data: { register: { username } } } = res;
+    const { data: { register: { id } } } = res;
+    // console.log(res.data, '<<<<<<<<<<<<>>>>>>>>>>');
+    existId = id;
     expect(username).toBe(user.username);
   });
 
@@ -98,5 +119,26 @@ describe('Test User', () => {
     const res = await graphqlTestCall(loginMutation, { input });
     const { data: { login: { username } } } = res;
     expect(username).toEqual('almasfikri');
+  });
+});
+
+describe('Test Query User', () => {
+  it('It should getAll existed user', async () => {
+    const res = await graphqlTestCall(allUserQuery, {});
+    const { data: { getUsers: [ { username } ] } } = res;
+    expect(username).not.toBeNull();
+  });
+
+  it('It should getUser user', async () => {
+    const res = await graphqlTestCall(getUserQuery, { id: existId });
+    // console.log(res, '<<<<<<<<');
+    const { data: { getUser: { username } } } = res;
+    expect(username).toEqual('almasfikri');
+  });
+
+  it('It should not getUser, wrong id', async () => {
+    const res = await graphqlTestCall(getUserQuery, { id: 'id asal' });
+    const { errors: [ { message } ] } = res;
+    expect(message).toEqual('User not found!');
   });
 });

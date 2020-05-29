@@ -80,36 +80,56 @@ export const typeDefs = gql`
 export const resolvers = {
   Query: {
     getUsers: async () => {
-      // const checkUsers = JSON.parse(await redis.get('users'));
+      const checkUsers = JSON.parse(await redis.get('users'));
 
-      // if (checkUsers) {
-      //   return checkUsers;
-      // } else {
-      const getAllUsers = await User.find();
-      // await redis.set('users', JSON.stringify(getAllUsers));
-      // }
-      return getAllUsers;
+      if (checkUsers) {
+        return checkUsers;
+      } else {
+        const getAllUsers = await User.find();
+        await redis.set('users', JSON.stringify(getAllUsers));
+        return getAllUsers;
+      }
     },
     getUser: async (_, { id }) => {
-      const getOneUser = await User.findOne({ _id: id });
-
-      return getOneUser;
+      try {
+        const users = JSON.parse(await redis.get('users'));
+        const user = users.filter(el => el._id == id);
+        if (user.length) {
+          const [ data ] = user;
+          return data;
+        } else {
+          const getOneUser = await User.findOne({ _id: id });
+          users.push(getOneUser);
+          await redis.set('users', JSON.stringify(users));
+          return getOneUser;
+        }
+      } catch (e) {
+        return new Error('User not found!');
+      }
     },
 
     getProducts: async () => {
       // await redis.del('products');
-      // const getProducts = JSON.parse(await redis.get('products'));
-      // if (getProducts) {
-      //   return getProducts;
-      // } else {
-      const getAllProducts = await Product.find();
-      // await redis.set('products', JSON.stringify(getAllProducts));
-      // }
-      return getAllProducts;
+      const getProducts = JSON.parse(await redis.get('products'));
+      if (getProducts) {
+        return getProducts;
+      } else {
+        const getAllProducts = await Product.find();
+        await redis.set('products', JSON.stringify(getAllProducts));
+        return getAllProducts;
+      }
     },
     getProduct: async (_, { id }) => {
-      const getOneProduct = await Product.findOne({ _id: id });
-      return getOneProduct;
+      const products = JSON.parse(await redis.get('products'));
+      const product = products.filter(el => el._id == id);
+      if (product.length) {
+        return product;
+      } else {
+        const getOneProduct = await Product.findOne({ _id: id });
+        products.push(getOneProduct);
+        redis.set('products', JSON.stringify(products));
+        return getOneProduct;
+      }
     },
   },
   Mutation: {
