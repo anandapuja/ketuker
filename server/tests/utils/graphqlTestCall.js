@@ -4,23 +4,24 @@ import { graphql } from 'graphql';
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
-export const graphqlTestCall = async (query, variables=null, id=null) => {
+export const graphqlTestCall = async (query, variables=null, token=null) => {
   return graphql(
     schema,
     query,
     undefined, 
+    // id,
     
-    { id },
-    // {
-    //   req: {
-    //     session: {
-    //       id
-    //     }
-    //   },
-    //   res: {
-    //     clearCookie: () => {}
-    //   }
-    // },
+    // { id },
+    {
+      req: {
+        session: {
+          token
+        }
+      },
+      res: {
+        clearCookie: () => {}
+      }
+    },
     variables
   );
 };

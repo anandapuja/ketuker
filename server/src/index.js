@@ -1,6 +1,6 @@
+require('dotenv').config();
 import { ApolloServer } from 'apollo-server';
 import mongoose from 'mongoose';
-
 import { typeDefs, resolvers } from './schemas/index';
 
 mongoose.connect('mongodb://localhost:27017/ketuker', {

@@ -6,8 +6,9 @@ import { graphqlTestCall } from './utils/graphqlTestCall';
 const registerMutation = `
   mutation registerUser($input: UserRegister) {
     register(input:$input) {
-      id
+      token
       username
+      id
     }
   }
 `;
@@ -15,7 +16,9 @@ const registerMutation = `
 const loginMutation = `
   mutation loginUser($input: UserLogin) {
     login(input: $input) {
+      token
       username
+      id
     }
   }
 `;
@@ -68,7 +71,6 @@ describe('Test Mutation User', () => {
     const res = await graphqlTestCall(registerMutation, { input } );
     const { data: { register: { username } } } = res;
     const { data: { register: { id } } } = res;
-    // console.log(res.data, '<<<<<<<<<<<<>>>>>>>>>>');
     existId = id;
     expect(username).toBe(user.username);
   });
@@ -131,7 +133,6 @@ describe('Test Query User', () => {
 
   it('It should getUser user', async () => {
     const res = await graphqlTestCall(getUserQuery, { id: existId });
-    // console.log(res, '<<<<<<<<');
     const { data: { getUser: { username } } } = res;
     expect(username).toEqual('almasfikri');
   });
