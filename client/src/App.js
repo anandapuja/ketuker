@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import './LoginRegister.css'
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,14 +12,13 @@ import {
   Login
 } from './pages';
 
-import { storage } from '../src/storage/firebase'
 
 function App () {
 
   if(!localStorage.getItem('token')){
     return (
       <Router>
-        <h3>KEtuker Login Register</h3>
+        <h3>KEtuker Login Register---navbar/logo etc</h3>
         <Switch>
           <Route path="/register" component={ Register } />
           <Route path="/login" component={ Login } />
@@ -30,7 +30,7 @@ function App () {
 
   return (
     <>
-      <div>Ketuker</div>
+      <div>Ketuker---navbar/logo etc</div>
     </>
   )
 }

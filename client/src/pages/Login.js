@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
 import {useHistory} from "react-router-dom";
 
+// import gql from "graphql-tag";
+// import {useQuery, useMutation} from '@apollo/react-hooks'
+
+//waiting server
+// const SIGNIN = gql`
+//     mutation 
+    
+// `
+
+
 function Login(){
 
   const history = useHistory()
@@ -8,6 +18,8 @@ function Login(){
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  // const [signin] = useMutation(SIGNIN)
   
   function ToRegister(){
     history.push('/register')
@@ -43,20 +55,31 @@ function Login(){
       }
     }
     console.log(data, "---data")
+    // signin({variables: })
   }
 
   return (
-    <div>
-      <h3>Page Login</h3>
-      <form onSubmit={SubmitLogin}>
-          <label>Username/ Email</label>
-          <input onChange={onHandleLogin} type='text' placeholder='input your registered  username/email'></input>
-          <label>Password</label>
-          <input onChange={(e)=>setPassword(e.target.value)} type="password"></input>
-          <button>Login</button>
+    <div className="login">
+      <h3 className="title-login">SIGN IN</h3>
+      <div className="div-form">
+        <form onSubmit={SubmitLogin} className="form-login">
+          <input onChange={onHandleLogin} 
+                  type='text' 
+                  placeholder='username/email'
+                  className="input-login"
+                  ></input>
+          <input onChange={(e)=>setPassword(e.target.value)} 
+                  type="password"
+                  placeholder='password'
+                  className="input-login"
+                  ></input>
+          <button className="btn-login">SIGN IN</button>
         </form>
-
-      <button onClick={ToRegister}>Sign Up</button>
+      </div>
+      
+      <div className="footer-login">Not have an account ? Sign Up
+                                    <a href="#" onClick={ToRegister}> here</a>
+                                    </div>
     </div>
   )
 
