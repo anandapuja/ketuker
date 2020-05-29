@@ -1,9 +1,13 @@
 import React from 'react';
-import { ProductItemList } from '../components';
+import {
+  ProductItemList,
+  LoadMoreButton
+} from '../components';
 
 export default function Category () {
   return (
     <div className="home-list-container">
+      <h1>PROPERTY</h1>
       <div className="home-product-list-item-container">
         <ProductItemList />
         <ProductItemList />
@@ -14,6 +18,9 @@ export default function Category () {
         <ProductItemList />
         <ProductItemList />
         <ProductItemList />
+      </div>
+      <div className="home-load-more-container">
+        <LoadMoreButton />
       </div>
     </div>
   );
