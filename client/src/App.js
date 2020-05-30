@@ -10,13 +10,7 @@ import {
   Login,
   Home,
   Category,
-<<<<<<< HEAD
-  DetailItemUser,
-  DetailItemCustomer,
-  User
-=======
   AddItem
->>>>>>> uploadbarang-client
 } from './pages';
 import {
   HeaderMain,
@@ -33,13 +27,7 @@ function App () {
         <Route path="/register" component={ Register } />
         <Route path="/login" component={ Login } />
         <Route path="/category" component={ Category } />
-<<<<<<< HEAD
-        <Route path="/me/barang/:id" component={ DetailItemUser } />
-        <Route path="/barang/:id" component={ DetailItemCustomer } />
-        <Route path="/my-profile" component={ User } />
-=======
         <Route path="/additem" component={ AddItem} />
->>>>>>> uploadbarang-client
       </Switch>
     </Router>
   );
