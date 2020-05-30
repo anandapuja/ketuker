@@ -56,6 +56,8 @@ function Login(){
     }
     console.log(data, "---data")
     // signin({variables: })
+    localStorage.setItem('token','1234') //dummy token
+    history.push('/')
   }
 
   return (
@@ -88,14 +90,3 @@ function Login(){
 export default Login
 
 
-
-// import React from 'react';
-
-// export default function Login () {
-//   return (
-//     <>
-//       <h3>Login</h3>
-
-//     </>
-//   );
-// }
