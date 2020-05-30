@@ -74,11 +74,14 @@ export default function AddItem () {
 
   function SubmitCreate(e){
     e.preventDefault();
+    let harga1 = price.replace('Rp. ','')
+    let harga2 = harga1.replace('.','')
+    let harga = Number(harga2)
     let data={  //change as the fields required in server
       title: title,
       description: description,
       image: image,
-      price: price,
+      price: harga,
       category: category,
       wishlist: wishlist
     }

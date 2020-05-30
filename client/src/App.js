@@ -21,27 +21,28 @@ import {
 
 function App () {
 
-  if(!localStorage.getItem('token')){
-    return (
-      <Router>
-        <h3>KEtuker Login Register---navbar/logo etc</h3>
-        <Switch>
-          <Route path="/register" component={ Register } />
-          <Route path="/login" component={ Login } />
-          <Redirect to={`/login`} />
-        </Switch>
-      </Router>
-    );
-  }
+  // if(!localStorage.getItem('token')){
+  //   return (
+  //     <Router>
+  //       <h3>KEtuker Login Register---navbar/logo etc</h3>
+  //       <Switch>
+  //         <Route path="/register" component={ Register } />
+  //         <Route path="/login" component={ Login } />
+  //         <Redirect to={`/login`} />
+  //       </Switch>
+  //     </Router>
+  //   );
+  // }
 
   return (
     <Router>
       <HeaderMain />
       <Navigation />
       <Switch>
+        {/* <Redirect to={`/login?redirect=true`} /> */}
         <Route exact path="/" component={ Home } />
-        {/* <Route path="/register" component={ Register } />
-        <Route path="/login" component={ Login } /> */}
+        <Route path="/register" component={ Register } />
+        <Route path="/login" component={ Login } />
         <Route path="/category" component={ Category } />
         <Route path="/additem" component={ AddItem} />
       </Switch>
