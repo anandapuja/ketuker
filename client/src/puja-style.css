@@ -282,3 +282,81 @@ a{
 .readyToExchange:hover{
   background-color: #5415CE;
 }
+
+/* USER PROFILE COMPONENT */
+.user-profile-container{
+  width: 980px;
+  margin: 40px auto;
+}
+.user-profile-first {
+  display: flex;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgb(129, 129, 129);
+}
+.user-profile-container-image{
+  width: 200px;
+  margin-right: 30px;
+}
+.user-profile-container-image img{
+  border-radius: 50%;
+  border: 5px solid rgb(182, 182, 182);
+}
+.user-profile-container-description p{
+  padding: 10px 0;
+}
+
+/* USER NAVIGATION */
+.user-navigation {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.user-navigation-list{
+  width: 100%;
+  text-align: center;
+  background-color: rgb(224, 224, 224);
+  padding: 10px 0;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.user-navigation-list:hover{
+  background-color: rgb(202, 202, 202);
+}
+
+/* USER BARANG */
+.user-barang-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.product-item-list-action-img {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.product-item-list-action-img img{
+  width: 30px;
+  padding: 5px;
+  background: white;
+  margin: 1px;
+  opacity: 0.5;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.product-item-list-action-img img:hover{
+  opacity: 1;
+}
+
+/* USER MENGAJAK */
+.user-mengajak-container{
+  width: 100%;
+  margin-top: 10px;
+}
+.user-mengajak-item-container{
+  background-color: rgb(219, 219, 219);
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
