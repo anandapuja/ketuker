@@ -108,4 +108,5 @@ button:hover {
     overflow: scroll;
     border: solid grey;
     border-radius: 10px;
+    margin-bottom: 25px;
 }

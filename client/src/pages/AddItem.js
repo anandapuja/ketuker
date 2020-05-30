@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import '../additem.css'
 // import { storage } from '../'
+import { Link } from 'react-router-dom';
 
 export default function AddItem () {
-
 
   const[title, setTitle] = useState('')
   const[description, setDescription] = useState('')
@@ -19,7 +19,15 @@ export default function AddItem () {
 
   function SubmitCreate(e){
     e.preventDefault();
-    console.log()
+    let data={  //change as the fields required in server
+      title: title,
+      description: description,
+      image: image,
+      price: price,
+      category: category,
+      wishlist: wishlist
+    }
+    console.log(data)
   }
 
   const [imageAsFile, setImageAsFile] = useState('')
@@ -89,7 +97,7 @@ export default function AddItem () {
               <option>Hobby</option>
               <option>Household</option>
           </select>
-          <input onChange={(e)=>wishlist(e.target.value)} 
+          <input onChange={(e)=>setWishlist(e.target.value)} 
                   type="text" placeholder="wishlist" className="input-additem"></input>
           <button className="btn-additem">CREATE</button>
         </form>
@@ -108,6 +116,7 @@ export default function AddItem () {
           <div className="suggestion-additem">
             <h4>Suggestion Price</h4>
           </div>
+          <Link to="/"><button className="btn-additem">BACK</button></Link>
         </div>
        
       </div>
