@@ -1,9 +1,16 @@
 import React from 'react';
 import logo from '../assets/images/logo.png';
 import avatar from '../assets/images/avatar.png';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 export default function HeaderMain () {
+
+  const history = useHistory()
+
+  function ToUploadBarang(){
+      history.push('/additem')
+  }
+
   return (
     <div className="header-container">
       <Link to="/">
@@ -15,7 +22,7 @@ export default function HeaderMain () {
         <input type="text" placeholder="cari barang" />
       </div>
       <div className="header-user-container">
-        <button>Upload Barang</button>
+        <button onClick={ToUploadBarang}>Upload Barang</button>
         <img src={avatar} alt="avatar" />
       </div>
     </div>
