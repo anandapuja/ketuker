@@ -1,0 +1,141 @@
+.login {
+    background-color: #FFF;
+    text-align: center;
+}
+
+.title-login {
+    color: grey;
+    font-size: 50px;
+    font-weight: 800;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.div-form {
+    display: block;
+    text-align: center;
+}
+
+.form-login {
+    display: inline-block;
+    margin: center auto;
+    text-align: center;
+    width: 500px;
+    height: 300px;
+}
+
+.input-login {
+    width: 400px;
+    height: 60px;
+    font-size: 20px;
+    text-align: center;
+    margin: 20px 20px;
+    border-radius: 10px;
+}
+
+.btn-login {
+    width : 400px;
+    height: 60px;
+    font-size: 30px;
+    color: white;
+    background-color: grey;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: silver;
+}
+
+.footer-login {
+    font-size: 18px;
+}
+
+.register {
+    background-color: #FFF;
+    text-align: center;
+}
+
+.title-register {
+    color: grey;
+    font-size: 30px;
+    font-weight: 800;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.div-register {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.form-register {
+    display: inline-block;
+    margin: center auto;
+    text-align: center;
+    width: 500px;
+    height: 500px;
+}
+
+.input-register {
+    width: 400px;
+    height: 40px;
+    font-size: 18px;
+    text-align: center;
+    margin: 10px 20px;
+    border-radius: 10px;
+}
+
+.btn-register {
+    width : 400px;
+    height: 60px;
+    font-size: 30px;
+    color: white;
+    background-color: grey;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: silver;
+}
+
+.form-upload-register {
+    display: inline-block;
+    margin: center auto;
+    text-align: center;
+    width: 300px;
+    height: 500px;
+}
+
+.title-upload-register {
+    font-size: 24px;
+    color: grey;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.input-upload-register {
+    width: 300px;
+    height : 50px;
+    font-size: 20px;
+}
+
+.btn-upload-register{
+    width: 300px;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 10px;
+    background-color: grey;
+    color: white
+}
+
+.img-avatar {
+    max-width: 100px;
+    max-height: 100px;
+    margin: 20px 20px;
+    padding: 10px 10px
+}
+
+.footer-register {
+    font-size: 18px;
+}
