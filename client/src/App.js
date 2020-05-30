@@ -11,7 +11,8 @@ import {
   Home,
   Category,
   DetailItemUser,
-  DetailItemCustomer
+  DetailItemCustomer,
+  User
 } from './pages';
 import {
   HeaderMain,
@@ -30,6 +31,7 @@ function App () {
         <Route path="/category" component={ Category } />
         <Route path="/me/barang/:id" component={ DetailItemUser } />
         <Route path="/barang/:id" component={ DetailItemCustomer } />
+        <Route path="/my-profile" component={ User } />
       </Switch>
     </Router>
   );
