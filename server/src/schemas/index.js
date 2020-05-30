@@ -4,6 +4,7 @@ const secret = process.env.JWT_SECRET;
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
+import sendEmail from '../utilities/nodemailer';
 import redis from '../utilities/redis';
 import User from '../models/User';
 import Product from '../models/Product';
@@ -67,6 +68,9 @@ export const typeDefs = gql`
 
     getProducts: [Product]!
     getProduct(id: ID!): Product!
+
+    ##### nodemailer
+    nodemailer: Output!
   }
 
   type Mutation {
@@ -95,9 +99,9 @@ export const resolvers = {
     getUser: async (_, { id }) => {
       try {
         const users = JSON.parse(await redis.get('users'));
-        const user = users.filter(el => el._id == id);
+        const user = users.filter((el) => el._id == id);
         if (user.length) {
-          const [ data ] = user;
+          const [data] = user;
           return data;
         } else {
           const getOneUser = await User.findOne({ _id: id });
@@ -123,7 +127,7 @@ export const resolvers = {
     },
     getProduct: async (_, { id }) => {
       const products = JSON.parse(await redis.get('products'));
-      const product = products.filter(el => el._id == id);
+      const product = products.filter((el) => el._id == id);
       if (product.length) {
         return product;
       } else {
@@ -133,6 +137,13 @@ export const resolvers = {
         return getOneProduct;
       }
     },
+
+    nodemailer: async () => {
+      sendEmail();
+      return {
+        result: 'Succesfully sent email to our lovely client!',
+      };
+    },
   },
   Mutation: {
     register: async (_, { input }) => {
@@ -140,9 +151,9 @@ export const resolvers = {
       const error = newUser.validateSync();
       if (error) {
         if (error.errors.password) {
-          throw new Error (error.errors.password.properties.message);
+          throw new Error(error.errors.password.properties.message);
         } else {
-          throw new Error (error.errors.phone.properties.message);
+          throw new Error(error.errors.phone.properties.message);
         }
       } else {
         const res = await newUser.save();
@@ -157,7 +168,7 @@ export const resolvers = {
       if (getUser) {
         const compare = await bcrypt.compare(password, getUser.password);
         if (!compare) {
-          throw new Error ('Wrong Password / Wrong Email');
+          throw new Error('Wrong Password / Wrong Email');
         } else {
           //kalo secretPrivateKey gw taruh di .env masih error. sementara gtu.
           const token = jwt.sign({ id: getUser._id }, secret);
@@ -170,15 +181,23 @@ export const resolvers = {
             phone,
             email,
             password,
-            token
+            token,
           };
         }
       } else {
-        throw new Error ('Wrong Password / Wrong Email');
+        throw new Error('Wrong Password / Wrong Email');
       }
     },
 
-    addProduct: async (_, { input }, { req: { headers: { token } } }) => {
+    addProduct: async (
+      _,
+      { input },
+      {
+        req: {
+          headers: { token },
+        },
+      }
+    ) => {
       const { title, description, price, whislist, category, image, submit } = input;
       const userAuth = await authen(token);
       const user = await User.findOne({ _id: userAuth.id });
@@ -199,7 +218,15 @@ export const resolvers = {
 
       return newProduct;
     },
-    updateProduct: async (_, { id, input }, { req: { headers: { token } } }) => {
+    updateProduct: async (
+      _,
+      { id, input },
+      {
+        req: {
+          headers: { token },
+        },
+      }
+    ) => {
       const { title, description, price, whislist, category, image, submit } = input;
 
       const userAuth = await authen(token);
@@ -217,7 +244,7 @@ export const resolvers = {
 
       await updateProduct.save();
       const products = JSON.parse(await redis.get('products'));
-      const newProducts = products.filter(el => el._id != id);
+      const newProducts = products.filter((el) => el._id != id);
       if (newProducts.length) {
         newProducts.push(updateProduct);
         await redis.set('products', JSON.stringify(newProducts));
@@ -229,7 +256,15 @@ export const resolvers = {
         result: 'Succesfully updated product!',
       };
     },
-    deleteProduct: async (_, { id }, { req: { headers: { token } } }) => {
+    deleteProduct: async (
+      _,
+      { id },
+      {
+        req: {
+          headers: { token },
+        },
+      }
+    ) => {
       const userAuth = await authen(token);
       const user = await User.findOne({ _id: userAuth.id });
       if (!user) throw new Error('You have to login!');
@@ -238,7 +273,7 @@ export const resolvers = {
       await Product.deleteOne({ _id: id });
 
       const products = JSON.parse(await redis.get('products'));
-      const newProducts = products.filter(el => el._id != id);
+      const newProducts = products.filter((el) => el._id != id);
       if (newProducts.length) {
         await redis.set('products', JSON.stringify(newProducts));
       } else {
