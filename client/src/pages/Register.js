@@ -98,14 +98,14 @@ function Register(){
             <button className="btn-register">Register</button>
           </form>
 
-          <form onSubmit={handleFireBaseUpload} className="form-upload">
-            <h4 className="title-upload">Upload your avatar here</h4>
+          <form onSubmit={handleFireBaseUpload} className="form-upload-register">
+            <h4 className="title-upload-register">Upload your avatar here</h4>
             <input
               type="file"
               onChange={handleImageAsFile}
-              className="input-upload"
+              className="input-upload-register"
             />
-            <button type="submit" className="btn-upload">Upload Avatar</button>
+            <button type="submit" className="btn-upload-register">Upload Avatar</button>
             {(avatar!=='') && <img src={avatar} alt="profile" className="img-avatar"></img> }
           </form>
         </div>

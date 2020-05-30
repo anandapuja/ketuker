@@ -78,7 +78,7 @@ button:hover {
 
 .input-register {
     width: 400px;
-    height: 30px;
+    height: 40px;
     font-size: 18px;
     text-align: center;
     margin: 10px 20px;
@@ -99,26 +99,29 @@ button:hover {
     background-color: silver;
 }
 
-.form-upload {
+.form-upload-register {
     display: inline-block;
+    margin: center auto;
     text-align: center;
     width: 300px;
     height: 500px;
 }
 
-.title-upload {
+.title-upload-register {
     font-size: 24px;
     color: grey;
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
-.input-upload {
+.input-upload-register {
     width: 300px;
     height : 50px;
     font-size: 20px;
 }
 
-.btn-upload {
-    width: 200px;
+.btn-upload-register{
+    width: 300px;
     height: 50px;
     font-size: 20px;
     border-radius: 10px;

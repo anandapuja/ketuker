@@ -89,13 +89,13 @@ export default function AddItem () {
           <input onChange={handlePrice} 
                   type="text" placeholder="price" value={price} className="input-additem"></input>
           <select onChange={(e)=>setCategory(e.target.value)} className="category-additem">
-              <option disabled selected >Category</option>
-              <option>Automotive</option>
-              <option>Property</option>
-              <option>Fashion</option>
-              <option>Gadget</option>
-              <option>Hobby</option>
-              <option>Household</option>
+              <option disabled selected value >Category</option>
+              <option value="automotive">Automotive</option>
+              <option value="property">Property</option>
+              <option value="fashion">Fashion</option>
+              <option value="gadget">Gadget</option>
+              <option value="hobby">Hobby</option>
+              <option value="household">Household</option>
           </select>
           <input onChange={(e)=>setWishlist(e.target.value)} 
                   type="text" placeholder="wishlist" className="input-additem"></input>
