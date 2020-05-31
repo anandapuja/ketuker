@@ -3,6 +3,23 @@ import '../additem.css';
 import { storage } from '../storage/firebase';
 import { Link } from 'react-router-dom';
 import { HeaderSecond, NavigationSecond } from '../components';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/react-hooks';
+
+const ADD_PRODUCT = gql`
+mutation addProduct($input: InputProduct!) {
+  addProduct(input: $input) {
+    title
+    description
+    price
+    whislist
+    category
+    image
+    submit
+    userId
+  }
+}
+`;
 
 export default function AddItem () {
 
@@ -15,20 +32,29 @@ export default function AddItem () {
 
 
   function handlePrice(e){
-    setPrice(formatRupiah(e.target.value, 'Rp'))
+    // setPrice(formatRupiah(e.target.value, 'Rp'))
+    setPrice(Number(e.target.value));
   }
 
-  function SubmitCreate(e){
+  const [addProduct] = useMutation(ADD_PRODUCT);
+
+  async function SubmitCreate(e){
     e.preventDefault();
-    let data={  //change as the fields required in server
-      title: title,
-      description: description,
-      image: image,
-      price: price,
-      category: category,
-      wishlist: wishlist
+    try {
+      let data={  //change as the fields required in server
+        title: title,
+        description: description,
+        image: image,
+        price: price,
+        category: category,
+        whislist: wishlist,
+        submit: false
+      }
+      const product = await addProduct({ variables:{ input: data }});
+    } catch (error) {
+      console.log(error, 'ERRORNY')
     }
-    console.log(data)
+
   }
 
   const [imageAsFile, setImageAsFile] = useState('')

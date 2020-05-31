@@ -27,7 +27,7 @@ import {
 
 function App () {
   return (
-    // <ApolloProvider client={ client }>
+    <ApolloProvider client={ client }>
       <Router>
         <Switch>
           <Route exact path="/" component={ Home } />
@@ -39,9 +39,9 @@ function App () {
           <Route path="/me/barang/:id" component={ DetailItemUser } />
           <Route path="/barang/:id" component={ DetailItemCustomer } />
           <Route path="/my-profile" component={ User } />
-      </Switch>
-    </Router>
-    // </ApolloProvider>
+        </Switch>
+      </Router>
+    </ApolloProvider>
   )
 }
 

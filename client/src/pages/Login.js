@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import {useHistory} from "react-router-dom";
 import { HeaderSecond, NavigationSecond } from '../components';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/react-hooks';
 
-// import gql from "graphql-tag";
-// import {useQuery, useMutation} from '@apollo/react-hooks'
-
-//waiting server
-// const SIGNIN = gql`
-//     mutation 
-    
-// `
+const LOGIN_USER = gql`
+  mutation loginUser($input: UserLogin) {
+    login(input: $input) {
+      token
+      username
+      _id
+    }
+  }
+`
 
 
 function Login(){
@@ -20,45 +23,43 @@ function Login(){
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  // const [signin] = useMutation(SIGNIN)
+  const [loginUser] = useMutation(LOGIN_USER);
   
   function ToRegister(){
     history.push('/register')
   }
 
   function onHandleLogin(e){
-    console.log(e.target.value,"-----")
     let str = e.target.value
-    console.log(str, "---target value")
     if(str.match(/@/g)){
-      console.log(str,"====email")
       setEmail(str)
     } else {
-      console.log(str,"===username")
       setUsername(str)
     }
   }
   
-  function SubmitLogin(e){
+  async function SubmitLogin(e){
     e.preventDefault();
-    console.log('submitLogin')
-    console.log(username, "username / email", email)
     let data
     if(email){
-      data= {
+      data = {
         email: email,
         password: password
       }
+      const response = await loginUser({ variables: { input: data} });
+      if(response.data.login.token){
+        console.log(response)
+        localStorage.setItem('token',response.data.login.token); //dummy token
+        localStorage.setItem('user_id',response.data.login._id);
+        localStorage.setItem('username',response.data.login.username);
+        history.push('/')
+      }
     } else {
-      data= {
+      data = {
         username: username,
         password: password
       }
     }
-    console.log(data, "---data")
-    // signin({variables: })
-    localStorage.setItem('token','1234') //dummy token
-    history.push('/')
   }
 
   return (
