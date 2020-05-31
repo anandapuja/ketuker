@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_USER } from '../services/schema';
+import { Link } from 'react-router-dom';
 
 export default function ProductItemList ({ product }) {
   const { loading, error, data: userData } = useQuery(GET_USER, {
@@ -26,7 +27,9 @@ export default function ProductItemList ({ product }) {
           <img src={product.image} alt="item" />
           <p className="product-item-list-price">IDR {product.price}</p>
         </div>
-        <p className="product-item-list-title">{ product.title }</p>
+        <Link to={ '/barang/' + product._id } >
+          <p className="product-item-list-title">{ product.title }</p>
+        </Link>
         <p className="product-item-list-location">Loc: {city}</p>
       </div>
     );

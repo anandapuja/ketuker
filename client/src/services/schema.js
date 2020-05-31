@@ -50,9 +50,49 @@ query getProducts{
 }
 `;
 
+export const GET_PRODUCT_DETAIL = gql`
+query productDetail($id: ID!) {
+  getProduct(id: $id) {
+    _id
+    title
+    description
+    userId
+    category
+    image
+    submit
+    price
+  }
+}
+`;
+
 export const GET_PRODUCT_USER = gql`
 query productByUser($userId: ID!) {
   productByUser(userId: $userId) {
+    _id
+    title
+    description
+    userId
+    category
+    image
+    submit
+    price
+  }
+}
+`;
+
+export const GET_PRODUCT_USER_AND_DETAIL = gql`
+query ($id: ID!, $userId: ID!) {
+  productByUser(userId: $userId) {
+    _id
+    title
+    description
+    userId
+    category
+    image
+    submit
+    price
+  }
+  getProduct(id: $id) {
     _id
     title
     description
@@ -76,6 +116,25 @@ query productByCategory($category: String) {
       image
       submit
       price
+    }
+  }
+`;
+
+export const GET_PRODUCTS_AND_USERS = gql`
+  query($category: String) {
+    productByCategory(category: $category) {
+      _id
+      title
+      description
+      userId
+      category
+      image
+      submit
+      price
+    }
+    getUsers {
+      username,
+      city
     }
   }
 `;

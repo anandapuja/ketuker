@@ -116,9 +116,7 @@ export const resolvers = {
       }
     },
 
-    getProducts: async () => {
-      // await redis.del('products');
-      
+    getProducts: async () => {      
       const getProducts = JSON.parse(await redis.get('products'));
       if (getProducts) {
         return getProducts;
@@ -129,35 +127,46 @@ export const resolvers = {
       }
     },
     getProduct: async (_, { id }) => {
-      const products = JSON.parse(await redis.get('products'));
-      const product = products.filter((el) => el._id == id);
-      if (product.length) {
-        return product;
-      } else {
-        const getOneProduct = await Product.findOne({ _id: id });
-        products.push(getOneProduct);
-        await redis.set('products', JSON.stringify(products));
-        return getOneProduct;
+      try {
+        const products = JSON.parse(await redis.get('products'));
+        if (products) {
+          const [ product ] = products.filter((el) => el._id == id);
+          if (product) return product;
+          else {
+            const getOneProduct = await Product.findOne({ _id: id });
+            product.push(getOneProduct);
+            await redis.set('products', JSON.stringify(products));
+            return getOneProduct;
+          }
+        } else {
+          const productsDb = await Product.find();
+          const getOneProduct = await Product.findOne({ _id: id });
+          await redis.set('products', JSON.stringify(productsDb));
+          return getOneProduct;
+        }
+      } catch (error) {
+        console.log(error);
       }
     },
 
-    nodemailer: async () => {
-      sendEmail();
-      return {
-        result: 'Succesfully sent email to our lovely client!',
-      };
-    },
-
     productByUser: async (_, { userId }) => {
-      const products = JSON.parse(await redis.get('products'));
-      const product = products.filter((el) => el.userId == userId);
-      if (product.length) {
-        return product;
-      } else {
+      try {
+        const products = JSON.parse(await redis.get('products'));
+        let newProducts;
+        if (products) {
+          const product = products.filter((el) => el.userId == userId);
+          if (product) return product;
+        }
         const getProduct = await Product.findOne({ userId: userId });
-        const newProducts = [ ...products, getProduct ];
+        if(products) {
+          newProducts = [ ...products, getProduct ];
+        } else {
+          newProducts = await Product.find();
+        }
         await redis.set('products', JSON.stringify(newProducts));
         return getProduct;
+      } catch (error) {
+        console.log(error, '>>>>>>>2');
       }
     },
 
@@ -186,6 +195,13 @@ export const resolvers = {
       } catch (error) {
         return error;
       }
+    },
+
+    nodemailer: async () => {
+      sendEmail();
+      return {
+        result: 'Succesfully sent email to our lovely client!',
+      };
     },
   },
   Mutation: {

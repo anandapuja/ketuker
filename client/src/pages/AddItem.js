@@ -4,7 +4,7 @@ import '../additem.css';
 import { storage } from '../storage/firebase';
 import { HeaderSecond, NavigationSecond } from '../components';
 import { useMutation } from '@apollo/react-hooks';
-import { ADD_PRODUCT, GET_ALL_PRODUCT, GET_PRODUCT_CATEGORY } from '../services/schema';
+import { ADD_PRODUCT, GET_PRODUCTS_AND_USERS } from '../services/schema';
 import { useHistory } from 'react-router-dom';
 
 export default function AddItem () {
@@ -14,7 +14,7 @@ export default function AddItem () {
   const[ price, setPrice ] = useState('');
   const[ category, setCategory ] = useState('');
   const[ wishlist, setWishlist ] = useState('');
-  const [ addProduct ] = useMutation(ADD_PRODUCT, { refetchQueries: () => [ { query: GET_PRODUCT_CATEGORY } ] });
+  const [ addProduct ] = useMutation(ADD_PRODUCT, { refetchQueries: () => [ { query: GET_PRODUCTS_AND_USERS } ] });
   const history = useHistory();
   // const [addMovie] = useMutation(ADD_MOVIE,{refetchQueries:[{query:GET_MOVIES}]});
   function handlePrice (e) {
