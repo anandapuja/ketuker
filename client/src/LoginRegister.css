@@ -7,7 +7,6 @@
     color: grey;
     font-size: 50px;
     font-weight: 800;
-    font-family: 'Times New Roman', Times, serif;
 }
 
 .div-form {
@@ -20,22 +19,23 @@
     margin: center auto;
     text-align: center;
     width: 500px;
-    height: 300px;
+    height: 250px;
 }
 
 .input-login {
     width: 400px;
-    height: 60px;
-    font-size: 20px;
-    text-align: center;
-    margin: 20px 20px;
-    border-radius: 10px;
+    height: 30px;
+    text-align: left;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: none;
+    border-bottom: 1px solid rgb(114, 112, 112);
+    background-color: rgb(240, 240, 240);
 }
 
 .btn-login {
     width : 400px;
     height: 60px;
-    font-size: 30px;
     color: white;
     background-color: grey;
     border-radius: 10px;
@@ -46,20 +46,16 @@ button:hover {
     background-color: silver;
 }
 
-.footer-login {
-    font-size: 18px;
-}
-
 .register {
-    background-color: #FFF;
+    padding: 50px 0 100px;
     text-align: center;
 }
 
 .title-register {
-    color: grey;
+    color: #5415CE;
     font-size: 30px;
     font-weight: 800;
-    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 30px;
 }
 
 .div-register {
@@ -78,21 +74,22 @@ button:hover {
 
 .input-register {
     width: 400px;
-    height: 40px;
-    font-size: 18px;
-    text-align: center;
-    margin: 10px 20px;
-    border-radius: 10px;
+    height: 30px;
+    text-align: left;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: none;
+    border-bottom: 1px solid rgb(114, 112, 112);
+    background-color: rgb(240, 240, 240);
 }
 
 .btn-register {
     width : 400px;
     height: 60px;
-    font-size: 30px;
     color: white;
-    background-color: grey;
-    border-radius: 10px;
-    font-weight: bold;
+    background-color: rgb(80, 80, 80);
+    border: none;
+    transition: 0.3s;
 }
 
 button:hover {
@@ -108,25 +105,24 @@ button:hover {
 }
 
 .title-upload-register {
-    font-size: 24px;
-    color: grey;
-    margin-top: 20px;
+    color: white;
+    background-color: #5415CE;
+    padding: 20px;
     margin-bottom: 30px;
 }
 
 .input-upload-register {
     width: 300px;
     height : 50px;
-    font-size: 20px;
 }
 
 .btn-upload-register{
     width: 300px;
     height: 50px;
-    font-size: 20px;
-    border-radius: 10px;
+    border: none;
     background-color: grey;
-    color: white
+    color: white;
+    transition: 0.3s;
 }
 
 .img-avatar {
@@ -137,5 +133,5 @@ button:hover {
 }
 
 .footer-register {
-    font-size: 18px;
+    margin-top: 20px;
 }

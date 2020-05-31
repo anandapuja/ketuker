@@ -15,7 +15,8 @@ import {
 } from './pages';
 import {
   HeaderMain,
-  Navigation
+  Navigation,
+  HeaderSecond
 } from './components';
 
 
@@ -24,7 +25,7 @@ function App () {
   if(!localStorage.getItem('token')){
     return (
       <Router>
-        <h3>KEtuker Login Register---navbar/logo etc</h3>
+        <HeaderSecond />
         <Switch>
           <Route path="/register" component={ Register } />
           <Route path="/login" component={ Login } />

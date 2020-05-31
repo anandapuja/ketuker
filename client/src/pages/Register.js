@@ -99,7 +99,7 @@ function Register(){
           </form>
 
           <form onSubmit={handleFireBaseUpload} className="form-upload-register">
-            <h4 className="title-upload-register">Upload your avatar here</h4>
+            <h4 className="title-upload-register">Upload your avatar below.</h4>
             <input
               type="file"
               onChange={handleImageAsFile}
@@ -111,7 +111,7 @@ function Register(){
         </div>
 
         <div className="footer-register">Already have an account ? Sign In
-                                    <a href="#" onClick={ToLogin}> here</a>
+          <a href="#" onClick={ToLogin}> here</a>
         </div>
       </div>
     )

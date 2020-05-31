@@ -61,8 +61,8 @@ function Login(){
   }
 
   return (
-    <div className="login">
-      <h3 className="title-login">SIGN IN</h3>
+    <div className="register">
+      <h3 className="title-register">SIGN IN</h3>
       <div className="div-form">
         <form onSubmit={SubmitLogin} className="form-login">
           <input onChange={onHandleLogin} 
@@ -75,13 +75,13 @@ function Login(){
                   placeholder='password'
                   className="input-login"
                   ></input>
-          <button className="btn-login">SIGN IN</button>
+          <button className="btn-register">SIGN IN</button>
         </form>
       </div>
       
       <div className="footer-login">Not have an account ? Sign Up
-                                    <a href="#" onClick={ToRegister}> here</a>
-                                    </div>
+        <a href="#" onClick={ToRegister}> here</a>
+      </div>
     </div>
   )
 
