@@ -23,7 +23,9 @@ export default function HeaderMain () {
       </div>
       <div className="header-user-container">
         <button onClick={ToUploadBarang}>Upload Barang</button>
-        <img src={avatar} alt="avatar" />
+        <Link to="/my-profile">
+          <img src={avatar} alt="avatar" />
+        </Link>
       </div>
     </div>
   );
