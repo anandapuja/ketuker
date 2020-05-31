@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {useHistory} from "react-router-dom";
 import { storage } from '../storage/firebase'
+import { HeaderSecond } from '../components';
 
 // import gql from "graphql-tag";
 // import {useQuery, useMutation} from '@apollo/react-hooks'
@@ -83,37 +84,40 @@ function Register(){
 
 
     return (
-      <div className="register">
-        <h3 className="title-register">CREATE ACCOUNT</h3>
-        <div className="div-register">
-          <form onSubmit={SubmitRegister} className='form-register'>
-            <input onChange={(e)=>setUsername(e.target.value)} type='text' placeholder='username' className="input-register"></input>
-            <input onChange={(e)=>setEmail(e.target.value)} type='email' placeholder='email' className="input-register"></input> 
-            <input onChange={(e)=>setPassword(e.target.value)} type="password" placeholder='password' className="input-register"></input>
-            <input onChange={(e)=>setPassword2(e.target.value)} type="password" placeholder='re-type your password' className="input-register"></input>
-            <input onChange={(e)=>setPhone(e.target.value)} type="number" placeholder='phone' className="input-register"></input>
-            <input onChange={(e)=>setAddress(e.target.value)} type="text" placeholder='address' className="input-register"></input>
-            <input onChange={(e)=>setCity(e.target.value)} type="text" placeholder='city/districk' className="input-register"></input>
-            <br></br>
-            <button className="btn-register">Register</button>
-          </form>
+      <>
+      <HeaderSecond />
+        <div className="register">
+          <h3 className="title-register">CREATE ACCOUNT</h3>
+          <div className="div-register">
+            <form onSubmit={SubmitRegister} className='form-register'>
+              <input onChange={(e)=>setUsername(e.target.value)} type='text' placeholder='username' className="input-register"></input>
+              <input onChange={(e)=>setEmail(e.target.value)} type='email' placeholder='email' className="input-register"></input> 
+              <input onChange={(e)=>setPassword(e.target.value)} type="password" placeholder='password' className="input-register"></input>
+              <input onChange={(e)=>setPassword2(e.target.value)} type="password" placeholder='re-type your password' className="input-register"></input>
+              <input onChange={(e)=>setPhone(e.target.value)} type="number" placeholder='phone' className="input-register"></input>
+              <input onChange={(e)=>setAddress(e.target.value)} type="text" placeholder='address' className="input-register"></input>
+              <input onChange={(e)=>setCity(e.target.value)} type="text" placeholder='city/districk' className="input-register"></input>
+              <br></br>
+              <button className="btn-register">Register</button>
+            </form>
 
-          <form onSubmit={handleFireBaseUpload} className="form-upload-register">
-            <h4 className="title-upload-register">Upload your avatar here</h4>
-            <input
-              type="file"
-              onChange={handleImageAsFile}
-              className="input-upload-register"
-            />
-            <button type="submit" className="btn-upload-register">Upload Avatar</button>
-            {(avatar!=='') && <img src={avatar} alt="profile" className="img-avatar"></img> }
-          </form>
-        </div>
+            <form onSubmit={handleFireBaseUpload} className="form-upload-register">
+              <h4 className="title-upload-register">Upload your avatar below.</h4>
+              <input
+                type="file"
+                onChange={handleImageAsFile}
+                className="input-upload-register"
+              />
+              <button type="submit" className="btn-upload-register">Upload Avatar</button>
+              {(avatar!=='') && <img src={avatar} alt="profile" className="img-avatar"></img> }
+            </form>
+          </div>
 
-        <div className="footer-register">Already have an account ? Sign In
-                                    <a href="#" onClick={ToLogin}> here</a>
+          <div className="footer-register">Already have an account ? Sign In
+            <a href="#" onClick={ToLogin}> here</a>
+          </div>
         </div>
-      </div>
+      </>
     )
 
 }
