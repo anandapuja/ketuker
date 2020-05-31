@@ -14,7 +14,7 @@ export default function AddItem () {
   const[ price, setPrice ] = useState('');
   const[ category, setCategory ] = useState('');
   const[ wishlist, setWishlist ] = useState('');
-  const [ addProduct ] = useMutation(ADD_PRODUCT, { refetchQueries: [ { query: GET_PRODUCT_CATEGORY } ] });
+  const [ addProduct ] = useMutation(ADD_PRODUCT, { refetchQueries: () => [ { query: GET_PRODUCT_CATEGORY } ] });
   const history = useHistory();
   // const [addMovie] = useMutation(ADD_MOVIE,{refetchQueries:[{query:GET_MOVIES}]});
   function handlePrice (e) {

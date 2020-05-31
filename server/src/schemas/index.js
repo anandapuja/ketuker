@@ -112,7 +112,6 @@ export const resolvers = {
           return getOneUser;
         }
       } catch (e) {
-        console.log(e);
         return new Error('User not found!');
       }
     },
@@ -122,11 +121,8 @@ export const resolvers = {
       
       const getProducts = JSON.parse(await redis.get('products'));
       if (getProducts) {
-        console.log(getProducts, '>>>>>>>');
-        console.log('masuk 1');
         return getProducts;
       } else {
-        console.log('masuk 2');
         const getAllProducts = await Product.find();
         await redis.set('products', JSON.stringify(getAllProducts));
         return getAllProducts;
@@ -176,23 +172,18 @@ export const resolvers = {
             }
           }
           const getProduct = await Product.find({ category: category });
-          console.log(getProduct);
           return getProduct;
         } else {
           const getProducts = JSON.parse(await redis.get('products'));
-          console.log(getProducts);
           if (getProducts) {
-            console.log('masuk si 1');
             return getProducts;
           } else {
-            console.log('masuk si 2');
             const getAllProducts = await Product.find();
             await redis.set('products', JSON.stringify(getAllProducts));
             return getAllProducts;
           }
         }
       } catch (error) {
-        console.log(error);
         return error;
       }
     },
@@ -273,7 +264,6 @@ export const resolvers = {
       
       if(getProducts) {
         getProducts.push(savedProduct);
-        console.log(getProducts, '>>>>>><<<<<<<');
         await redis.set('products', JSON.stringify(getProducts));
       } else {
         const getAllProducts = await Product.find();

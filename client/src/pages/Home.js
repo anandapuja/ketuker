@@ -11,7 +11,7 @@ import { useLocation } from 'react-router-dom';
 
 export default function Home () {
   const { search } = useLocation();
-  const { loading, error, data } = useQuery(GET_PRODUCT_CATEGORY, { variables: { category: search.slice(10) } });
+  const { loading, error, data } = useQuery(GET_PRODUCT_CATEGORY, { variables: { category: search ? search.slice(10) : '' }, fetchPolicy: 'cache-and-network' });
 
   if(loading) {
     return <p>Loading</p>;
@@ -25,9 +25,6 @@ export default function Home () {
   if(data) {
     const { getProducts } = data;
     const { productByCategory } = data;
-    console.log(data);
-    console.log(getProducts, 'getpro');
-    console.log(productByCategory, 'cat');
     return (
       <>
         <HeaderMain />
