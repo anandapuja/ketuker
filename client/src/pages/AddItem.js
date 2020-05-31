@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import '../additem.css';
 import { storage } from '../storage/firebase';
 import { Link } from 'react-router-dom';
-import { HeaderSecond } from '../components';
+import { HeaderSecond, NavigationSecond } from '../components';
 
 export default function AddItem () {
 
@@ -81,6 +81,7 @@ export default function AddItem () {
   return (
     <>
     <HeaderSecond />
+    <NavigationSecond />
     <div className="additem">
       <div className="title-register">UPLOAD BARANG</div>
       <div className="flex-additem">
