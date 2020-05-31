@@ -51,11 +51,7 @@ button:hover {
 }
 
 .register {
-<<<<<<< HEAD
-    background-image: linear-gradient(#F98A06, #F9BE06);
-=======
     padding: 50px 0 100px;
->>>>>>> development
     text-align: center;
     width: 900px;
     margin: 40px auto;
