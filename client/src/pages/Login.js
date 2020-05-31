@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {useHistory} from "react-router-dom";
+import { HeaderSecond, NavigationSecond } from '../components';
 
 // import gql from "graphql-tag";
 // import {useQuery, useMutation} from '@apollo/react-hooks'
@@ -61,30 +62,33 @@ function Login(){
   }
 
   return (
-    <div className="register">
-      <h3 className="title-register">SIGN IN</h3>
-      <div className="div-form">
-        <form onSubmit={SubmitLogin} className="form-login">
-          <input onChange={onHandleLogin} 
-                  type='text' 
-                  placeholder='username/email'
-                  className="input-login"
-                  ></input>
-          <input onChange={(e)=>setPassword(e.target.value)} 
-                  type="password"
-                  placeholder='password'
-                  className="input-login"
-                  ></input>
-          <button className="btn-register">SIGN IN</button>
-        </form>
+    <>
+      <HeaderSecond />
+      <NavigationSecond />
+      <div className="register">
+        <h3 className="title-register">SIGN IN</h3>
+        <div className="div-form">
+          <form onSubmit={SubmitLogin} className="form-login">
+            <input onChange={onHandleLogin} 
+              type='text' 
+              placeholder='username/email'
+              className="input-login"
+              ></input>
+            <input onChange={(e)=>setPassword(e.target.value)} 
+              type="password"
+              placeholder='password'
+              className="input-login"
+              ></input>
+            <button className="btn-register">SIGN IN</button>
+          </form>
+        </div>
+        
+        <div className="footer-login">Not have an account ? Sign Up
+          <a href="#" onClick={ToRegister}> here</a>
+        </div>
       </div>
-      
-      <div className="footer-login">Not have an account ? Sign Up
-        <a href="#" onClick={ToRegister}> here</a>
-      </div>
-    </div>
-  )
-
+    </>
+  );
 }
 
 export default Login

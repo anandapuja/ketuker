@@ -62,10 +62,10 @@ a{
 .arrow-header-left {
   width: 0; 
   height: 0; 
-  border-top: 35px solid transparent;
-  border-bottom: 35px solid transparent; 
-  border-right: 35px solid rgb(243, 243, 243); 
-  margin-right: 20px;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent; 
+  border-right: 15px solid rgb(243, 243, 243); 
+  margin: 4px 20px;
 }
 
 /* NAVIGATION SECTION */
@@ -73,6 +73,10 @@ a{
   display: flex;
   background-color: #F98A06;
   justify-content: center;
+}
+.navigation-container-second{
+  display: flex;
+  background-color: #F98A06;
 }
 .navigation-container p{
   padding: 10px 30px;
