@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
-import { ApolloProvider } from '@apollo/react-hooks'
+import { ApolloProvider } from '@apollo/react-hooks';
 import client from './services/graphql';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect
-} from "react-router-dom";
+} from 'react-router-dom';
 import {
   Register,
   Login,
@@ -42,7 +42,7 @@ function App () {
         </Switch>
       </Router>
     </ApolloProvider>
-  )
-}
+  );
+} 
 
 export default App;

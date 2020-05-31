@@ -5,56 +5,49 @@ import {
   HeaderMain,
   Navigation
 } from '../components';
-import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
-
-const GET_ALL_PRODUCT = gql`
-  query getProducts{
-    getProducts{
-      _id
-      title
-      description
-      userId
-      category
-      image
-      submit
-      price
-    }
-  }
-`
-
+import { GET_PRODUCT_CATEGORY } from '../services/schema';
+import { useLocation } from 'react-router-dom';
 
 export default function Home () {
-  const { loading, error, data } = useQuery(GET_ALL_PRODUCT);
+  const { search } = useLocation();
+  const { loading, error, data } = useQuery(GET_PRODUCT_CATEGORY, { variables: { category: search.slice(10) } });
 
-  if(loading){
-    return <p>Loading</p>
+  if(loading) {
+    return <p>Loading</p>;
   }
 
-  if(error){
-    return <p> error ... </p>
+  if(error) {
+    console.log(error);
+    return <p>error ... </p>;
   }
 
-  if(data){
+  if(data) {
     const { getProducts } = data;
+    const { productByCategory } = data;
+    console.log(data);
+    console.log(getProducts, 'getpro');
+    console.log(productByCategory, 'cat');
     return (
       <>
-      <HeaderMain />
-      <Navigation />
-      <div className="home-list-container">
-        <div className="home-product-list-item-container">
-          {
-        
-            getProducts.map(product => (
-              
-              <ProductItemList key={ product._id } data={ product } />
-            ))
-          }
+        <HeaderMain />
+        <Navigation />
+        <div className="home-list-container">
+          <div className="home-product-list-item-container">
+            {
+              getProducts ?
+                getProducts.map(product => (
+                  <ProductItemList key={ product._id } product={ product } />
+                )) :
+                productByCategory.map(product => (
+                  <ProductItemList key={ product._id } product={ product } />
+                ))
+            }
+          </div>
+          <div className="home-load-more-container">
+            <LoadMoreButton />
+          </div>
         </div>
-        <div className="home-load-more-container">
-          <LoadMoreButton />
-        </div>
-      </div>
       </>
     );
   }
