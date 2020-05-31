@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css';
+import { ApolloProvider } from '@apollo/react-hooks'
+import client from './services/graphql';
 import {
   BrowserRouter as Router,
   Switch,
@@ -25,6 +27,7 @@ import {
 
 function App () {
   return (
+    // <ApolloProvider client={ client }>
       <Router>
         <Switch>
           <Route exact path="/" component={ Home } />
@@ -38,6 +41,7 @@ function App () {
           <Route path="/my-profile" component={ User } />
       </Switch>
     </Router>
+    // </ApolloProvider>
   )
 }
 
