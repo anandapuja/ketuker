@@ -1,6 +1,4 @@
 import { gql } from 'apollo-server';
-const secret = process.env.JWT_SECRET;
-
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
@@ -19,6 +17,7 @@ export const typeDefs = gql`
     avatar: String!
     address: String!
     phone: String!
+    city: String
     token: String
   }
 
@@ -33,6 +32,7 @@ export const typeDefs = gql`
     password: String!
     avatar: String!
     address: String!
+    city: String!
     phone: String!
   }
 
@@ -71,6 +71,9 @@ export const typeDefs = gql`
 
     ##### nodemailer
     nodemailer: Output!
+
+    productByUser(userId: ID!): [Product]!
+    productByCategory(category: String): [Product]!
   }
 
   type Mutation {
@@ -87,7 +90,6 @@ export const resolvers = {
   Query: {
     getUsers: async () => {
       const checkUsers = JSON.parse(await redis.get('users'));
-
       if (checkUsers) {
         return checkUsers;
       } else {
@@ -101,7 +103,7 @@ export const resolvers = {
         const users = JSON.parse(await redis.get('users'));
         const user = users.filter((el) => el._id == id);
         if (user.length) {
-          const [data] = user;
+          const [ data ] = user;
           return data;
         } else {
           const getOneUser = await User.findOne({ _id: id });
@@ -114,8 +116,7 @@ export const resolvers = {
       }
     },
 
-    getProducts: async () => {
-      // await redis.del('products');
+    getProducts: async () => {      
       const getProducts = JSON.parse(await redis.get('products'));
       if (getProducts) {
         return getProducts;
@@ -126,15 +127,73 @@ export const resolvers = {
       }
     },
     getProduct: async (_, { id }) => {
-      const products = JSON.parse(await redis.get('products'));
-      const product = products.filter((el) => el._id == id);
-      if (product.length) {
-        return product;
-      } else {
-        const getOneProduct = await Product.findOne({ _id: id });
-        products.push(getOneProduct);
-        await redis.set('products', JSON.stringify(products));
-        return getOneProduct;
+      try {
+        const products = JSON.parse(await redis.get('products'));
+        if (products) {
+          const [ product ] = products.filter((el) => el._id == id);
+          if (product) return product;
+          else {
+            const getOneProduct = await Product.findOne({ _id: id });
+            product.push(getOneProduct);
+            await redis.set('products', JSON.stringify(products));
+            return getOneProduct;
+          }
+        } else {
+          const productsDb = await Product.find();
+          const getOneProduct = await Product.findOne({ _id: id });
+          await redis.set('products', JSON.stringify(productsDb));
+          return getOneProduct;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    productByUser: async (_, { userId }) => {
+      try {
+        const products = JSON.parse(await redis.get('products'));
+        let newProducts;
+        if (products) {
+          const product = products.filter((el) => el.userId == userId);
+          if (product) return product;
+        }
+        const getProduct = await Product.findOne({ userId: userId });
+        if(products) {
+          newProducts = [ ...products, getProduct ];
+        } else {
+          newProducts = await Product.find();
+        }
+        await redis.set('products', JSON.stringify(newProducts));
+        return getProduct;
+      } catch (error) {
+        console.log(error, '>>>>>>>2');
+      }
+    },
+
+    productByCategory: async (_, { category }) => {
+      try {
+        if (category) {
+          const products = JSON.parse(await redis.get('products'));
+          if (products) {
+            const product = await products.filter((el) => el.category == category);
+            if (product.length) {
+              return product;
+            }
+          }
+          const getProduct = await Product.find({ category: category });
+          return getProduct;
+        } else {
+          const getProducts = JSON.parse(await redis.get('products'));
+          if (getProducts) {
+            return getProducts;
+          } else {
+            const getAllProducts = await Product.find();
+            await redis.set('products', JSON.stringify(getAllProducts));
+            return getAllProducts;
+          }
+        }
+      } catch (error) {
+        return error;
       }
     },
 
@@ -157,12 +216,18 @@ export const resolvers = {
         }
       } else {
         const res = await newUser.save();
-        const token = jwt.sign({ id: newUser._id }, secret);
+        const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
+        const users = JSON.parse(await redis.get('users'));
+        if(users) {
+          users.push(newUser);
+          await redis.set('users', JSON.stringify(users));
+        } else {
+          await redis.set('users', JSON.stringify([ res ]));
+        }
         return { _id: res._id, ...res._doc, token };
       }
     },
     login: async (_, { input }) => {
-      await redis.flushall();
       const { email, password } = input;
       const getUser = await User.findOne({ email });
       if (getUser) {
@@ -171,7 +236,7 @@ export const resolvers = {
           throw new Error('Wrong Password / Wrong Email');
         } else {
           //kalo secretPrivateKey gw taruh di .env masih error. sementara gtu.
-          const token = jwt.sign({ id: getUser._id }, secret);
+          const token = jwt.sign({ id: getUser._id }, process.env.JWT_SECRET);
           const { _id, username, email, avatar, address, phone } = getUser;
           return {
             _id: _id,
@@ -189,9 +254,7 @@ export const resolvers = {
       }
     },
 
-    addProduct: async (
-      _,
-      { input },
+    addProduct: async (_, { input },
       {
         req: {
           headers: { token },
@@ -212,10 +275,16 @@ export const resolvers = {
         submit,
       });
       newProduct.userId = user._id;
-      await newProduct.save();
-      const getAllProducts = await Product.find();
-      await redis.set('products', JSON.stringify(getAllProducts));
-
+      const savedProduct = await newProduct.save();
+      const getProducts = JSON.parse(await redis.get('products'));
+      
+      if(getProducts) {
+        getProducts.push(savedProduct);
+        await redis.set('products', JSON.stringify(getProducts));
+      } else {
+        const getAllProducts = await Product.find();
+        await redis.set('products', JSON.stringify(getAllProducts));
+      }
       return newProduct;
     },
     updateProduct: async (

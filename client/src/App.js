@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
-import { ApolloProvider } from '@apollo/react-hooks'
+import { ApolloProvider } from '@apollo/react-hooks';
 import client from './services/graphql';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect
-} from "react-router-dom";
+} from 'react-router-dom';
 import {
   Register,
   Login,
@@ -27,7 +27,7 @@ import {
 
 function App () {
   return (
-    // <ApolloProvider client={ client }>
+    <ApolloProvider client={ client }>
       <Router>
         <Switch>
           <Route exact path="/" component={ Home } />
@@ -39,10 +39,10 @@ function App () {
           <Route path="/me/barang/:id" component={ DetailItemUser } />
           <Route path="/barang/:id" component={ DetailItemCustomer } />
           <Route path="/my-profile" component={ User } />
-      </Switch>
-    </Router>
-    // </ApolloProvider>
-  )
-}
+        </Switch>
+      </Router>
+    </ApolloProvider>
+  );
+} 
 
 export default App;

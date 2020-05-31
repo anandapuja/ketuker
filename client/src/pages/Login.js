@@ -1,64 +1,53 @@
 import React, { useState } from 'react';
-import {useHistory} from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import { HeaderSecond, NavigationSecond } from '../components';
+import { useMutation } from '@apollo/react-hooks';
+import { LOGIN_USER } from '../services/schema';
 
-// import gql from "graphql-tag";
-// import {useQuery, useMutation} from '@apollo/react-hooks'
+function Login () {
 
-//waiting server
-// const SIGNIN = gql`
-//     mutation 
-    
-// `
+  const history = useHistory();
+  const [ username, setUsername ] = useState('');
+  const [ email, setEmail ] = useState('');
+  const [ password, setPassword ] = useState('');
 
-
-function Login(){
-
-  const history = useHistory()
-
-  const [username, setUsername] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
-  // const [signin] = useMutation(SIGNIN)
+  const [ loginUser ] = useMutation(LOGIN_USER);
   
-  function ToRegister(){
-    history.push('/register')
+  function ToRegister () {
+    history.push('/register');
   }
 
-  function onHandleLogin(e){
-    console.log(e.target.value,"-----")
-    let str = e.target.value
-    console.log(str, "---target value")
-    if(str.match(/@/g)){
-      console.log(str,"====email")
-      setEmail(str)
+  function onHandleLogin (e) {
+    let str = e.target.value;
+    if(str.match(/@/g)) {
+      setEmail(str);
     } else {
-      console.log(str,"===username")
-      setUsername(str)
+      setUsername(str);
     }
   }
   
-  function SubmitLogin(e){
+  async function SubmitLogin (e) {
     e.preventDefault();
-    console.log('submitLogin')
-    console.log(username, "username / email", email)
-    let data
-    if(email){
-      data= {
+    let data;
+    if(email) {
+      data = {
         email: email,
         password: password
+      };
+      const response = await loginUser({ variables: { input: data } });
+      if(response.data.login.token) {
+        console.log(response);
+        localStorage.setItem('token',response.data.login.token); //dummy token
+        localStorage.setItem('user_id',response.data.login._id);
+        localStorage.setItem('username',response.data.login.username);
+        history.push('/'); 
       }
     } else {
-      data= {
+      data = {
         username: username,
         password: password
-      }
+      };
     }
-    console.log(data, "---data")
-    // signin({variables: })
-    localStorage.setItem('token','1234') //dummy token
-    history.push('/')
   }
 
   return (
@@ -73,12 +62,12 @@ function Login(){
               type='text' 
               placeholder='username/email'
               className="input-login"
-              ></input>
+            ></input>
             <input onChange={(e)=>setPassword(e.target.value)} 
               type="password"
               placeholder='password'
               className="input-login"
-              ></input>
+            ></input>
             <button className="btn-register">SIGN IN</button>
           </form>
         </div>
@@ -91,6 +80,6 @@ function Login(){
   );
 }
 
-export default Login
+export default Login;
 
 

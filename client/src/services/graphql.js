@@ -1,7 +1,15 @@
-// import { ApolloClient } from 'apollo-boost';
+import ApolloClient from 'apollo-boost';
 
-// const client = new ApolloClient({
-//   uri: 'https://48p1r2roz4.sse.codesandbox.io',
-// });
+const client = new ApolloClient({
+  uri: 'http://localhost:4000/graphql',
+  request: (operation) => {
+    const userToken = localStorage.getItem('token');
+    operation.setContext({
+      headers: {
+        token: userToken ? userToken : ''
+      }
+    }); 
+  }
+});
 
-// export default client;
+export default client;
