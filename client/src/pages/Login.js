@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {useHistory} from "react-router-dom";
+import { HeaderSecond } from '../components';
 
 // import gql from "graphql-tag";
 // import {useQuery, useMutation} from '@apollo/react-hooks'
@@ -62,7 +63,8 @@ function Login(){
 
   return (
     <div className="login">
-      <h3 className="title-login">SIGN IN</h3>
+      <HeaderSecond />
+      <h3 className="title-login">SIGN IN</h3>  
       <div className="div-form">
         <form onSubmit={SubmitLogin} className="form-login">
           <input onChange={onHandleLogin} 

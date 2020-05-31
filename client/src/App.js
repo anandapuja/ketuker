@@ -39,12 +39,32 @@ function App () {
       <HeaderMain />
       <Navigation />
       <Switch>
-        {/* <Redirect to={`/login?redirect=true`} /> */}
+        {(localStorage.getItem('token') ? 
+          (
+            <div>
+              <Route exact path="/" component={ Home } />
+              <Route path="/category" component={ Category } />
+              <Route path="/additem" component={ AddItem} />
+            </div>
+            
+          )
+        : 
+          (
+            <div>
+               <Redirect to={`/login`} />
+              <Route path="/login" component={ Login } />
+              <Route path="/register" component={ Register } />
+              <Route exact path="/" component={ Home } />
+            </div>
+          )
+
+        )}
+        {/* <Redirect to={`/login?redirect=true`} />
         <Route exact path="/" component={ Home } />
         <Route path="/register" component={ Register } />
         <Route path="/login" component={ Login } />
         <Route path="/category" component={ Category } />
-        <Route path="/additem" component={ AddItem} />
+        <Route path="/additem" component={ AddItem} /> */}
       </Switch>
     </Router>
   );

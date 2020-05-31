@@ -1,13 +1,19 @@
 .login {
-    background-color: #FFF;
+    background-image: linear-gradient(#F98A06, #F9BE06);
     text-align: center;
+    width: 500px;
+    margin: 40px auto;
+    border-radius: 10px;
+    padding-bottom: 20px;;
 }
 
 .title-login {
-    color: grey;
+    color: #5415CE;
     font-size: 50px;
     font-weight: 800;
     font-family: 'Times New Roman', Times, serif;
+    width: 500px;
+    margin: 10px auto
 }
 
 .div-form {
@@ -37,7 +43,7 @@
     height: 60px;
     font-size: 30px;
     color: white;
-    background-color: grey;
+    background-color: #5415CE;
     border-radius: 10px;
     font-weight: bold;
 }
@@ -51,15 +57,23 @@ button:hover {
 }
 
 .register {
-    background-color: #FFF;
+    background-image: linear-gradient(#F98A06, #F9BE06);
     text-align: center;
+    width: 900px;
+    margin: 40px auto;
+    border-radius: 10px;
+    padding-bottom: 10px;
 }
 
 .title-register {
-    color: grey;
-    font-size: 30px;
+    color: #5415CE;
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 40px;
     font-weight: 800;
     font-family: 'Times New Roman', Times, serif;
+    padding: 20px 20px
 }
 
 .div-register {
@@ -90,7 +104,7 @@ button:hover {
     height: 60px;
     font-size: 30px;
     color: white;
-    background-color: grey;
+    background-color: #5415CE;
     border-radius: 10px;
     font-weight: bold;
 }
@@ -109,7 +123,7 @@ button:hover {
 
 .title-upload-register {
     font-size: 24px;
-    color: grey;
+    color: #5415CE;
     margin-top: 20px;
     margin-bottom: 30px;
 }
@@ -125,7 +139,7 @@ button:hover {
     height: 50px;
     font-size: 20px;
     border-radius: 10px;
-    background-color: grey;
+    background-color: #5415CE;
     color: white
 }
 

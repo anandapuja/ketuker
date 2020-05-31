@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import '../additem.css'
 import { storage } from '../storage/firebase'
 import { Link } from 'react-router-dom';
+import HeaderSecond from '../components/HeaderSecond'
 
 export default function AddItem () {
 
@@ -137,6 +138,7 @@ export default function AddItem () {
 
   return (
     <div className="additem">
+      <HeaderSecond />
       <div className="title-additem">CREATE YOUR ITEM</div>
       <div className="flex-additem">
         <form onSubmit={SubmitCreate} className="form-additem">
@@ -182,7 +184,7 @@ export default function AddItem () {
               </div>
             ))}
           </div>
-          <Link to="/"><button className="btn-additem">BACK</button></Link>
+          <Link to="/"><button className="btn-additem">CANCEL</button></Link>
         </div>
        
       </div>

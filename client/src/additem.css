@@ -1,15 +1,19 @@
 .additem {
-    background-color: #FFF;
+    background-image: linear-gradient(#F98A06, #F9BE06);
     text-align: center;
-    padding: 20px 20px
+    width: 900px;
+    margin: 20px auto;
+    border-radius: 10px;
+    padding-bottom: 20px;
 }
 
 .title-additem {
-    color: grey;
+    color: #5415CE;
+    width: 900px;
     font-size: 40px;
     font-weight: 800;
     font-family: 'Times New Roman', Times, serif;
-    margin-top: 20px
+    padding: 10px 10px
 }
 
 .flex-additem {
@@ -49,7 +53,7 @@
     font-size: 20px;
     margin: 20px 20px;
     border-radius: 10px;
-    color: grey;
+    color: black;
 }
 
 .btn-additem {
@@ -57,13 +61,13 @@
     height: 60px;
     font-size: 20px;
     color: white;
-    background-color: grey;
+    background-color: #5415CE;
     border-radius: 10px;
     font-weight: bold;
 }
 
 button:hover {
-    background-color: silver;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)
 }
 
 .form-upload {
@@ -76,8 +80,8 @@ button:hover {
 
 .title-upload {
     font-size: 20px;
-    color: black;
-    margin: 5px 0px
+    color: #5415CE;
+    margin: 10px 0px
 }
 
 .input-upload {
@@ -91,7 +95,7 @@ button:hover {
     height: 50px;
     font-size: 20px;
     border-radius: 10px;
-    background-color: grey;
+    background-color: #5415CE;
     color: white
 }
 
@@ -104,9 +108,11 @@ button:hover {
 
 .suggestion-additem {
     width: 450px;
-    height: 220px;
+    height: 225px;
     overflow: scroll;
-    border: solid grey;
+    background-color: #FFF;
+    border: solid #F98A06;
     border-radius: 10px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
+    margin-right: 5px;
 }

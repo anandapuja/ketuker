@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {useHistory} from "react-router-dom";
-import { storage } from '../storage/firebase'
+import { storage } from '../storage/firebase';
+import HeaderSecond from '../components/HeaderSecond'
 
 // import gql from "graphql-tag";
 // import {useQuery, useMutation} from '@apollo/react-hooks'
@@ -84,6 +85,7 @@ function Register(){
 
     return (
       <div className="register">
+        <HeaderSecond />
         <h3 className="title-register">CREATE ACCOUNT</h3>
         <div className="div-register">
           <form onSubmit={SubmitRegister} className='form-register'>
