@@ -2,16 +2,18 @@ import React, { useState } from 'react';
 import {useHistory} from "react-router-dom";
 import { storage } from '../storage/firebase'
 import { HeaderSecond } from '../components';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/react-hooks';
 
-// import gql from "graphql-tag";
-// import {useQuery, useMutation} from '@apollo/react-hooks'
-
-
-//waiting server
-// const SIGNUP = gql`
-//     mutation 
-    
-// `
+const CREATE_ACCOUNT = gql`
+mutation registerUser($input: UserRegister) {
+  register(input:$input) {
+    token
+    username
+    _id
+  }
+}
+`
 
 function Register(){
 
@@ -27,12 +29,11 @@ function Register(){
   const [phone, setPhone] = useState('')
 
   // const [signup] = useMutation(SIGNUP)
-
+  const [registerAccount] = useMutation(CREATE_ACCOUNT);
 
   function ToLogin(){
     history.push('/login')
   }
-
 
   function SubmitRegister(e){
     e.preventDefault()
@@ -46,9 +47,10 @@ function Register(){
         password: password2,
         avatar: avatar,
         address: address,
-        city: city,
+        // city: city,
         phone: phone
       }
+      registerAccount({variables: { input: data }});
       console.log(data)
       // signup({ variables: data });
     }
@@ -81,7 +83,6 @@ function Register(){
 					})
 			})
 	}
-
 
     return (
       <>

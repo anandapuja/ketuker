@@ -3,6 +3,23 @@ import '../additem.css';
 import { storage } from '../storage/firebase';
 import { Link } from 'react-router-dom';
 import { HeaderSecond, NavigationSecond } from '../components';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/react-hooks';
+
+const ADD_PRODUCT = gql`
+mutation addProduct($input: InputProduct!) {
+  addProduct(input: $input) {
+    title
+    description
+    price
+    whislist
+    category
+    image
+    submit
+    userId
+  }
+}
+`;
 
 export default function AddItem () {
 
@@ -70,23 +87,33 @@ export default function AddItem () {
   }
 
   function handlePrice(e){
-    setPrice(formatRupiah(e.target.value, 'Rp'))
+    // setPrice(formatRupiah(e.target.value, 'Rp'))
+    setPrice(Number(e.target.value));
   }
 
-  function SubmitCreate(e){
+  const [addProduct] = useMutation(ADD_PRODUCT);
+
+  async function SubmitCreate(e){
     e.preventDefault();
     let harga1 = price.replace('Rp. ','')
     let harga2 = harga1.replace('.','')
-    let harga = Number(harga2)
-    let data={  //change as the fields required in server
-      title: title,
-      description: description,
-      image: image,
-      price: harga,
-      category: category,
-      wishlist: wishlist
+    let price = Number(harga2)
+    
+    try {
+      let data={  //change as the fields required in server
+        title: title,
+        description: description,
+        image: image,
+        price: price,
+        category: category,
+        whislist: wishlist,
+        submit: false
+      }
+      const product = await addProduct({ variables:{ input: data }});
+    } catch (error) {
+      console.log(error, 'ERRORNY')
     }
-    console.log(data)
+
   }
 
   const [imageAsFile, setImageAsFile] = useState('')
@@ -174,7 +201,6 @@ export default function AddItem () {
               className="input-upload"
             />
             <button type="submit" className="btn-upload">Upload</button>
-            {(image!=='') && <img src={image} alt="picture" className="img-picture"></img> }
           </form>
           <div className="suggestion-additem">
             <h4>Suggestion Price</h4>
@@ -189,8 +215,8 @@ export default function AddItem () {
           </div>
           <Link to="/"><button className="btn-additem">CANCEL</button></Link>
         </div>
-       
       </div>
+      {(image!=='') && <img src={image} alt="picture" className="img-additem"></img> }
     </div>
     </>
   );

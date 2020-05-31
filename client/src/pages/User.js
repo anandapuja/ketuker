@@ -10,6 +10,7 @@ import {
 } from '../components';
 
 export default function User () {
+
   const [navBarang, setNavBarang] = useState(true);
   const [mengajak, setMengajak] = useState(false);
   const [diajak, setDiajak] = useState(false);

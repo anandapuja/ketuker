@@ -11,3 +11,5 @@ export { default as UserNavigation } from './UserNavigation';
 export { default as UserBarang } from './UserBarang';
 export { default as UserMengajak } from './UserMengajak';
 export { default as UserDiajak } from './UserDiajak';
+export { default as CompError } from './CompError';
+export { default as CompLoading } from './CompLoading';
