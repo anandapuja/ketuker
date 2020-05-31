@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css';
+import { ApolloProvider } from '@apollo/react-hooks'
+import client from './services/graphql';
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,63 +13,36 @@ import {
   Login,
   Home,
   Category,
-  AddItem
+  AddItem,
+  DetailItemUser,
+  DetailItemCustomer,
+  User
 } from './pages';
 import {
   HeaderMain,
-  Navigation
+  Navigation,
+  HeaderSecond,
 } from './components';
 
 
 function App () {
-
-  // if(!localStorage.getItem('token')){
-  //   return (
-  //     <Router>
-  //       <h3>KEtuker Login Register---navbar/logo etc</h3>
-  //       <Switch>
-  //         <Route path="/register" component={ Register } />
-  //         <Route path="/login" component={ Login } />
-  //         <Redirect to={`/login`} />
-  //       </Switch>
-  //     </Router>
-  //   );
-  // }
-
   return (
-    <Router>
-      <HeaderMain />
-      <Navigation />
-      <Switch>
-        {(localStorage.getItem('token') ? 
-          (
-            <div>
-              <Route exact path="/" component={ Home } />
-              <Route path="/category" component={ Category } />
-              <Route path="/additem" component={ AddItem} />
-            </div>
-            
-          )
-        : 
-          (
-            <div>
-               <Redirect to={`/login`} />
-              <Route path="/login" component={ Login } />
-              <Route path="/register" component={ Register } />
-              <Route exact path="/" component={ Home } />
-            </div>
-          )
-
-        )}
-        {/* <Redirect to={`/login?redirect=true`} />
-        <Route exact path="/" component={ Home } />
-        <Route path="/register" component={ Register } />
-        <Route path="/login" component={ Login } />
-        <Route path="/category" component={ Category } />
-        <Route path="/additem" component={ AddItem} /> */}
+    // <ApolloProvider client={ client }>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={ Home } />
+          <Route path="/register" component={ Register } />
+          <Route path="/login" component={ Login } />
+          <Route path="/category" component={ Category } />
+          <Route path="/additem" component={ AddItem} />
+          <Route path="/category" component={ Category } />
+          <Route path="/me/barang/:id" component={ DetailItemUser } />
+          <Route path="/barang/:id" component={ DetailItemCustomer } />
+          <Route path="/my-profile" component={ User } />
       </Switch>
     </Router>
-  );
+    // </ApolloProvider>
+  )
 }
 
 export default App;

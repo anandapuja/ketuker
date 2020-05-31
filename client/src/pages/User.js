@@ -4,7 +4,9 @@ import {
   UserNavigation,
   UserBarang,
   UserMengajak,
-  UserDiajak
+  UserDiajak,
+  HeaderMain,
+  Navigation
 } from '../components';
 
 export default function User () {
@@ -31,45 +33,49 @@ export default function User () {
   }
 
   return (
-    <div className="user-profile-container">
-      <UserProfile />
-      <UserNavigation
-        barang={handleBarang}
-        mengajak={handleMengajak}
-        diajak={handleDiajak}
-      />
-      { navBarang && (
-        <div className="user-barang-container">
-          <UserBarang />
-          <UserBarang />
-          <UserBarang />
-          <UserBarang />
-          <UserBarang />
-          <UserBarang />
-        </div>
-      ) }
+    <>
+      <HeaderMain />
+      <Navigation />
+      <div className="user-profile-container">
+        <UserProfile />
+        <UserNavigation
+          barang={handleBarang}
+          mengajak={handleMengajak}
+          diajak={handleDiajak}
+        />
+        { navBarang && (
+          <div className="user-barang-container">
+            <UserBarang />
+            <UserBarang />
+            <UserBarang />
+            <UserBarang />
+            <UserBarang />
+            <UserBarang />
+          </div>
+        ) }
 
-      { mengajak && (
-        <div className="user-mengajak-container">
-          <UserMengajak />
-          <UserMengajak />
-          <UserMengajak />
-          <UserMengajak />
-          <UserMengajak />
-          <UserMengajak />
-        </div>
-      ) }
+        { mengajak && (
+          <div className="user-mengajak-container">
+            <UserMengajak />
+            <UserMengajak />
+            <UserMengajak />
+            <UserMengajak />
+            <UserMengajak />
+            <UserMengajak />
+          </div>
+        ) }
 
-      { diajak && (
-        <div className="user-barang-container">
-          <UserDiajak />
-          <UserDiajak />
-          <UserDiajak />
-          <UserDiajak />
-          <UserDiajak />
-          <UserDiajak />
-        </div>
-      ) }
-    </div>
+        { diajak && (
+          <div className="user-barang-container">
+            <UserDiajak />
+            <UserDiajak />
+            <UserDiajak />
+            <UserDiajak />
+            <UserDiajak />
+            <UserDiajak />
+          </div>
+        ) }
+      </div>
+    </>
   );
 }

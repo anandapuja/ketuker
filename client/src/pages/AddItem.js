@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import '../additem.css'
-import { storage } from '../storage/firebase'
+import '../additem.css';
+import { storage } from '../storage/firebase';
 import { Link } from 'react-router-dom';
-import HeaderSecond from '../components/HeaderSecond'
+import { HeaderSecond, NavigationSecond } from '../components';
 
 export default function AddItem () {
 
@@ -137,17 +137,19 @@ export default function AddItem () {
     
 
   return (
+    <>
+    <HeaderSecond />
+    <NavigationSecond />
     <div className="additem">
-      <HeaderSecond />
-      <div className="title-additem">CREATE YOUR ITEM</div>
+      <div className="title-register">UPLOAD BARANG</div>
       <div className="flex-additem">
         <form onSubmit={SubmitCreate} className="form-additem">
           <input onChange={handleTitle} 
-                  type="text" placeholder="title" className="input-additem"></input>
+                  type="text" placeholder="Nama Barang" className="input-register"></input>
           <textarea onChange={(e)=>setDescription(e.target.value)} 
-                  type="textarea" placeholder="description" rows={5} className="textarea-additem"></textarea>
+                  type="textarea" placeholder="Deskripsi" rows={5} className="textarea-additem"></textarea>
           <input onChange={handlePrice} 
-                  type="text" placeholder="price" value={price} className="input-additem"></input>
+                  type="text" placeholder="Harga" value={price} className="input-register"></input>
           <select onChange={(e)=>setCategory(e.target.value)} className="category-additem">
               <option disabled selected value >Category</option>
               <option value="automotive">Automotive</option>
@@ -158,13 +160,14 @@ export default function AddItem () {
               <option value="household">Household</option>
           </select>
           <input onChange={(e)=>setWishlist(e.target.value)} 
-                  type="text" placeholder="wishlist" className="input-additem"></input>
-          <button className="btn-additem">CREATE</button>
+                  type="text" placeholder="Barang apa yang kamu cari?" className="input-register"></input>
+          <button className="btn-register">SUBMIT</button>
+          {/* <Link to="/"><button className="btn-register">BACK</button></Link> */}
         </form>
         
         <div>
           <form onSubmit={handleFireBaseUpload} className="form-upload">
-            <h4 className="title-upload">Upload your item picture here</h4>
+            <h4 className="title-upload-register">Upload gambar di sini.</h4>
             <input
               type="file"
               onChange={handleImageAsFile}
@@ -188,8 +191,7 @@ export default function AddItem () {
         </div>
        
       </div>
-      
-        
     </div>
+    </>
   );
 }

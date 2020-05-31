@@ -12,8 +12,7 @@
     width: 900px;
     font-size: 40px;
     font-weight: 800;
-    font-family: 'Times New Roman', Times, serif;
-    padding: 10px 10px
+    margin-top: 20px
 }
 
 .flex-additem {
@@ -40,28 +39,35 @@
 }
 
 .textarea-additem {
-    width: 400px;
+    /* width: 400px;
     font-size: 20px;
     text-align: center;
     margin: 20px 20px;
     border-radius: 10px;
+ */
+    font-family: inherit;
+    width: 400px;
     text-align: left;
-    padding-left: 10px
+    margin-bottom: 20px;
+    padding: 20px;
+    border: none;
+    border-bottom: 1px solid rgb(114, 112, 112);
+    background-color: rgb(240, 240, 240);
 }
 
 .category-additem {
+    padding: 20px;
     width: 400px;
-    height: 60px;
-    font-size: 20px;
-    margin: 20px 20px;
-    border-radius: 10px;
-    color: black;
+    margin-bottom: 20px;
+    border: none;
+    border-bottom: 1px solid rgb(114, 112, 112);
+    background-color: rgb(240, 240, 240);
+    color: grey;
 }
 
 .btn-additem {
     width : 400px;
     height: 60px;
-    font-size: 20px;
     color: white;
     background-color: #5415CE;
     border-radius: 10px;
@@ -76,28 +82,22 @@ button:hover {
     display: inline-block;
     text-align: center;
     width: 400px;
-    height: 300px;
-    margin: 10px 10px
 }
 
 .title-upload {
-    font-size: 20px;
-    color: #5415CE;
-    margin: 10px 0px
+    color: black;
+    margin: 5px 0px
 }
 
 .input-upload {
     width: 300px;
     height : 50px;
-    font-size: 20px;
 }
 
 .btn-upload {
-    width: 100px;
-    height: 50px;
-    font-size: 20px;
-    border-radius: 10px;
-    background-color: #5415CE;
+    padding: 10px 20px;
+    border: none;
+    background-color: grey;
     color: white
 }
 
@@ -112,9 +112,13 @@ button:hover {
     width: 450px;
     height: 225px;
     overflow: scroll;
-    background-color: #FFF;
-    border: solid #F98A06;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    margin-right: 5px;
+    margin-bottom: 25px;
+    border: none;
+    border-bottom: 1px solid rgb(114, 112, 112);
+    background-color: rgb(240, 240, 240);
+    padding: 20px;
+}
+.suggestion-additem h4{
+    text-align: left;
+    text-decoration: underline;
 }

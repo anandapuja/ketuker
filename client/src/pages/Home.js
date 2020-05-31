@@ -1,11 +1,16 @@
 import React from 'react';
 import {
   ProductItemList,
-  LoadMoreButton
+  LoadMoreButton,
+  HeaderMain,
+  Navigation
 } from '../components';
 
 export default function Home () {
   return (
+    <>
+    <HeaderMain />
+    <Navigation />
     <div className="home-list-container">
       <div className="home-product-list-item-container">
         <ProductItemList />
@@ -22,5 +27,6 @@ export default function Home () {
         <LoadMoreButton />
       </div>
     </div>
+    </>
   );
 }

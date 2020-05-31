@@ -23,7 +23,7 @@ export default function HeaderMain () {
       </div>
       <div className="header-user-container">
         <button onClick={ToUploadBarang}>Upload Barang</button>
-        <Link to="/my-profile">
+        <Link to={ localStorage.getItem('token') ? "/my-profile" : "/login" }>
           <img src={avatar} alt="avatar" />
         </Link>
       </div>
