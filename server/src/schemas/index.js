@@ -420,7 +420,7 @@ export const resolvers = {
 
     addTransaction: async (_, { input }, { req: { headers: { token } } }) => {
       try {
-        console.log(input, 'INPUTTT>><<');
+        console.log(input, '<<<<<<<>>>>>');
         const userAuth = await authen(token);
         const user = await User.findOne({ _id: userAuth.id });
         const { userTarget, productOriginal, productTarget } = input;
@@ -429,7 +429,6 @@ export const resolvers = {
           userOriginal: userAuth.id, userTarget, productOriginal, productTarget
         });
         const newTrans = await transaction.save();
-        console.log(newTrans, '>>><<<<<<OUTPUT');
         return newTrans;
       } catch (error) {
         console.log(error);
