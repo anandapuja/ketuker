@@ -45,7 +45,7 @@ export default function DetailItemCustomer () {
             </div>
           </div>
           {
-            !barterStatus ? (
+            barterStatus ? (
               <div className="detail-item-user-second">
                 <h1>PILIH BARANGMU</h1>
                 <div className="detail-item-customer-list">
