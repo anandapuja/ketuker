@@ -65,16 +65,29 @@ export const typeDefs = gql`
 
   type Transaction {
     _id: ID!
-    userOriginal: User!
-    userTarget: User!
+    userOriginal: String!
+    userTarget: String!
     productOriginal: [Product]!
     productTarget: [Product]!
+    status: Boolean
   }
 
-  input Transaction {
-    userTarget: User!
-    productOriginal: [Product]!
-    productTarget: [Product]!
+  input InputProdTrans {
+    _id: ID!
+    userId: String!
+    title: String!
+    description: String!
+    price: Int!
+    whislist: String!
+    category: String!
+    image: String!
+    submit: Boolean!
+  }
+
+  input InputTransaction {
+    userTarget: String!
+    productOriginal: [InputProdTrans]!
+    productTarget: [InputProdTrans]!
   }
 
   type Query {
@@ -404,5 +417,24 @@ export const resolvers = {
         result: 'Successfully deleted product!',
       };
     },
+
+    addTransaction: async (_, { input }, { req: { headers: { token } } }) => {
+      try {
+        console.log(input, 'INPUTTT>><<');
+        const userAuth = await authen(token);
+        const user = await User.findOne({ _id: userAuth.id });
+        const { userTarget, productOriginal, productTarget } = input;
+        if (!user) throw new Error('You have to login!');
+        const transaction = new Transaction({
+          userOriginal: userAuth.id, userTarget, productOriginal, productTarget
+        });
+        const newTrans = await transaction.save();
+        console.log(newTrans, '>>><<<<<<OUTPUT');
+        return newTrans;
+      } catch (error) {
+        console.log(error);
+        return error;
+      }
+    }
   },
 };

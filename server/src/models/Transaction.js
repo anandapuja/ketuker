@@ -19,12 +19,8 @@ const transactionSchema = new mongoose.Schema({
   },
   status: {
     type: Boolean,
+    default: false
   },
-});
-
-transactionSchema.pre('save', (next) => {
-  this.status = false;
-  next();
 });
 
 const Transaction = mongoose.model('Transaction', transactionSchema);
