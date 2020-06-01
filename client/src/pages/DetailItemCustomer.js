@@ -46,6 +46,8 @@ export default function DetailItemCustomer () {
       productOriginal
     }
     localStorage.setItem('barter', JSON.stringify(barter))
+    localStorage.setItem('userOriginal', productTarget[0].userId);
+    localStorage.setItem('userTarget', localStorage.getItem('user_id'));
     history.push('/konfirmasi')
   }
   

@@ -6,13 +6,12 @@ import {
   Navigation
 } from '../components';
 import { useQuery } from '@apollo/react-hooks';
-import { GET_PRODUCTS_AND_USERS, GET_ALL_PRODUCT } from '../services/schema';
+import { GET_ALL_PRODUCT } from '../services/schema';
 import { useLocation, useHistory } from 'react-router-dom';
 import SliderApp from '../components/Slider';
 
 export default function Home () {
-  const { search, pathname } = useLocation();
-  const location = useLocation();
+  const { search } = useLocation();
   const history = useHistory();
   const { loading, error, data } = useQuery(GET_ALL_PRODUCT, { fetchPolicy: 'cache-and-network' });
   const [ page, setPage ] = useState(search ? Number(search.slice(6)) : 1);

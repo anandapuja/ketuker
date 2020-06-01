@@ -85,8 +85,8 @@ export default function AddItem () {
       rupiah += separator + ribuan.join('.');
     }
    
-    rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-    return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+    rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
+    return prefix === undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
   }
     
 
@@ -128,7 +128,7 @@ export default function AddItem () {
                 className="input-upload"
               />
               <button type="submit" className="btn-upload">Upload</button>
-              {(image!=='') && <img src={image} alt="picture" className="img-picture"></img> }
+              {(image!=='') && <img src={image} alt={image} className="img-picture"></img> }
             </form>
             <div className="suggestion-additem">
               <h4>Rekomendasi harga</h4>

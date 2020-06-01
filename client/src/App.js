@@ -39,7 +39,8 @@ function App () {
           <Route path="/me/barang/:id" component={ DetailItemUser } />
           <Route path="/barang/:id" component={ DetailItemCustomer } />
           <Route path="/my-profile" component={ User } />
-          <Route path="/konfirmasi" component={ Confirmation } />
+          <Route exact path="/konfirmasi" component={ Confirmation } />
+          <Route path="/konfirmasi/:id" component={ Confirmation } />
         </Switch>
       </Router>
     </ApolloProvider>
