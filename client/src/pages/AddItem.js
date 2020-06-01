@@ -1,25 +1,11 @@
-import React, {useState} from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react';
 import '../additem.css';
 import { storage } from '../storage/firebase';
-import { Link } from 'react-router-dom';
 import { HeaderSecond, NavigationSecond } from '../components';
-import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
-
-const ADD_PRODUCT = gql`
-mutation addProduct($input: InputProduct!) {
-  addProduct(input: $input) {
-    title
-    description
-    price
-    whislist
-    category
-    image
-    submit
-    userId
-  }
-}
-`;
+import { ADD_PRODUCT, GET_PRODUCTS_AND_USERS } from '../services/schema';
+import { useHistory, Link } from 'react-router-dom';
 
 export default function AddItem () {
 
@@ -32,6 +18,8 @@ export default function AddItem () {
   const[price, setPrice] = useState('')
   const[category, setCategory] = useState('')
   const[wishlist, setWishlist] = useState('')
+  const [ addProduct ] = useMutation(ADD_PRODUCT, { refetchQueries: () => [ { query: GET_PRODUCTS_AND_USERS } ] });
+  const history = useHistory();
   const[suggestion, setSuggestion] = useState('')
 
   function cari(katakunci){
@@ -91,16 +79,15 @@ export default function AddItem () {
     setPrice(Number(e.target.value));
   }
 
-  const [addProduct] = useMutation(ADD_PRODUCT);
 
-  async function SubmitCreate(e){
+  async function SubmitCreate (e) {
     e.preventDefault();
     let harga1 = price.replace('Rp. ','')
     let harga2 = harga1.replace('.','')
     let price = Number(harga2)
     
     try {
-      let data={  //change as the fields required in server
+      let data={ //change as the fields required in server
         title: title,
         description: description,
         image: image,
@@ -108,52 +95,53 @@ export default function AddItem () {
         category: category,
         whislist: wishlist,
         submit: false
-      }
-      const product = await addProduct({ variables:{ input: data }});
+      };
+      await addProduct({ variables:{ input: data } });
+      history.push('/');
     } catch (error) {
-      console.log(error, 'ERRORNY')
+      console.log(error, 'ERRORNY');
     }
 
   }
 
-  const [imageAsFile, setImageAsFile] = useState('')
+  const [ imageAsFile, setImageAsFile ] = useState('');
 
   const handleImageAsFile = (e) => {
-		const pic = e.target.files[0]
-		setImageAsFile(imageFile => (pic))
-	}
+    const pic = e.target.files[0];
+    setImageAsFile(imageFile => (pic));
+  };
 
-	const handleFireBaseUpload = e => {
-		e.preventDefault()
-		console.log('start of upload')
-		if (imageAsFile === '') {
-			console.error(`not an image, the image file is a ${typeof (imageAsFile)}`)
-		}
-		const uploadTask = storage.ref(`/images/${imageAsFile.name}`).put(imageAsFile)
-		uploadTask.on('state_changed',
-			(snapShot) => {
-				console.log(snapShot)
-			}, (err) => {
-				console.log(err)
-			}, () => {
-				storage.ref('images').child(imageAsFile.name).getDownloadURL()
-					.then(fireBaseUrl => {
-						console.log(fireBaseUrl, "---firebaseURl")
-						setImage(fireBaseUrl)
-					})
-			})
-  }
+  const handleFireBaseUpload = e => {
+    e.preventDefault();
+    console.log('start of upload');
+    if (imageAsFile === '') {
+      console.error(`not an image, the image file is a ${typeof (imageAsFile)}`);
+    }
+    const uploadTask = storage.ref(`/images/${imageAsFile.name}`).put(imageAsFile);
+    uploadTask.on('state_changed',
+      (snapShot) => {
+        console.log(snapShot);
+      }, (err) => {
+        console.log(err);
+      }, () => {
+        storage.ref('images').child(imageAsFile.name).getDownloadURL()
+          .then(fireBaseUrl => {
+            console.log(fireBaseUrl, '---firebaseURl');
+            setImage(fireBaseUrl);
+          });
+      });
+  };
   
-  function formatRupiah(angka, prefix){
+  function formatRupiah (angka, prefix) {
     var number_string = angka.replace(/[^,\d]/g, '').toString(),
-    split   		= number_string.split(','),
-    sisa     		= split[0].length % 3,
-    rupiah     		= split[0].substr(0, sisa),
-    ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+      split = number_string.split(','),
+      sisa = split[0].length % 3,
+      rupiah = split[0].substr(0, sisa),
+      ribuan = split[0].substr(sisa).match(/\d{3}/gi);
    
-    let separator
+    let separator;
     // tambahkan titik jika yang di input sudah menjadi angka ribuan
-    if(ribuan){
+    if(ribuan) {
       separator = sisa ? '.' : '';
       rupiah += separator + ribuan.join('.');
     }

@@ -1,17 +1,17 @@
 import React from 'react';
-import profileImage from '../assets/images/avatar.png';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 
 const GET_USER = gql`
   query getUser($id: ID!) {
     getUser(id: $id) {
-      username,
-      address,
+      username
+      address
       avatar
+      city
     }
   }
-`
+`;
 
 export default function UserProfile () {
   const { loading, error, data } = useQuery(GET_USER, {
@@ -20,19 +20,20 @@ export default function UserProfile () {
     }
   });
 
-  if(loading){
+  if(loading) {
     return(
-      <p>Loading ...</p>
-    )
+      <p>Loading ...</p> 
+    );
   }
 
-  if(error){
+  if(error) {
+    console.log(error);
     return(
       <p>Error ...</p>
-    )
+    );
   }
 
-  if(data){
+  if(data) {
     return (
       <div className="user-profile-first">
         <div className="user-profile-container-image">
@@ -41,7 +42,7 @@ export default function UserProfile () {
         <div className="user-profile-container-description">
           <h2>{data.getUser.username}</h2>
           <p>Address: {data.getUser.address}</p>
-          <p>Loc: </p>
+          <p>Loc: {data.getUser.city}</p>
         </div>
       </div>
     );

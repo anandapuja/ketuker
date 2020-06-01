@@ -5,10 +5,10 @@ import { Link, useHistory } from 'react-router-dom';
 
 export default function HeaderMain () {
 
-  const history = useHistory()
+  const history = useHistory();
 
-  function ToUploadBarang(){
-      history.push('/additem')
+  function ToUploadBarang () {
+    history.push('/additem'); 
   }
 
   return (
@@ -23,7 +23,7 @@ export default function HeaderMain () {
       </div>
       <div className="header-user-container">
         <button onClick={ToUploadBarang}>Upload Barang</button>
-        <Link to={ localStorage.getItem('token') ? "/my-profile" : "/login" }>
+        <Link to={ localStorage.getItem('token') ? '/my-profile' : '/login' }>
           <img src={avatar} alt="avatar" />
         </Link>
       </div>

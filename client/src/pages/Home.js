@@ -7,27 +7,13 @@ import {
   CompError,
   CompLoading
 } from '../components';
-import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
-
-const GET_ALL_PRODUCT = gql`
-  query getProducts{
-    getProducts{
-      _id
-      title
-      description
-      userId
-      category
-      image
-      submit
-      price
-    }
-  }
-`
-
+import { GET_PRODUCTS_AND_USERS } from '../services/schema';
+import { useLocation } from 'react-router-dom';
 
 export default function Home () {
-  const { loading, error, data } = useQuery(GET_ALL_PRODUCT);
+  const { search } = useLocation();
+  const { loading, error, data } = useQuery(GET_PRODUCTS_AND_USERS, { variables: { category: search ? search.slice(10) : '' }, fetchPolicy: 'cache-and-network' });
 
   if(loading){
     return <CompLoading />
@@ -37,26 +23,29 @@ export default function Home () {
     return <CompError />
   }
 
-  if(data){
+  if(data) {
     const { getProducts } = data;
+    const { productByCategory } = data;
     return (
       <>
-      <HeaderMain />
-      <Navigation />
-      <div className="home-list-container">
-        <div className="home-product-list-item-container">
-          {
-        
-            getProducts.map(product => (
-              
-              <ProductItemList key={ product._id } data={ product } />
-            ))
-          }
+        <HeaderMain />
+        <Navigation />
+        <div className="home-list-container">
+          <div className="home-product-list-item-container">
+            {
+              getProducts ?
+                getProducts.map(product => (
+                  <ProductItemList key={ product._id } product={ product } />
+                )) :
+                productByCategory.map(product => (
+                  <ProductItemList key={ product._id } product={ product } />
+                ))
+            }
+          </div>
+          <div className="home-load-more-container">
+            <LoadMoreButton />
+          </div>
         </div>
-        <div className="home-load-more-container">
-          <LoadMoreButton />
-        </div>
-      </div>
       </>
     );
   }

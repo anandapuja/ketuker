@@ -8,12 +8,15 @@ import {
   HeaderMain,
   Navigation
 } from '../components';
+import { useQuery } from '@apollo/react-hooks';
+import { GET_PRODUCT_USER } from '../services/schema';
 
 export default function User () {
 
-  const [navBarang, setNavBarang] = useState(true);
-  const [mengajak, setMengajak] = useState(false);
-  const [diajak, setDiajak] = useState(false);
+  const [ navBarang, setNavBarang ] = useState(true);
+  const [ mengajak, setMengajak ] = useState(false);
+  const [ diajak, setDiajak ] = useState(false);
+  const { loading, error, data } = useQuery(GET_PRODUCT_USER, { variables: { userId: localStorage.getItem('user_id') } });
 
   function handleBarang () {
     setNavBarang(true);
@@ -33,50 +36,60 @@ export default function User () {
     setDiajak(true);
   }
 
-  return (
-    <>
-      <HeaderMain />
-      <Navigation />
-      <div className="user-profile-container">
-        <UserProfile />
-        <UserNavigation
-          barang={handleBarang}
-          mengajak={handleMengajak}
-          diajak={handleDiajak}
-        />
-        { navBarang && (
-          <div className="user-barang-container">
-            <UserBarang />
-            <UserBarang />
-            <UserBarang />
-            <UserBarang />
-            <UserBarang />
-            <UserBarang />
-          </div>
-        ) }
+  if(loading) {
+    return <p>Loading</p>;
+  }
 
-        { mengajak && (
-          <div className="user-mengajak-container">
-            <UserMengajak />
-            <UserMengajak />
-            <UserMengajak />
-            <UserMengajak />
-            <UserMengajak />
-            <UserMengajak />
-          </div>
-        ) }
+  if(error) {
+    console.log(error);
+    return <p>error ... </p>;
+  }
 
-        { diajak && (
-          <div className="user-barang-container">
-            <UserDiajak />
-            <UserDiajak />
-            <UserDiajak />
-            <UserDiajak />
-            <UserDiajak />
-            <UserDiajak />
-          </div>
-        ) }
-      </div>
-    </>
-  );
+  if (data) {
+    const { productByUser } = data;
+    console.log(productByUser);
+    return (
+      <>
+        <HeaderMain />
+        <Navigation />
+        <div className="user-profile-container">
+          <UserProfile />
+          <UserNavigation
+            barang={handleBarang}
+            mengajak={handleMengajak}
+            diajak={handleDiajak}
+          />
+          { navBarang && (
+            <div className="user-barang-container">
+              { productByUser.map(product => (
+                <UserBarang product={product} key={product._id}/>
+              ))}
+            </div>
+          ) }
+  
+          { mengajak && (
+            <div className="user-mengajak-container">
+              <UserMengajak />
+              <UserMengajak />
+              <UserMengajak />
+              <UserMengajak />
+              <UserMengajak />
+              <UserMengajak />
+            </div>
+          ) }
+  
+          { diajak && (
+            <div className="user-barang-container">
+              <UserDiajak />
+              <UserDiajak />
+              <UserDiajak />
+              <UserDiajak />
+              <UserDiajak />
+              <UserDiajak />
+            </div>
+          ) }
+        </div>
+      </>
+    );
+  }
 }
