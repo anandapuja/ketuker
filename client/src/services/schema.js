@@ -91,6 +91,7 @@ query ($id: ID!, $userId: ID!) {
     image
     submit
     price
+    whislist
   }
   getProduct(id: $id) {
     _id
@@ -101,6 +102,7 @@ query ($id: ID!, $userId: ID!) {
     image
     submit
     price
+    whislist
   }
 }
 `;
@@ -160,3 +162,57 @@ query getUsers{
   }
 }
 `;
+
+export const TRANSACTION = gql`
+mutation addTransaction($input: InputTransaction!) {
+  addTransaction(input: $input) {
+    _id
+    userTarget
+    userOriginal
+    status
+  }
+}
+`
+
+export const GET_TRANSACTION_USER = gql`
+query ($userId: ID!) {
+  transactionByOriginal(userId: $userId) {
+    _id
+    userTarget
+    userOriginal
+    status
+    productOriginal {
+      title
+      price
+      description
+    }
+    productTarget {
+      title
+      price
+      description
+    }
+  },
+  transactionByTarget(userId: $userId) {
+    _id
+    userTarget
+    userOriginal
+    status
+    productTarget {
+      title
+      price
+      description
+      image
+    }
+  },
+  productByUser(userId: $userId) {
+    _id
+    title
+    description
+    userId
+    category
+    image
+    submit
+    price
+  }
+}
+`
