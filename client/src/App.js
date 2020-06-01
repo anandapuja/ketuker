@@ -23,6 +23,7 @@ import {
   Navigation,
   HeaderSecond,
 } from './components';
+import Confirmation from './pages/Confirmation';
 
 
 function App () {
@@ -39,6 +40,7 @@ function App () {
           <Route path="/me/barang/:id" component={ DetailItemUser } />
           <Route path="/barang/:id" component={ DetailItemCustomer } />
           <Route path="/my-profile" component={ User } />
+          <Route path="/konfirmasi" component={ Confirmation } />
         </Switch>
       </Router>
     </ApolloProvider>
