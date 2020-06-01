@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import './puja-style.css';
+import './p-responsive.css';
 import './LoginRegister.css';
+import './additem.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 

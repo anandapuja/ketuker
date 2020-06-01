@@ -8,6 +8,7 @@ import {
 import { useQuery } from '@apollo/react-hooks';
 import { GET_PRODUCTS_AND_USERS } from '../services/schema';
 import { useLocation } from 'react-router-dom';
+import SliderApp from '../components/Slider';
 
 export default function Home () {
   const { search } = useLocation();
@@ -29,6 +30,7 @@ export default function Home () {
       <>
         <HeaderMain />
         <Navigation />
+        <SliderApp />
         <div className="home-list-container">
           <div className="home-product-list-item-container">
             {

@@ -4,23 +4,26 @@ import { Link } from 'react-router-dom';
 export default function Navigation () {
   return (
     <nav className="navigation-container">
+      <Link to="/">
+        <p>Beranda</p>
+      </Link>
       <Link to="/?category=automotive">
-        <p>Automotive</p>
+        <p>Otomotif</p>
       </Link>
       <Link to="/?category=property">
-        <p>Property</p>
+        <p>Properti</p>
       </Link>
       <Link to="/?category=fashion">
-        <p>Fashion</p>
+        <p>Pakaian</p>
       </Link>
       <Link to="/?category=gadget">
         <p>Gadget</p>
       </Link>
       <Link to="/?category=hobby">
-        <p>Hobby</p>
+        <p>Hobi</p>
       </Link>
       <Link to="/?category=household">
-        <p>Household</p>
+        <p>Perabotan</p>
       </Link>
     </nav>
   );

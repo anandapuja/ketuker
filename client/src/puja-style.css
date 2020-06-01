@@ -364,3 +364,35 @@ a{
   justify-content: space-between;
   margin-bottom: 5px;
 }
+
+/* CSS */
+
+.input-register {
+  width: 400px;
+  height: 30px;
+  text-align: left;
+  margin-bottom: 20px;
+  padding: 20px;
+  border: none;
+  border-bottom: 1px solid rgb(114, 112, 112);
+  background-color: rgb(240, 240, 240);
+}
+
+
+/* SLIDER SECTION */
+.slick-container {
+  width: 100%;
+  height: auto;
+}
+
+.slick-slide {
+  height: 320px;
+  box-sizing: border-box;
+}
+
+.slick-slide img {
+  height: 100%;
+  width: 100%;
+  border: 2.5px solid white;
+  box-sizing: border-box;
+}

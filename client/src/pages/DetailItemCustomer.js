@@ -40,7 +40,7 @@ export default function DetailItemCustomer () {
             <div className="detail-item-user-descwhis">
               <h2>IDR {product.price}</h2>
               <p>{product.description}</p>
-              <Link to="/category"><p style={{ marginTop:20 }}>Kategori: {product.category}</p></Link>
+              <Link to={`/?category=${product.category}`}><p style={{ marginTop:20 }}>Kategori: {product.category}</p></Link>
               <button type="button" onClick={changeBarterStatus}>AJAK BARTERAN</button>
             </div>
           </div>
