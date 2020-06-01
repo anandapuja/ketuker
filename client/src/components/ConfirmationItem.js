@@ -1,13 +1,13 @@
 import React from 'react';
 import avatar from '../assets/images/avatar.png';
 
-export default function ConfirmationItem () {
+export default function ConfirmationItem ({ product }) {
   return (
     <div className="confirmation-items">
-      <img src={avatar} alt="item" />
+      <img src={product.image} alt="item" />
       <div className="confirmation-items-title">
-        <h5>Title</h5>
-        <p>Price</p>
+        <h5>{product.title}</h5>
+        <p>{product.price}</p>
       </div>
     </div>
   );

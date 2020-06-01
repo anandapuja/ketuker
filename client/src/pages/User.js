@@ -10,7 +10,7 @@ import {
   LoadMoreButton
 } from '../components';
 import { useQuery } from '@apollo/react-hooks';
-import { GET_PRODUCT_USER } from '../services/schema';
+import { GET_TRANSACTION_USER } from '../services/schema';
 import { useLocation, useHistory } from 'react-router-dom';
 
 export default function User () {
@@ -18,7 +18,7 @@ export default function User () {
   const [ navBarang, setNavBarang ] = useState(true);
   const [ mengajak, setMengajak ] = useState(false);
   const [ diajak, setDiajak ] = useState(false);
-  const { loading, error, data } = useQuery(GET_PRODUCT_USER, { variables: { userId: localStorage.getItem('user_id') }, fetchPolicy: "cache-and-network" });
+  const { loading, error, data } = useQuery(GET_TRANSACTION_USER, { variables: { userId: localStorage.getItem('user_id') }, fetchPolicy: "cache-and-network" });
   const { search, pathname } = useLocation();
   const history = useHistory();
   const [ page, setPage ] = useState(search ? Number(search.slice(6)) : 1);
@@ -26,6 +26,7 @@ export default function User () {
 
   useEffect(() => {
     if(data) {
+      console.log(data)
       if(page !== 1) {
         return setProducts(data.productByUser.slice(0, page*9));
       } else {
@@ -100,23 +101,17 @@ export default function User () {
   
           { mengajak && (
             <div className="user-mengajak-container">
-              <UserMengajak />
-              <UserMengajak />
-              <UserMengajak />
-              <UserMengajak />
-              <UserMengajak />
-              <UserMengajak />
+              {data.transactionByOriginal.map(product => (
+                <UserMengajak product={product.productTarget} key={product._id}/>
+              ))}
             </div>
           ) }
   
           { diajak && (
             <div className="user-barang-container">
-              <UserDiajak />
-              <UserDiajak />
-              <UserDiajak />
-              <UserDiajak />
-              <UserDiajak />
-              <UserDiajak />
+              {data.transactionByTarget.map(product => (
+                <UserDiajak product={product.productTarget} key={product._id} />
+              ))}
             </div>
           ) }
         </div>
