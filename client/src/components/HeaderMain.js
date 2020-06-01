@@ -19,7 +19,7 @@ export default function HeaderMain () {
         </div>
       </Link>
       <div className="header-search-container">
-        <input type="text" placeholder="cari barang" />
+        <input type="text" placeholder="cari barang lalu tekan enter" />
       </div>
       <div className="header-user-container">
         <button onClick={ToUploadBarang}>Upload Barang</button>

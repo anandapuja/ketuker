@@ -71,7 +71,7 @@ button:hover {
     width: 500px;
     height: 500px;
 }
-
+/* 
 .input-register {
     width: 400px;
     height: 30px;
@@ -81,7 +81,7 @@ button:hover {
     border: none;
     border-bottom: 1px solid rgb(114, 112, 112);
     background-color: rgb(240, 240, 240);
-}
+} */
 
 .btn-register {
     width : 400px;
