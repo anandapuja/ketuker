@@ -36,18 +36,41 @@ export default function User () {
     setDiajak(true);
   }
 
-  if(loading) {
-    return <p>Loading</p>;
-  }
+  // if(loading) {
+  //   return <p>Loading</p>;
+  // }
 
-  if(error) {
-    console.log(error);
-    return <p>error ... </p>;
-  }
+  // if(error) {
+  //   console.log(error);
+  //   return <p>error ... </p>;
+  // }
 
-  if (data) {
-    const { productByUser } = data;
-    console.log(productByUser);
+  // if (data) {
+  //   const { productByUser } = data;
+  //   console.log(productByUser);
+
+  const productByUser = [{
+    _id : 1,
+    title : 'meja',
+    description : "meja tulis",
+    userId : 1,
+    category : 'household',
+    image : 'https://ecs7.tokopedia.net/img/cache/700/product-1/2019/11/27/40253380/40253380_1cd8302b-5e1a-4dcb-b43e-fb353f65d785_694_694.jpg',
+    submit : true,
+    price : 80000
+   },
+   {
+    _id : 2,
+    title : 'meja',
+    description : "meja asik",
+    userId : 1,
+    category : 'household',
+    image : 'https://ecs7.tokopedia.net/img/cache/700/product-1/2019/11/27/40253380/40253380_1cd8302b-5e1a-4dcb-b43e-fb353f65d785_694_694.jpg',
+    submit : true,
+    price : 70000
+   }
+
+]
     return (
       <>
         <HeaderMain />
@@ -92,4 +115,4 @@ export default function User () {
       </>
     );
   }
-}
+//}

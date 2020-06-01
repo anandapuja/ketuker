@@ -4,23 +4,25 @@ import { GET_USER } from '../services/schema';
 import { Link } from 'react-router-dom';
 
 export default function ProductItemList ({ product }) {
-  const { loading, error, data: userData } = useQuery(GET_USER, {
-    variables:{
-      id: product.userId
-    }
-  });
+  // const { loading, error, data: userData } = useQuery(GET_USER, {
+  //   variables:{
+  //     id: product.userId
+  //   }
+  // });
 
-  if(loading) {
-    return <p>Loading ...</p>;
-  }
+  // if(loading) {
+  //   return <p>Loading ...</p>;
+  // }
 
-  if(error) {
-    console.log(error);
-    return <p> error ... </p>;
-  }
+  // if(error) {
+  //   console.log(error);
+  //   return <p> error ... </p>;
+  // }
   
-  if(userData) {
-    const { getUser: { city } } = userData; 
+  const city = 'jak'
+
+  // if(userData) {
+  //   const { getUser: { city } } = userData; 
     return (
       <div className="product-item-list-container">
         <div className="product-item-list-image">
@@ -34,4 +36,4 @@ export default function ProductItemList ({ product }) {
       </div>
     );
   }
-}
+//}

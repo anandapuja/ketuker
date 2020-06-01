@@ -16,7 +16,8 @@ import {
   AddItem,
   DetailItemUser,
   DetailItemCustomer,
-  User
+  User, 
+  EditItem
 } from './pages';
 import {
   HeaderMain,
@@ -39,6 +40,7 @@ function App () {
           <Route path="/me/barang/:id" component={ DetailItemUser } />
           <Route path="/barang/:id" component={ DetailItemCustomer } />
           <Route path="/my-profile" component={ User } />
+          <Route path="/edit/:id" component={ EditItem } />
         </Switch>
       </Router>
     </ApolloProvider>

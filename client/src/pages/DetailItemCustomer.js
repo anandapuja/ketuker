@@ -16,17 +16,41 @@ export default function DetailItemCustomer () {
   function readyToExchange () {
     setReadyExchange(true);
   }
-  if (loading) {
-    return <> loading </>;
-  }
-  if (error) {
-    console.log(error);
-    return <> erorr </>;
-  }
-  if (data) {
-    const { getProduct: product } = data;
-    const { productByUser } = data;
-    console.log(data);
+  // if (loading) {
+  //   return <> loading </>;
+  // }
+  // if (error) {
+  //   console.log(error);
+  //   return <> erorr </>;
+  // }
+  // if (data) {
+  //   const { getProduct: product } = data;
+  //   const { productByUser } = data;
+  //   console.log(data);
+
+  const productByUser = [{
+    _id : 1,
+    title : 'meja',
+    description : "meja tulis",
+    userId : 1,
+    category : 'household',
+    image : 'https://ecs7.tokopedia.net/img/cache/700/product-1/2019/11/27/40253380/40253380_1cd8302b-5e1a-4dcb-b43e-fb353f65d785_694_694.jpg',
+    submit : true,
+    price : 80000
+   }
+]
+
+  const product= {
+    _id : 1,
+    title : 'meja',
+    description : "meja tulis",
+    userId : 1,
+    category : 'household',
+    image : 'https://ecs7.tokopedia.net/img/cache/700/product-1/2019/11/27/40253380/40253380_1cd8302b-5e1a-4dcb-b43e-fb353f65d785_694_694.jpg',
+    submit : true,
+    price : 80000
+   }
+
     return (
       <>
         <HeaderMain />
@@ -68,4 +92,4 @@ export default function DetailItemCustomer () {
       </>
     );
   }
-}
+//}
