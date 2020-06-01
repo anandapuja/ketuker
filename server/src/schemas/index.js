@@ -7,6 +7,7 @@ import redis from '../utilities/redis';
 import User from '../models/User';
 import Product from '../models/Product';
 import { authen, author } from '../utilities/authenticagtion';
+import Transaction from '../models/Transaction';
 
 export const typeDefs = gql`
   type User {
@@ -62,6 +63,33 @@ export const typeDefs = gql`
     result: String!
   }
 
+  type Transaction {
+    _id: ID!
+    userOriginal: String!
+    userTarget: String!
+    productOriginal: [Product]!
+    productTarget: [Product]!
+    status: Boolean
+  }
+
+  input InputProdTrans {
+    _id: ID!
+    userId: String!
+    title: String!
+    description: String!
+    price: Int!
+    whislist: String!
+    category: String!
+    image: String!
+    submit: Boolean!
+  }
+
+  input InputTransaction {
+    userTarget: String!
+    productOriginal: [InputProdTrans]!
+    productTarget: [InputProdTrans]!
+  }
+
   type Query {
     getUsers: [User]!
     getUser(id: ID!): User!
@@ -74,6 +102,10 @@ export const typeDefs = gql`
 
     productByUser(userId: ID!): [Product]!
     productByCategory(category: String): [Product]!
+
+    transactionById(id: ID!): Transaction
+    transactionByOriginal(userId: ID!): [Transaction]
+    transactionByTarget(userId: ID!): [Transaction]
   }
 
   type Mutation {
@@ -83,6 +115,8 @@ export const typeDefs = gql`
     addProduct(input: InputProduct!): Product!
     updateProduct(id: ID!, input: InputProduct!): Output!
     deleteProduct(id: ID!): Output!
+
+    addTransaction(input: InputTransaction!): Transaction
   }
 `;
 
@@ -193,6 +227,36 @@ export const resolvers = {
           }
         }
       } catch (error) {
+        return error;
+      }
+    },
+
+    transactionById: async (_, { id }) => {
+      try {
+        const transaction = await Transaction.findById(id);
+        return transaction;
+      } catch (error) {
+        console.log(error);
+        return error;
+      }
+    },
+
+    transactionByOriginal: async (_, { userId }) => {
+      try {
+        const transactions = await Transaction.find({ userOriginal: userId });
+        return transactions;
+      } catch (error) {
+        console.log(error);
+        return error;
+      }
+    },
+
+    transactionByTarget: async (_, { userId }) => {
+      try {
+        const transactions = await Transaction.find({ userTarget: userId });
+        return transactions;
+      } catch (error) {
+        console.log(error);
         return error;
       }
     },
@@ -353,5 +417,24 @@ export const resolvers = {
         result: 'Successfully deleted product!',
       };
     },
+
+    addTransaction: async (_, { input }, { req: { headers: { token } } }) => {
+      try {
+        console.log(input, 'INPUTTT>><<');
+        const userAuth = await authen(token);
+        const user = await User.findOne({ _id: userAuth.id });
+        const { userTarget, productOriginal, productTarget } = input;
+        if (!user) throw new Error('You have to login!');
+        const transaction = new Transaction({
+          userOriginal: userAuth.id, userTarget, productOriginal, productTarget
+        });
+        const newTrans = await transaction.save();
+        console.log(newTrans, '>>><<<<<<OUTPUT');
+        return newTrans;
+      } catch (error) {
+        console.log(error);
+        return error;
+      }
+    }
   },
 };
