@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function LoadMoreButton () {
+export default function LoadMoreButton ({page}) {
   return (
     <div className="home-load-more">
-      <button>Load more ...</button>
+      <button onClick={page}>Load more ...</button>
     </div>
   );
 }
