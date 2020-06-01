@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   UserProfile,
   UserNavigation,
@@ -6,17 +6,41 @@ import {
   UserMengajak,
   UserDiajak,
   HeaderMain,
-  Navigation
+  Navigation,
+  LoadMoreButton
 } from '../components';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_PRODUCT_USER } from '../services/schema';
+import { useLocation, useHistory } from 'react-router-dom';
 
 export default function User () {
 
   const [ navBarang, setNavBarang ] = useState(true);
   const [ mengajak, setMengajak ] = useState(false);
   const [ diajak, setDiajak ] = useState(false);
-  const { loading, error, data } = useQuery(GET_PRODUCT_USER, { variables: { userId: localStorage.getItem('user_id') } });
+  const { loading, error, data } = useQuery(GET_PRODUCT_USER, { variables: { userId: localStorage.getItem('user_id') }, fetchPolicy: "cache-and-network" });
+  const { search, pathname } = useLocation();
+  const history = useHistory();
+  const [ page, setPage ] = useState(search ? Number(search.slice(6)) : 1);
+  const [ products, setProducts ] = useState([]);
+
+  useEffect(() => {
+    if(data) {
+      if(page !== 1) {
+        return setProducts(data.productByUser.slice(0, page*9));
+      } else {
+        return setProducts(data.productByUser.slice(0, 9));
+      }
+    }
+  }, [data, page])
+
+  function nextPage () {
+    setPage((val)=> val+1);
+    history.push({
+      pathname,
+      search: '?page=' + (page + 1)
+    })
+  }
 
   function handleBarang () {
     setNavBarang(true);
@@ -47,7 +71,6 @@ export default function User () {
 
   if (data) {
     const { productByUser } = data;
-    console.log(productByUser);
     return (
       <>
         <HeaderMain />
@@ -60,11 +83,19 @@ export default function User () {
             diajak={handleDiajak}
           />
           { navBarang && (
-            <div className="user-barang-container">
-              { productByUser.map(product => (
-                <UserBarang product={product} key={product._id}/>
-              ))}
-            </div>
+            <>
+              <div className="user-barang-container">
+                { products.map(product => (
+                  <UserBarang product={product} key={product._id}/>
+                ))}
+              </div>
+              <div className="home-load-more-container">
+                {
+                  products.length < data.productByUser.length && (data.productByUser.length > 9) && 
+                  <LoadMoreButton page={nextPage}/>
+                }
+              </div>
+            </>
           ) }
   
           { mengajak && (

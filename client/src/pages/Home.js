@@ -6,23 +6,24 @@ import {
   Navigation
 } from '../components';
 import { useQuery } from '@apollo/react-hooks';
-import { GET_PRODUCTS_AND_USERS } from '../services/schema';
+import { GET_PRODUCTS_AND_USERS, GET_ALL_PRODUCT } from '../services/schema';
 import { useLocation, useHistory } from 'react-router-dom';
 import SliderApp from '../components/Slider';
 
 export default function Home () {
-  const { search } = useLocation();
+  const { search, pathname } = useLocation();
+  const location = useLocation();
   const history = useHistory();
-  const { loading, error, data } = useQuery(GET_PRODUCTS_AND_USERS, { variables: { category: search ? search.slice(10) : '' }, fetchPolicy: 'cache-and-network' });
-  const [ page, setPage ] = useState(1);
+  const { loading, error, data } = useQuery(GET_ALL_PRODUCT, { fetchPolicy: 'cache-and-network' });
+  const [ page, setPage ] = useState(search ? Number(search.slice(6)) : 1);
   const [ products, setProducts ] = useState([]);
 
   useEffect(() => {
     if(data) {
       if(page !== 1) {
-        return setProducts(data.productByCategory.slice(0, page*9));
+        return setProducts(data.getProducts.slice(0, page*9));
       } else {
-        return setProducts(data.productByCategory.slice(0, 9));
+        return setProducts(data.getProducts.slice(0, 9));
       }
     }
   }, [data, page])
@@ -57,7 +58,7 @@ export default function Home () {
           </div>
           <div className="home-load-more-container">
             {
-              products.length < data.productByCategory.length &&
+              products.length < data.getProducts.length && (data.getProducts.length > 9) && 
               <LoadMoreButton page={nextPage}/>
             }
           </div>
