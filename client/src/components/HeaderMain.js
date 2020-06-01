@@ -2,6 +2,7 @@ import React from 'react';
 import logo from '../assets/images/logo.png';
 import avatar from '../assets/images/avatar.png';
 import { Link, useHistory } from 'react-router-dom';
+import logoutIcon from '../assets/images/logout.png';
 
 export default function HeaderMain () {
 
@@ -26,6 +27,9 @@ export default function HeaderMain () {
         <Link to={ localStorage.getItem('token') ? '/my-profile' : '/login' }>
           <img src={avatar} alt="avatar" />
         </Link>
+        <div>
+          <img style={{border: "none", borderRadius: 0, marginLeft: 10,}} src={logoutIcon} alt="logout" />
+        </div>
       </div>
     </div>
   );

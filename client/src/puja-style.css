@@ -396,3 +396,59 @@ a{
   border: 2.5px solid white;
   box-sizing: border-box;
 }
+
+/* CONFIRMATION */
+.confirmation-container {
+  width: 1024px;
+  margin: 30px auto;
+  display: flex;
+}
+.confirmation-container-half{
+  width: 50%;
+  height: 600px;
+  margin: 20px;
+  overflow: scroll;
+}
+.confirmation-container-half-title{
+  background-color: rgb(223, 223, 223);
+  padding: 20px;
+}
+.confirmation-container-half-title h3{
+  font-weight: normal;
+}
+.confirmation-items{
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 20px 0;
+}
+.confirmation-items img{
+  width: 20%;
+  margin-right: 20px;
+}
+.logout-icon{
+  border-radius: 0;
+  border: none;
+}
+.confirmation-button{
+  text-align: center;
+}
+.confirmation-button button{
+  background-color: #F98A06;
+  transition: 0.3s;
+  padding: 20px;
+  border: none;
+  margin-bottom: 50px;
+  color: white;
+  cursor: pointer;
+}
+.confirmation-button button:hover{
+  background-color: rgb(255, 210, 155);
+  color: black;
+}
+.confirmation-title h1{
+  text-align: center;
+  margin: 30px 0;
+  color: rgb(51, 4, 145);
+}
