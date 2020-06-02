@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ProductItemList,
   LoadMoreButton,
@@ -6,50 +6,43 @@ import {
   Navigation
 } from '../components';
 import { useQuery } from '@apollo/react-hooks';
-import { GET_PRODUCTS_AND_USERS } from '../services/schema';
-import { useLocation } from 'react-router-dom';
+import { GET_PRODUCTS_AND_USERS, GET_ALL_PRODUCT } from '../services/schema';
+import { useLocation, useHistory } from 'react-router-dom';
 import SliderApp from '../components/Slider';
 
 export default function Home () {
-  const { search } = useLocation();
-  // const { loading, error, data } = useQuery(GET_PRODUCTS_AND_USERS, { variables: { category: search ? search.slice(10) : '' }, fetchPolicy: 'cache-and-network' });
+  const { search, pathname } = useLocation();
+  const location = useLocation();
+  const history = useHistory();
+  const { loading, error, data } = useQuery(GET_ALL_PRODUCT, { fetchPolicy: 'cache-and-network' });
+  const [ page, setPage ] = useState(search ? Number(search.slice(6)) : 1);
+  const [ products, setProducts ] = useState([]);
 
-  
-    const getProducts = [{
-      _id : 1,
-      title : 'meja',
-      description : "meja tulis",
-      userId : 1,
-      category : 'household',
-      image : 'https://ecs7.tokopedia.net/img/cache/700/product-1/2019/11/27/40253380/40253380_1cd8302b-5e1a-4dcb-b43e-fb353f65d785_694_694.jpg',
-      submit : true,
-      price : 80000
-     }]
+  useEffect(() => {
+    if(data) {
+      if(page !== 1) {
+        return setProducts(data.getProducts.slice(0, page*9));
+      } else {
+        return setProducts(data.getProducts.slice(0, 9));
+      }
+    }
+  }, [data, page])
 
-    const productByCategory =[ {
-      _id : 1,
-      title : 'meja',
-      description : "meja tulis",
-      userId : 1,
-      category : 'household',
-      image : 'https://ecs7.tokopedia.net/img/cache/700/product-1/2019/11/27/40253380/40253380_1cd8302b-5e1a-4dcb-b43e-fb353f65d785_694_694.jpg',
-      submit : true,
-      price : 80000
-     }]
+  function nextPage () {
+    setPage((val)=> val+1);
+    history.push('/?page=' + (page + 1))
+  }
 
+  if(loading) {
+    return <p>Loading</p>;
+  }
 
-  // if(loading) {
-  //   return <p>Loading</p>;
-  // }
+  if(error) {
+    console.log(error);
+    return <p>error ... </p>;
+  }
 
-  // if(error) {
-  //   console.log(error);
-  //   return <p>error ... </p>;
-  // }
-
-  // if(data) {
-  //   const { getProducts } = data;
-  //   const { productByCategory } = data;
+  if(data) {
     return (
       <>
         <HeaderMain />
@@ -58,23 +51,19 @@ export default function Home () {
         <div className="home-list-container">
           <div className="home-product-list-item-container">
             {
-              getProducts ?
-                getProducts.map(product => (
-                  <div key={ product._id }>
-                  <ProductItemList product={ product } />
-                  </div>
-                  
-                )) :
-                productByCategory.map(product => (
-                  <ProductItemList key={ product._id } product={ product } />
-                ))
+              products.map(product => (
+                <ProductItemList key={ product._id } product={ product } />
+              )) 
             }
           </div>
           <div className="home-load-more-container">
-            <LoadMoreButton />
+            {
+              products.length < data.getProducts.length && (data.getProducts.length > 9) && 
+              <LoadMoreButton page={nextPage}/>
+            }
           </div>
         </div>
       </>
     );
   }
-// }
+}
