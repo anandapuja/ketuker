@@ -40,3 +40,53 @@
     margin: 10px 10px;
     padding: 10px 10px;
 }
+
+
+.modalAlert {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px solid #f1f1f1;
+    z-index: 1;
+    width: 300px;
+    height: auto;
+    background-color: #FFF;
+    box-shadow: 5px 10px #888888;
+    animation-name: mymove;
+    animation-duration: 0.5s;    
+}
+
+.Alert-flex {
+    display: flex;
+    flex-direction: column;
+}
+
+.Alert-title {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 0px;
+    background-color: #F9BE06;
+}
+
+.Alert-content {
+    font-size: 20px;
+    padding: 10px 10px;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.Alert-button{
+    width: 100%;
+    height :auto;
+    font-weight: bold;
+    border: solid grey;
+    border-width: 1px;
+    padding: 10px 10px;
+}
+
+@keyframes mymove {
+    from {top: 0px;}
+    to {top: center;}
+  }

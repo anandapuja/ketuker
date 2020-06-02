@@ -5,6 +5,7 @@ import { storage } from '../storage/firebase';
 import { HeaderSecond } from '../components';
 import { useMutation } from '@apollo/react-hooks';
 import { CREATE_ACCOUNT } from '../services/schema';
+import alertify from 'alertifyjs'
 
 function Register () {
   const history = useHistory(); 
@@ -16,6 +17,8 @@ function Register () {
   const [ address, setAddress ] = useState('');
   const [ city, setCity ] = useState('');
   const [ phone, setPhone ] = useState('');
+  const [ notif, setNotif ] = useState('')
+  const [ alertInput, setAlertInput ] = useState(false);
 
   // const [signup] = useMutation(SIGNUP)
   const [ registerAccount ] = useMutation(CREATE_ACCOUNT);
@@ -26,8 +29,18 @@ function Register () {
 
   async function SubmitRegister (e) {
     e.preventDefault();
-    if(password!==password2) {
-      alert('passowrds are not same');
+    console.log('register')
+    if(
+        (username === '') || (email === '') || (password= '') || (address = '') ||  (city=== '') ||  (phone === '')
+    ) {
+      setNotif ('form is not complete');
+      setAlertInput(true);
+    } else if (password!==password2) {
+      setNotif ('passwords are not same');
+      setAlertInput(true);
+    } else if (password.length<=6){
+      setNotif('password must have minimum 6 characters');
+      setAlertInput(true);
     } else {
       let data = {
         username: username,
@@ -44,6 +57,7 @@ function Register () {
       localStorage.setItem('token', token); //dummy token
       localStorage.setItem('user_id', _id);
       localStorage.setItem('username', username);
+      alertify.notify('SUCCESS REGISTER', 'success', 5, function(){  console.log('dismissed'); });
       history.push('/');
     }
   }
@@ -60,6 +74,8 @@ function Register () {
     console.log('start of upload');
     if (imageAsFile === '') {
       console.error(`not an image, the image file is a ${typeof (imageAsFile)}`);
+      setNotif (`no file is uploaded`);
+      setAlertInput(true);
     }
     const uploadTask = storage.ref(`/images/${imageAsFile.name}`).put(imageAsFile);
     uploadTask.on('state_changed',
@@ -85,7 +101,7 @@ function Register () {
           <form onSubmit={SubmitRegister} className='form-register'>
             <input onChange={(e)=>setUsername(e.target.value)} type='text' placeholder='username' className="input-register"></input>
             <input onChange={(e)=>setEmail(e.target.value)} type='email' placeholder='email' className="input-register"></input> 
-            <input onChange={(e)=>setPassword(e.target.value)} type="password" placeholder='password' className="input-register"></input>
+            <input onChange={(e)=>setPassword(e.target.value)} type="password" placeholder='password (min 6 characters)' className="input-register"></input>
             <input onChange={(e)=>setPassword2(e.target.value)} type="password" placeholder='re-type your password' className="input-register"></input>
             <input onChange={(e)=>setPhone(e.target.value)} type="number" placeholder='phone' className="input-register"></input>
             <input onChange={(e)=>setAddress(e.target.value)} type="text" placeholder='address' className="input-register"></input>
@@ -95,11 +111,12 @@ function Register () {
           </form>
 
           <form onSubmit={handleFireBaseUpload} className="form-upload-register">
-            <h4 className="title-upload-register">Upload your avatar below.</h4>
+            <h4 className="title-upload-register">Upload your avatar below (only .png and .jpeg)</h4>
             <input
               type="file"
               onChange={handleImageAsFile}
               className="input-upload-register"
+              accept="image/x-png,image/jpeg"
             />
             <button type="submit" className="btn-upload-register">Upload Avatar</button>
             {(avatar!=='') && <img src={avatar} alt="profile" className="img-avatar"></img> }
@@ -110,6 +127,17 @@ function Register () {
           <a href="#" onClick={ToLogin}> here</a>
         </div>
       </div>
+      {alertInput && (
+      <div className="modalAlert">
+        <div className="Alert-flex">
+          <div className="Alert-title">ALERT</div>
+          <div className="Alert-content">Notification: {notif}</div>
+          <div >
+            <button onClick={()=>setAlertInput(false)} className="Alert-button">OK</button>
+          </div>
+        </div>
+      </div>
+      )}
     </>
   );
 
