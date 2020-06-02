@@ -18,7 +18,7 @@ export default function User () {
   const [ navBarang, setNavBarang ] = useState(true);
   const [ mengajak, setMengajak ] = useState(false);
   const [ diajak, setDiajak ] = useState(false);
-  const { loading, error, data } = useQuery(GET_TRANSACTION_USER, { variables: { userId: localStorage.getItem('user_id') }, fetchPolicy: "cache-and-network" });
+  const { loading, error, data } = useQuery(GET_TRANSACTION_USER, { variables: { userId: localStorage.getItem('user_id') }, fetchPolicy: 'cache-and-network' });
   const { search, pathname } = useLocation();
   const history = useHistory();
   const [ page, setPage ] = useState(search ? Number(search.slice(6)) : 1);
@@ -32,14 +32,14 @@ export default function User () {
         return setProducts(data.productByUser.slice(0, 9));
       }
     }
-  }, [data, page])
+  }, [ data, page ]);
 
   function nextPage () {
     setPage((val)=> val+1);
     history.push({
       pathname,
       search: '?page=' + (page + 1)
-    })
+    });
   }
 
   function handleBarang () {
@@ -111,7 +111,7 @@ export default function User () {
             <div className="user-mengajak-container">
               {data.transactionByOriginal.map(product => (
                 <Link to={'/konfirmasi/' + product._id} onClick={setUserId(product, 'mengajak')} key={product._id}>
-                  <UserMengajak product={product.productTarget}  />
+                  <UserMengajak product={product.productTarget} />
                 </Link>
               ))}
             </div>

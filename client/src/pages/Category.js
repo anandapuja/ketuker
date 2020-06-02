@@ -25,14 +25,14 @@ export default function Home () {
         return setProducts(data.productByCategory.slice(0, 9));
       }
     }
-  }, [data, page])
+  }, [ data, page ]);
 
   function nextPage () {
     setPage((val)=> val+1);
     history.push({
       pathname,
       search: '?page=' + (page + 1)
-    })
+    });
   }
 
   if(loading) {

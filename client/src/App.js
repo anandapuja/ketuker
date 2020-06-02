@@ -6,7 +6,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
+  // Redirect
 } from 'react-router-dom';
 import {
   Register,
@@ -18,11 +18,11 @@ import {
   DetailItemCustomer,
   User
 } from './pages';
-import {
-  HeaderMain,
-  Navigation,
-  HeaderSecond,
-} from './components';
+// import {
+//   HeaderMain,
+//   Navigation,
+//   HeaderSecond,
+// } from './components';
 import Confirmation from './pages/Confirmation';
 
 

@@ -14,5 +14,5 @@ export default function NavigationSecond () {
       <p>Hobby</p>
       <p>Household</p> */}
     </nav>
-  )
+  );
 }

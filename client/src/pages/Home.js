@@ -25,11 +25,11 @@ export default function Home () {
         return setProducts(data.getProducts.slice(0, 9));
       }
     }
-  }, [data, page])
+  }, [ data, page ]);
 
   function nextPage () {
     setPage((val)=> val+1);
-    history.push('/?page=' + (page + 1))
+    history.push('/?page=' + (page + 1));
   }
 
   if(loading) {

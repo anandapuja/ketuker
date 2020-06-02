@@ -28,7 +28,7 @@ export default function HeaderMain () {
           <img src={avatar} alt="avatar" />
         </Link>
         <div>
-          <img style={{border: "none", borderRadius: 0, marginLeft: 10,}} src={logoutIcon} alt="logout" />
+          <img style={{ border: 'none', borderRadius: 0, marginLeft: 10, }} src={logoutIcon} alt="logout" />
         </div>
       </div>
     </div>

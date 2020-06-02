@@ -1,5 +1,6 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
 
 export default function DetailItemCustomerList ({ ready, product }) {
   const [ status, setStatus ] = useState(false);
@@ -14,7 +15,7 @@ export default function DetailItemCustomerList ({ ready, product }) {
       submit: true,
       price: product.price,
       whislist: product.whislist
-    }
+    };
     setStatus(val => !val);
     ready(data);
   }
@@ -32,3 +33,8 @@ export default function DetailItemCustomerList ({ ready, product }) {
     </div>
   );
 }
+
+DetailItemCustomerList.propTypes = {
+  ready: PropTypes.func,
+  product: PropTypes.object
+};

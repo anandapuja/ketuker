@@ -9,24 +9,24 @@ export default function Confirmation () {
   const [ barter ] = useState(JSON.parse(localStorage.getItem('barter')));
   const [ addTransaction ] = useMutation(TRANSACTION);
   const history = useHistory();
-  const {id} = useParams();
+  const { id } = useParams();
   const { search } = useLocation();
-  const {loading, error, data} = useQuery(GET_TRANSACTION_BYID, {variables: { 
-    id: id ? id : null, userId1: localStorage.getItem('userOriginal'), userId2: localStorage.getItem('userTarget')}})
+  const { loading, error, data } = useQuery(GET_TRANSACTION_BYID, { variables: { 
+    id: id ? id : null, userId1: localStorage.getItem('userOriginal'), userId2: localStorage.getItem('userTarget') } });
 
   async function deal () {
     try {
-      await addTransaction({variables: {input: barter}})
+      await addTransaction({ variables: { input: barter } });
       localStorage.removeItem('barter');
-      alert('SUCCES')
+      alert('SUCCES');
       history.push('/');
     } catch (error) {
-      console.log(error, '>>>>>>>>>>>EOROREO')
+      console.log(error, '>>>>>>>>>>>EOROREO');
     }
   }
 
   if (loading) {
-    return <p>loading</p>
+    return <p>loading</p>;
   }
 
   if (data || error) {
@@ -41,15 +41,15 @@ export default function Confirmation () {
           <div className="confirmation-container-half">
             <div className="confirmation-container-half-title">
               { search.slice(1) === 'diajak' ?
-              <>
-                <h3> 'BARANG KAMU' </h3>
-                <p>{data.userTarget.username}</p>
-              </>
-              : 
-              <>
-                <h3>'BARANG ORANG' </h3>
-                <p>{data.userOriginal.username}</p>
-              </>
+                <>
+                  <h3>BARANG KAMU</h3>
+                  <p>{data.userTarget.username}</p>
+                </>
+                : 
+                <>
+                  <h3>BARANG ORANG</h3>
+                  <p>{data.userOriginal.username}</p>
+                </>
               }
             </div>
             { barter &&
@@ -62,16 +62,16 @@ export default function Confirmation () {
   
           <div className="confirmation-container-half">
             <div className="confirmation-container-half-title">
-            { search.slice(1) === 'diajak' ?
-              <>
-                <h3> 'BARANG ORANG' </h3>
-                <p>{data.userOriginal.username}</p>
-              </>
-              : 
-              <>
-                <h3>'BARANG KAMU' </h3>
-                <p>{data.userTarget.username}</p>
-              </>
+              { search.slice(1) === 'diajak' ?
+                <>
+                  <h3>BARANG ORANG</h3>
+                  <p>{data.userOriginal.username}</p>
+                </>
+                : 
+                <>
+                  <h3>BARANG KAMU</h3>
+                  <p>{data.userTarget.username}</p>
+                </>
               }
             </div>
             { barter &&

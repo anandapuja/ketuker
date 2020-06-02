@@ -4,7 +4,7 @@ import {
   WhislistDetailItemUser,
   HeaderMain,
   Navigation
- } from '../components';
+} from '../components';
 
 export default function DetailItemUser () {
   const { id } = useParams();
@@ -33,7 +33,7 @@ export default function DetailItemUser () {
         </div>
         <div className="detail-item-user-second">
           <h1>PRICE</h1>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s</p>
           <Link to="/category"><p className="detail-item-user-second-category">Category</p></Link>
         </div>      
       </div>

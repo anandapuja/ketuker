@@ -12,5 +12,5 @@ export default function WhislistDetailItemUser () {
         <p>Loc:</p>
       </div>
     </div>
-  )
+  );
 }

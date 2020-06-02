@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_USER } from '../services/schema';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export default function ProductItemList ({ product }) {
   const { loading, error, data: userData } = useQuery(GET_USER, {
@@ -35,3 +36,7 @@ export default function ProductItemList ({ product }) {
     );
   }
 }
+
+ProductItemList.propTypes = {
+  product: PropTypes.object
+};
