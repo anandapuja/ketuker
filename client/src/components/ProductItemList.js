@@ -32,7 +32,7 @@ export default function ProductItemList ({ product }) {
         <Link to={ '/barang/' + product._id } >
           <p className="product-item-list-title">{ product.title }</p>
         </Link>
-        <p className="product-item-list-location">Loc: {city}</p>
+        <p className="product-item-list-location">Lokasi: {city}</p>
       </div>
     );
   }

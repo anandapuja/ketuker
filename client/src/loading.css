@@ -4,7 +4,9 @@ html, body {
 }
 
 body {
-    background: #0d161f;
+    /* background: #0d161f; */
+    background: url('./assets/images/bg-body.jpg');
+    background-attachment: fixed;
 }
 
 #circle {
