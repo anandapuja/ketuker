@@ -61,6 +61,7 @@ query productDetail($id: ID!) {
     image
     submit
     price
+    whislist
   }
 }
 `;
@@ -277,6 +278,22 @@ mutation ($id: ID!, $input: Boolean!) {
 export const deleteTransaction = gql`
 mutation ($id: ID!) {
   deleteTransaction(id: $id) {
+    result
+  }
+}
+`
+
+export const updateProduct = gql`
+mutation ($id: ID!, $input: InputProduct!) {
+  updateProduct(id: $id, input: $input) {
+    result
+  }
+}
+`
+
+export const deleteProduct = gql`
+mutation ($id: ID!) {
+  deleteProduct(id: $id) {
     result
   }
 }
