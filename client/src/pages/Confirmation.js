@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { HeaderMain, Navigation } from '../components';
 import ConfirmationItem from '../components/ConfirmationItem';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { TRANSACTION, GET_TRANSACTION_BYID } from '../services/schema';
+import { TRANSACTION, GET_TRANSACTION_BYID, updateTransaction, deleteTransaction } from '../services/schema';
 import { useHistory, useParams, useLocation } from 'react-router-dom';
 
 export default function Confirmation () {
   const [ barter ] = useState(JSON.parse(localStorage.getItem('barter')));
   const [ addTransaction ] = useMutation(TRANSACTION);
+  const [ updateTrans ] = useMutation(updateTransaction);
+  const [ deleteTrans ] = useMutation(deleteTransaction);
   const history = useHistory();
   const { id } = useParams();
   const { search } = useLocation();
@@ -25,11 +27,32 @@ export default function Confirmation () {
     }
   }
 
+  async function terima () {
+    try {
+      await updateTrans({ variables: { id: id, input: true }});
+      history.push('/sukses')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  
+  async function tolak () {
+    try {
+      await deleteTrans({ variables: { id }})
+      history.push('/my-profile')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   if (loading) {
     return <p>loading</p>;
   }
  
   if (data || error) {
+    if (data) {
+      if (data.transactionById.status) history.push('/sukses?status=selesai')
+    }
     return (
       <>
         <HeaderMain />
@@ -96,8 +119,8 @@ export default function Confirmation () {
           search.slice(1) === 'diajak' ?
           <>
             <div className="approve-reject-button">
-                <button className="app-rec-button" onClick={deal} >TERIMA</button>
-                <button className="app-rec-button" onClick={deal} >TOLAK</button>
+                <button className="app-rec-button" onClick={terima} >TERIMA</button>
+                <button className="app-rec-button" onClick={tolak} >TOLAK</button>
             </div>
           </>
           :

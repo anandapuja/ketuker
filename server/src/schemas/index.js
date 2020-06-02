@@ -126,6 +126,8 @@ export const typeDefs = gql`
     deleteProduct(id: ID!): Output!
 
     addTransaction(input: InputTransaction!): Transaction
+    updateTransaction(id: ID!, input: Boolean!): Transaction
+    deleteTransaction(id: ID!): Output
   }
 `;
 
@@ -189,6 +191,7 @@ export const resolvers = {
         }
       } catch (error) {
         console.log(error);
+        return error;
       }
     },
 
@@ -473,5 +476,32 @@ export const resolvers = {
         return error;
       }
     },
+    updateTransaction: async ( _, { id, input },
+      {
+        req: {
+          headers: { token },
+        },
+      }
+    ) => {
+      const userAuth = await authen(token);
+      const user = await User.findOne({ _id: userAuth.id });
+      if (!user) throw new Error('You have to login!');
+      if (!author({ userId: user._id, prodId: id })) throw new Error('You are not authorized!');
+      const updateTransaction = await Transaction.findOneAndUpdate({ _id: id }, { status: input });
+      await updateTransaction.save();
+      
+      return updateTransaction;
+    },
+
+    deleteTransaction: async ( _, { id }, { req: { headers: { token } } }) => {
+      const userAuth = await authen(token);
+      const user = await User.findOne({ _id: userAuth.id });
+      if (!user) throw new Error('You have to login!');
+      if (!author({ userId: user._id, prodId: id })) throw new Error('You are not authorized!');
+      await Transaction.findByIdAndRemove(id);
+      return {
+        result: 'Successfully deleted transaction!',
+      };
+    }
   },
 };
