@@ -19,13 +19,10 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-<<<<<<< HEAD
     "react-slick": "^0.26.1",
-    "slick-carousel": "^1.8.1"
-=======
+    "slick-carousel": "^1.8.1",
     "request": "^2.88.2",
     "request-promise": "^4.2.5"
->>>>>>> suggestion-additem
   },
   "scripts": {
     "start": "react-scripts start",

@@ -54,7 +54,7 @@ export default function EditItem () {
         whislist: wishlist,
         submit: false
       };
-      // await addProduct({ variables:{ input: data } }); 
+      // await addProduct({ variables:{ input: data } });   //------check query for submit
       history.push('/');
     } catch (error) {
       console.log(error, 'ERRORNY');
@@ -106,8 +106,6 @@ export default function EditItem () {
       // const { getProduct: product } = data;
       // const { productByUser } = data;
       // console.log(data);
-      
-
       
 
     return (
