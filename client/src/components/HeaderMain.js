@@ -3,6 +3,7 @@ import logo from '../assets/images/logo.png';
 import avatar from '../assets/images/avatar.png';
 import { Link, useHistory } from 'react-router-dom';
 import logoutIcon from '../assets/images/logout.png';
+import faqIcon from '../assets/images/faq.jpg'
 import alertify from 'alertifyjs'
 
 export default function HeaderMain () {
@@ -49,10 +50,19 @@ export default function HeaderMain () {
         <Link to={ localStorage.getItem('token') ? '/my-profile' : '/login' }>
           <img src={avatar} alt="avatar" />
         </Link>
+        <Link to="/faq">
+            <div style={{border: "none", borderRadius: 0, marginLeft: 10,}}>
+              <img src={faqIcon} alt="logo" />
+            </div>
+          </Link>
         <div>
-          <div onClick={ShowSignOut}>
-            <img style={{border: "none", borderRadius: 0, marginLeft: 10, cursor: "pointer"}} src={logoutIcon} alt="logout" />
-          </div>
+         
+          {localStorage.getItem('token') && (
+            <div onClick={ShowSignOut}>
+              <img style={{border: "none", borderRadius: 0, marginLeft: 10,}} src={logoutIcon} alt="logout" />
+            </div>
+          )}
+          
         </div>
       </div>
       {showOut && (

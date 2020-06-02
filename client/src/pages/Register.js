@@ -29,9 +29,8 @@ function Register () {
 
   async function SubmitRegister (e) {
     e.preventDefault();
-    console.log('register')
     if(
-        (username === '') || (email === '') || (password= '') || (address = '') ||  (city=== '') ||  (phone === '')
+        (username === '') || (email === '') || (password=== '') || (address === '') ||  (city=== '') ||  (phone === '')
     ) {
       setNotif ('form is not complete');
       setAlertInput(true);

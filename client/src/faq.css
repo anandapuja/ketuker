@@ -1,0 +1,48 @@
+.faq-page{
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 800px;
+  height: auto;
+}
+
+.faq-title{
+  margin-bottom: 20px;
+}
+
+/* .faq-body{
+  border: solid grey
+} */
+
+.collapsible {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  padding: 8px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 17px;
+  font-weight: 600;
+  }
+
+
+.content {
+  padding: 20px 20px;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+p {
+  margin: 2px 2px
+}
+
+.ask-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 2px
+}
+  

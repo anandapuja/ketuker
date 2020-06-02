@@ -7,3 +7,4 @@ export { default as DetailItemUser } from './DetailItemUser';
 export { default as EditItem } from './EditItem';
 export { default as Home } from './Home';
 export { default as User } from './User';
+export { default as FAQ } from './FAQ';
