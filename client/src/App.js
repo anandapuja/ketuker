@@ -42,7 +42,7 @@ function App () {
                 <Route path="/me/barang/:id" component={ DetailItemUser } />
                 <Route path="/my-profile" component={ User } />
                 <Route path="/edit/:id" component={ EditItem } />
-                <Route path="/konfirmasi" component={ Confirmation } />
+                <Route exact path="/konfirmasi" component={ Confirmation } />
                 <Route path="/konfirmasi/:id" component={ Confirmation } />
               </>
             )}

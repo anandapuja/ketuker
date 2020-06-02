@@ -28,8 +28,7 @@ export default function Confirmation () {
   if (loading) {
     return <p>loading</p>;
   }
-  
-  return (
+ 
   if (data || error) {
     return (
       <>
