@@ -172,7 +172,42 @@ mutation addTransaction($input: InputTransaction!) {
     status
   }
 }
-`
+`;
+
+export const GET_TRANSACTION_BYID = gql`
+query ($id: ID, $userId1: ID!, $userId2: ID!) {
+  transactionById(id: $id) {
+    _id
+    userTarget
+    userOriginal
+    status
+    productOriginal {
+      title
+      price
+      description
+      image
+    }
+    productTarget {
+      title
+      price
+      description
+      image
+    }
+  }
+  userOriginal: getUser(id: $userId1) {
+    username,
+    address,
+    avatar
+    city
+  }
+  userTarget: getUser(id: $userId2) {
+    username,
+    address,
+    avatar
+    city
+  }
+}
+`;
 
 export const GET_TRANSACTION_USER = gql`
 query ($userId: ID!) {
@@ -215,4 +250,4 @@ query ($userId: ID!) {
     price
   }
 }
-`
+`;

@@ -112,7 +112,7 @@ export const typeDefs = gql`
     productByUser(userId: ID!): [Product]!
     productByCategory(category: String): [Product]!
 
-    transactionById(id: ID!): Transaction
+    transactionById(id: ID): Transaction
     transactionByOriginal(userId: ID!): [Transaction]
     transactionByTarget(userId: ID!): [Transaction]
   }

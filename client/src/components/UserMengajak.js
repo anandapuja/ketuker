@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function UserMengajak ({product}) {
-  console.log(product)
+export default function UserMengajak ({ product }) {
   return(
     <div className="user-mengajak-item-container">
       <div className="user-mengajak-item-container-title">
@@ -13,3 +13,7 @@ export default function UserMengajak ({product}) {
     </div>
   );
 }
+
+UserMengajak.propTypes = {
+  product: PropTypes.object
+};

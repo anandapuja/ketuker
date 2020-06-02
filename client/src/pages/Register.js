@@ -124,7 +124,7 @@ function Register () {
         </div>
 
         <div className="footer-register">Already have an account ? Sign In
-          <a href="#" onClick={ToLogin}> here</a>
+          <a onClick={ToLogin}> here</a>
         </div>
       </div>
       {alertInput && (

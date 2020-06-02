@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import deleteIcon from '../assets/images/trash.png';
 import editIcon from '../assets/images/edit.png';
+import PropTypes from 'prop-types';
 
 import { useHistory} from 'react-router-dom';
 
@@ -64,3 +65,7 @@ export default function UserBarang ({ product }) {
     </div>
   );
 }
+
+UserBarang.propTypes = {
+  product: PropTypes.object
+};

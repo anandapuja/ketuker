@@ -158,7 +158,7 @@ export default function AddItem () {
     }
    
     rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
-    return prefix === undefined ? rupiah : (rupiah ? 'IDR ' + rupiah : '');
+    return prefix === undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
   }
     
 
@@ -190,7 +190,7 @@ export default function AddItem () {
           <button className="btn-register">SUBMIT</button>
           {/* <Link to="/"><button className="btn-register">BACK</button></Link> */}
         </form>
-        
+     
         <div>
           <form onSubmit={handleFireBaseUpload} className="form-upload">
             <h4 className="title-upload-register">Upload gambar di sini.</h4>

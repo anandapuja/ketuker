@@ -13,14 +13,14 @@ import {
 } from '../components';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_TRANSACTION_USER } from '../services/schema';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useHistory, Link } from 'react-router-dom';
 
 export default function User () {
 
   const [ navBarang, setNavBarang ] = useState(true);
   const [ mengajak, setMengajak ] = useState(false);
   const [ diajak, setDiajak ] = useState(false);
-  const { loading, error, data } = useQuery(GET_TRANSACTION_USER, { variables: { userId: localStorage.getItem('user_id') }, fetchPolicy: "cache-and-network" });
+  const { loading, error, data } = useQuery(GET_TRANSACTION_USER, { variables: { userId: localStorage.getItem('user_id') }, fetchPolicy: 'cache-and-network' });
   const { search, pathname } = useLocation();
   const history = useHistory();
   const [ page, setPage ] = useState(search ? Number(search.slice(6)) : 1);
@@ -28,21 +28,20 @@ export default function User () {
 
   useEffect(() => {
     if(data) {
-      console.log(data)
       if(page !== 1) {
         return setProducts(data.productByUser.slice(0, page*9));
       } else {
         return setProducts(data.productByUser.slice(0, 9));
       }
     }
-  }, [data, page])
+  }, [ data, page ]);
 
   function nextPage () {
     setPage((val)=> val+1);
     history.push({
       pathname,
       search: '?page=' + (page + 1)
-    })
+    });
   }
 
   function handleBarang () {
@@ -63,6 +62,16 @@ export default function User () {
     setDiajak(true);
   }
 
+  function setUserId (product, type) {
+    if (type === 'diajak') {
+      localStorage.setItem('userOriginal', product.userOriginal);
+      localStorage.setItem('userTarget', product.userTarget);
+    } else {
+      localStorage.setItem('userOriginal', product.userTarget);
+      localStorage.setItem('userTarget', product.userOriginal);
+    }
+  }
+
   if(loading) {
     return <CompLoading></CompLoading>;
   }
@@ -75,7 +84,6 @@ export default function User () {
   if (data) {
     const { productByUser } = data;
     console.log(productByUser);
-
     return (
       <>
         <HeaderMain />
@@ -106,7 +114,9 @@ export default function User () {
           { mengajak && (
             <div className="user-mengajak-container">
               {data.transactionByOriginal.map(product => (
-                <UserMengajak product={product.productTarget} key={product._id}/>
+                <Link to={'/konfirmasi/' + product._id} onClick={setUserId(product, 'mengajak')} key={product._id}>
+                  <UserMengajak product={product.productTarget} />
+                </Link>
               ))}
             </div>
           ) }
@@ -114,7 +124,9 @@ export default function User () {
           { diajak && (
             <div className="user-barang-container">
               {data.transactionByTarget.map(product => (
-                <UserDiajak product={product.productTarget} key={product._id} />
+                <Link to={'/konfirmasi/' + product._id + '?diajak'} onClick={setUserId(product, 'diajak')} key={product._id}>
+                  <UserDiajak product={product.productTarget} />
+                </Link>
               ))}
             </div>
           ) }

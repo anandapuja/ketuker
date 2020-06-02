@@ -1,5 +1,5 @@
 import React from 'react';
-import avatar from '../assets/images/avatar.png';
+import PropTypes from 'prop-types';
 
 export default function ConfirmationItem ({ product }) {
   return (
@@ -12,3 +12,7 @@ export default function ConfirmationItem ({ product }) {
     </div>
   );
 }
+
+ConfirmationItem.propTypes = {
+  product: PropTypes.object
+};

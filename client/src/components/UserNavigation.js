@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function UserNavigation ({ barang, mengajak, diajak }) {
   return (
@@ -15,3 +16,9 @@ export default function UserNavigation ({ barang, mengajak, diajak }) {
     </nav>
   );
 }
+
+UserNavigation.propTypes = {
+  barang: PropTypes.any,
+  mengajak: PropTypes.any,
+  diajak: PropTypes.any
+};

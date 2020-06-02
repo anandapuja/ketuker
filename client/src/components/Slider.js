@@ -7,7 +7,7 @@ import slide2 from '../assets/images/slide-2-01.jpg';
 // import './puja-style.css';
 
 class SliderApp extends Component {
-  render() {
+  render () {
     const settings = {
       dots: true,
       autoplay: true,

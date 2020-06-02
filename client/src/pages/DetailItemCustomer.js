@@ -12,14 +12,14 @@ export default function DetailItemCustomer () {
   const [ readyExchange, setReadyExchange ] = useState(false);
   const { loading, error, data } = useQuery(GET_PRODUCT_USER_AND_DETAIL, { variables: { userId: localStorage.getItem('user_id'), id } });
   const [ productOriginal, setProductOriginal ] = useState([]);
-  const [ productTarget, setProductTarget] = useState([]);
+  const [ productTarget, setProductTarget ] = useState([]);
 
   useEffect(() => {
-    setReadyExchange((val) => {
-      if(productOriginal.length) return true
-      else return false
+    setReadyExchange(() => {
+      if(productOriginal.length) return true;
+      else return false;
     });
-  }, [productOriginal])
+  }, [ productOriginal ]);
 
   function changeBarterStatus () {
     setBarterStatus(true);
@@ -32,12 +32,12 @@ export default function DetailItemCustomer () {
       if(existingVal.length) {
         data = val.filter(el => el._id !== prodTrans._id);
       } else {
-        data = [...val, prodTrans]
+        data = [ ...val, prodTrans ];
       }
-      return data
-    })
-    const { __typename, ...rest } = data.getProduct
-    setProductTarget([rest])
+      return data;
+    });
+    const { __typename, ...rest } = data.getProduct;
+    setProductTarget([ rest ]);
   }
 
   function confirmation () {
@@ -45,9 +45,11 @@ export default function DetailItemCustomer () {
       userTarget: productTarget[0].userId,
       productTarget,
       productOriginal
-    }
-    localStorage.setItem('barter', JSON.stringify(barter))
-    history.push('/konfirmasi')
+    };
+    localStorage.setItem('barter', JSON.stringify(barter));
+    localStorage.setItem('userOriginal', productTarget[0].userId);
+    localStorage.setItem('userTarget', localStorage.getItem('user_id'));
+    history.push('/konfirmasi');
   }
   
   if (loading) {

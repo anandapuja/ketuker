@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function UserDiajak({product}){
-  console.log(product)
+export default function UserDiajak ({ product }) {
   return (
     <div className="product-item-list-container">
       <div className="product-item-list-image">
@@ -12,3 +12,7 @@ export default function UserDiajak({product}){
     </div>
   );
 }
+
+UserDiajak.propTypes = {
+  product: PropTypes.object
+};

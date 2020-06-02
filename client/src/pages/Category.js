@@ -14,7 +14,6 @@ import SliderApp from '../components/Slider';
 
 export default function Home () {
   const { search, pathname } = useLocation();
-  const location = useLocation();
   const history = useHistory();
   const { loading, error, data } = useQuery(GET_PRODUCTS_AND_USERS, { variables: { category: pathname ? pathname.slice(10) : '' }, fetchPolicy: 'cache-and-network' });
   const [ page, setPage ] = useState(search ? Number(search.slice(6)) : 1);
@@ -28,14 +27,14 @@ export default function Home () {
         return setProducts(data.productByCategory.slice(0, 9));
       }
     }
-  }, [data, page])
+  }, [ data, page ]);
 
   function nextPage () {
     setPage((val)=> val+1);
     history.push({
       pathname,
       search: '?page=' + (page + 1)
-    })
+    });
   }
 
   if(loading) {

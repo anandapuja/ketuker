@@ -6,7 +6,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
+  // Redirect
 } from 'react-router-dom';
 import {
   Register,
@@ -19,11 +19,11 @@ import {
   User, 
   EditItem
 } from './pages';
-import {
-  HeaderMain,
-  Navigation,
-  HeaderSecond,
-} from './components';
+// import {
+//   HeaderMain,
+//   Navigation,
+//   HeaderSecond,
+// } from './components';
 import Confirmation from './pages/Confirmation';
 
 
@@ -34,7 +34,7 @@ function App () {
             <Route exact path="/" component={ Home } />
             <Route path="/register" component={ Register } />
             <Route path="/login" component={ Login } />
-            <Route path="/category/:cat" component={ Category } />
+            <Route path="/category=:cat" component={ Category } />
             <Route path="/barang/:id" component={ DetailItemCustomer } />
             {localStorage.getItem('token') && (
               <>
@@ -43,9 +43,9 @@ function App () {
                 <Route path="/my-profile" component={ User } />
                 <Route path="/edit/:id" component={ EditItem } />
                 <Route path="/konfirmasi" component={ Confirmation } />
+                <Route path="/konfirmasi/:id" component={ Confirmation } />
               </>
             )}
-    
       </Router>
     </ApolloProvider>
   );
