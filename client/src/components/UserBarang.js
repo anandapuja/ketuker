@@ -5,12 +5,17 @@ import editIcon from '../assets/images/edit.png';
 import PropTypes from 'prop-types';
 
 import { useHistory} from 'react-router-dom';
+import { useMutation } from '@apollo/react-hooks';
+
+import { deleteProduct, GET_TRANSACTION_USER } from '../services/schema';
+
 
 export default function UserBarang ({ product }) {
 
   const history = useHistory()
   const [ pageDelete, setPageDelete ] = useState(false)
   const [ idDelete, setIdDelete ] = useState('')
+  const [ deleteProd ] = useMutation(deleteProduct, { refetchQueries: () => [{query: GET_TRANSACTION_USER , variables: { userId: localStorage.getItem('user_id')} }]})
 
   function ShowDelete(id){
     setIdDelete(id)
@@ -28,6 +33,8 @@ export default function UserBarang ({ product }) {
 
   function ConfirmDelete(){
     console.log(idDelete, "id to delete")
+    deleteProd({variables: {id: idDelete}})
+    // console.log(object)
     // tembak server
   }
 
