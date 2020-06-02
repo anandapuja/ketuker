@@ -10,7 +10,7 @@ export default function Success () {
       <div className="success-container">
         <div className="success-message">
           <h1>SUCCESS</h1>
-          <p>Anda telah mengirimkan permintaan barter. Silahkan cek status permintaan barter Anda di halaman user di <Link tp="/my-profile">sini!</Link></p>
+          <p>Anda telah mengirimkan permintaan barter. Silahkan cek status permintaan barter Anda di halaman user di <Link to="/my-profile">sini!</Link></p>
           <Link to="/">
             <button>Back To Home</button>
           </Link>
