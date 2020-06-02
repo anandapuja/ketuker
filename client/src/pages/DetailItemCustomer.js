@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { DetailItemCustomerList, HeaderMain, Navigation } from '../components';
+import { DetailItemCustomerList, HeaderMain, Navigation, CompError,
+  CompLoading } from '../components';
 import { Link, useParams, useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_PRODUCT_USER_AND_DETAIL } from '../services/schema';
@@ -50,11 +51,11 @@ export default function DetailItemCustomer () {
   }
   
   if (loading) {
-    return <> loading </>;
+    return <CompLoading></CompLoading>;
   }
   if (error) {
     console.log(error);
-    return <> erorr </>;
+    return <CompError></CompError>;
   }
   if (data) {
     const { getProduct: product } = data;

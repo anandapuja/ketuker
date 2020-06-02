@@ -7,7 +7,9 @@ import {
   UserDiajak,
   HeaderMain,
   Navigation,
-  LoadMoreButton
+  LoadMoreButton,
+  CompError,
+  CompLoading
 } from '../components';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_TRANSACTION_USER } from '../services/schema';
@@ -18,7 +20,7 @@ export default function User () {
   const [ navBarang, setNavBarang ] = useState(true);
   const [ mengajak, setMengajak ] = useState(false);
   const [ diajak, setDiajak ] = useState(false);
- // const { loading, error, data } = useQuery(GET_TRANSACTION_USER, { variables: { userId: localStorage.getItem('user_id') }, fetchPolicy: "cache-and-network" });
+  const { loading, error, data } = useQuery(GET_TRANSACTION_USER, { variables: { userId: localStorage.getItem('user_id') }, fetchPolicy: "cache-and-network" });
   const { search, pathname } = useLocation();
   const history = useHistory();
   const [ page, setPage ] = useState(search ? Number(search.slice(6)) : 1);
@@ -62,12 +64,12 @@ export default function User () {
   }
 
   if(loading) {
-    return <p>Loading</p>;
+    return <CompLoading></CompLoading>;
   }
 
   if(error) {
     console.log(error);
-    return <p>error ... </p>;
+    return <CompError></CompError>;
   }
 
   if (data) {
