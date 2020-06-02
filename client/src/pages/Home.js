@@ -3,7 +3,9 @@ import {
   ProductItemList,
   LoadMoreButton,
   HeaderMain,
-  Navigation
+  Navigation,
+  CompError,
+  CompLoading
 } from '../components';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_PRODUCTS_AND_USERS, GET_ALL_PRODUCT } from '../services/schema';
@@ -33,13 +35,12 @@ export default function Home () {
     history.push('/?page=' + (page + 1))
   }
 
-  if(loading) {
-    return <p>Loading</p>;
+  if(loading){
+    return <CompLoading />
   }
 
-  if(error) {
-    console.log(error);
-    return <p>error ... </p>;
+  if(error){
+    return <CompError />
   }
 
   if(data) {

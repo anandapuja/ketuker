@@ -1,10 +1,14 @@
 .login {
-    background-color: #FFF;
+    background-image: linear-gradient(#F98A06, #F9BE06);
     text-align: center;
+    width: 500px;
+    margin: 40px auto;
+    border-radius: 10px;
+    padding-bottom: 20px;;
 }
 
 .title-login {
-    color: grey;
+    color: #5415CE;
     font-size: 50px;
     font-weight: 800;
 }
@@ -37,7 +41,7 @@
     width : 400px;
     height: 60px;
     color: white;
-    background-color: grey;
+    background-color: #5415CE;
     border-radius: 10px;
     font-weight: bold;
 }
@@ -49,6 +53,10 @@ button:hover {
 .register {
     padding: 50px 0 100px;
     text-align: center;
+    width: 900px;
+    margin: 40px auto;
+    border-radius: 10px;
+    padding-bottom: 10px;
 }
 
 .title-register {
