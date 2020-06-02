@@ -3,6 +3,7 @@ import logo from '../assets/images/logo.png';
 import avatar from '../assets/images/avatar.png';
 import { Link, useHistory } from 'react-router-dom';
 import logoutIcon from '../assets/images/logout.png';
+import alertify from 'alertifyjs'
 
 export default function HeaderMain () {
 
@@ -16,6 +17,7 @@ export default function HeaderMain () {
 
   function ConfirmSignOut(){
     localStorage.clear()
+    alertify.notify('LOGOUT SUCCESS', 'success', 5, function(){  console.log('dismissed'); });
     history.push('/')
   }
 

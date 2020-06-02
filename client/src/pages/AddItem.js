@@ -6,6 +6,7 @@ import { HeaderSecond, NavigationSecond } from '../components';
 import { useMutation } from '@apollo/react-hooks';
 import { ADD_PRODUCT, GET_PRODUCTS_AND_USERS } from '../services/schema';
 import { useHistory, Link } from 'react-router-dom';
+import alertify from 'alertifyjs'
 
 export default function AddItem () {
 
@@ -21,7 +22,10 @@ export default function AddItem () {
   const [ addProduct ] = useMutation(ADD_PRODUCT, { refetchQueries: () => [ { query: GET_PRODUCTS_AND_USERS } ] });
   const history = useHistory();
   const[suggestion, setSuggestion] = useState('')
+  const [ notif, setNotif ] = useState('')
+  const [ alertInput, setAlertInput ] = useState(false);
 
+  // scraping dengan cheerio, dengan install chrome extension di browser agar tdk kena block cors
   function cari(katakunci){
     let options = {
       uri: `https://id.priceprice.com/search/?keyword=${katakunci}`,
@@ -32,7 +36,7 @@ export default function AddItem () {
   
     rp(options)
         .then(function ($) {
-          console.log('masuk then')
+          // console.log('masuk then')
           let name = []
           // const itemBox = $('.name')
           $('.name').each((i,el)=>{
@@ -58,7 +62,7 @@ export default function AddItem () {
             }
             arrobj.push(obj)
           }
-          console.log(arrobj)
+          // console.log(arrobj)
           setSuggestion(arrobj)
         })
         .catch(function (err) {
@@ -75,33 +79,40 @@ export default function AddItem () {
   }
 
   function handlePrice(e){
-    // setPrice(formatRupiah(e.target.value, 'Rp'))
-    setPrice(Number(e.target.value));
+    setPrice(formatRupiah(e.target.value, 'IDR '))
+    //setPrice(Number(e.target.value));
   }
 
 
   async function SubmitCreate (e) {
     e.preventDefault();
-    let harga1 = price.replace('Rp. ','')
+    let harga1 = price.replace('IDR ','')
     let harga2 = harga1.replace('.','')
-    let price = Number(harga2)
-    
-    try {
-      let data={ //change as the fields required in server
-        title: title,
-        description: description,
-        image: image,
-        price: price,
-        category: category,
-        whislist: wishlist,
-        submit: false
-      };
-      await addProduct({ variables:{ input: data } });
-      history.push('/');
-    } catch (error) {
-      console.log(error, 'ERRORNY');
+    let priceNum = Number(harga2)
+    if((title === '') || (category === '') ) {
+      setNotif ('title or category must be filled');
+      setAlertInput(true);
+    } else {
+      try {
+        let data={ //change as the fields required in server
+          title: title,
+          description: description,
+          image: image,
+          price: priceNum,
+          category: category,
+          whislist: wishlist,
+          submit: false
+        };
+        console.log(data,"----")
+        await addProduct({ variables:{ input: data } });
+        alertify.notify('SUCCESS INPUT ITEM', 'success', 5, function(){  console.log('dismissed'); });
+        history.push('/');
+      } catch (error) {
+        console.log(error, 'ERRORNY');
+        setNotif ('ERROR while submiting');
+        setAlertInput(true);
+      }
     }
-
   }
 
   const [ imageAsFile, setImageAsFile ] = useState('');
@@ -147,7 +158,7 @@ export default function AddItem () {
     }
    
     rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
-    return prefix === undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+    return prefix === undefined ? rupiah : (rupiah ? 'IDR ' + rupiah : '');
   }
     
 
@@ -187,6 +198,7 @@ export default function AddItem () {
               type="file"
               onChange={handleImageAsFile}
               className="input-upload"
+              accept="image/x-png,image/jpeg"
             />
             <button type="submit" className="btn-upload">Upload</button>
           </form>
@@ -206,6 +218,17 @@ export default function AddItem () {
       </div>
       {(image!=='') && <img src={image} alt="picture" className="img-additem"></img> }
     </div>
+    {alertInput && (
+      <div className="modalAlert">
+        <div className="Alert-flex">
+          <div className="Alert-title">ALERT</div>
+          <div className="Alert-content">Notification: {notif}</div>
+          <div >
+            <button onClick={()=>setAlertInput(false)} className="Alert-button">OK</button>
+          </div>
+        </div>
+      </div>
+      )}
     </>
   );
 }
