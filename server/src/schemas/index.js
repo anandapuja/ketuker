@@ -146,7 +146,7 @@ export const resolvers = {
         const users = JSON.parse(await redis.get('users'));
         const user = users.filter((el) => el._id == id);
         if (user.length) {
-          const [data] = user;
+          const [ data ] = user;
           return data;
         } else {
           const getOneUser = await User.findOne({ _id: id });
@@ -173,7 +173,7 @@ export const resolvers = {
       try {
         const products = JSON.parse(await redis.get('products'));
         if (products) {
-          const [product] = products.filter((el) => el._id == id);
+          const [ product ] = products.filter((el) => el._id == id);
           if (product) return product;
           else {
             const getOneProduct = await Product.findOne({ _id: id });
@@ -202,7 +202,7 @@ export const resolvers = {
         }
         const getProduct = await Product.findOne({ userId: userId });
         if (products) {
-          newProducts = [...products, getProduct];
+          newProducts = [ ...products, getProduct ];
         } else {
           newProducts = await Product.find();
         }
@@ -312,7 +312,7 @@ export const resolvers = {
           users.push(newUser);
           await redis.set('users', JSON.stringify(users));
         } else {
-          await redis.set('users', JSON.stringify([res]));
+          await redis.set('users', JSON.stringify([ res ]));
         }
         return { _id: res._id, ...res._doc, token };
       }
