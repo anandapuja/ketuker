@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
+import checkState from '../assets/images/check.png'
 
 export default function DetailItemCustomerList ({ ready, product }) {
   const [ status, setStatus ] = useState(false);
@@ -26,9 +27,20 @@ export default function DetailItemCustomerList ({ ready, product }) {
       </div>
       <p className="product-item-list-title">{product.title}</p>
       {
-        status && <p>Checked</p>
+        status && (
+          <div style={{textAlign: "center"}}>
+            <img className="check-state" src={checkState} alt="check" />
+            <button onClick={checked}>Uncheck</button>
+          </div>
+        )
       }
-      <button onClick={checked}>Pilih</button>
+      {
+        !status && (
+          <div style={{textAlign: "center"}}>
+            <button onClick={checked}>Check</button>
+          </div>
+        )
+      }
     </div>
   );
 }

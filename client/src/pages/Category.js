@@ -52,7 +52,7 @@ export default function Home () {
       <>
         <HeaderMain />
         <Navigation />
-        <SliderApp />
+        {/* <SliderApp /> */}
         <div className="home-list-container">
           <div className="home-product-list-item-container">
             {
