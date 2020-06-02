@@ -100,14 +100,13 @@ button:hover {
 
 .img-additem {
     position: fixed;
-    left: 1300px;
-    top: 250px;
-    max-width: 300px;
-    max-height: 300px;
+    right: 0px;
+    top: 30%;
+    max-width: 200px;
+    max-height: 200px;
     margin: 20px 20px;
     padding: 10px 10px;
-    border: solid grey;
-    border-radius: 10px;
+    border: solid rgb(29, 29, 29);
 }
 
 .suggestion-additem {

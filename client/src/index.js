@@ -7,6 +7,7 @@ import './LoginRegister.css';
 import './additem.css';
 import './editdelete.css';
 import './modal.css'
+import './faq.css'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 

@@ -17,7 +17,8 @@ import {
   DetailItemUser,
   DetailItemCustomer,
   User, 
-  EditItem
+  EditItem,
+  FAQ
 } from './pages';
 // import {
 //   HeaderMain,
@@ -25,6 +26,7 @@ import {
 //   HeaderSecond,
 // } from './components';
 import Confirmation from './pages/Confirmation';
+import Success from './pages/Success';
 
 
 function App () {
@@ -36,6 +38,7 @@ function App () {
             <Route path="/login" component={ Login } />
             <Route path="/category=:cat" component={ Category } />
             <Route path="/barang/:id" component={ DetailItemCustomer } />
+            <Route path="/faq" component={ FAQ } />
             {localStorage.getItem('token') && (
               <>
                 <Route path="/additem" component={ AddItem} />
@@ -44,6 +47,7 @@ function App () {
                 <Route path="/edit/:id" component={ EditItem } />
                 <Route exact path="/konfirmasi" component={ Confirmation } />
                 <Route path="/konfirmasi/:id" component={ Confirmation } />
+                <Route path="/sukses" component={ Success } />
               </>
             )}
       </Router>

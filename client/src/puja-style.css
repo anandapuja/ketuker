@@ -16,7 +16,7 @@ a{
 body{
   font-family: 'Space Mono', monospace;
 }
-p{
+p, button, input{
   font-family: 'Arvo', serif;
 }
 h5{
@@ -62,8 +62,10 @@ h5{
   transition: 0.3s;
 }
 .header-user-container button:hover{
-  background-color: #F98A06;
+  background-color: rgb(0, 0, 0);
   cursor: pointer;
+  color: white;
+  border: 1px solid #ffffff;
 }
 
 /* HEADER SECOND */
@@ -173,7 +175,7 @@ h5{
 }
 .home-load-more button{
   padding: 10px 40px;
-  background-color: #5415CE;
+  background-color: black;
   color: white;
   border: none;
   text-align: center;
@@ -490,4 +492,83 @@ h5{
   width: 20px;
   height: 20px;
   text-align: center;
+}
+
+.success-container{
+  width: 600px;
+  margin: 50px auto;
+  background-image: url('./assets/images/bg-copy.jpg');
+  display: flex;
+  padding: 50px;
+  height: 500px;
+  align-items: center;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.07), 
+                0 2px 4px rgba(0,0,0,0.07), 
+                0 4px 8px rgba(0,0,0,0.07), 
+                0 8px 16px rgba(0,0,0,0.07),
+                0 16px 32px rgba(0,0,0,0.07), 
+                0 32px 64px rgba(0,0,0,0.07);
+}
+.success-message{
+  color: white;
+  text-align: center;
+}
+.success-message a{
+  color: #f9be08;
+}
+.success-message p{
+  padding: 20px;
+}
+.success-message button{
+  padding: 10px 30px;
+  border: none;
+  background-color: #f9be08;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.success-message button:hover{
+  background-color: white;
+}
+.approve-reject-button{
+  display: flex;
+  position: fixed;
+  bottom: 20px;
+  left: 43%;
+  margin-top: -50px;
+  margin-left: -100px;
+  justify-content: space-between;
+  margin: auto
+}
+.app-rec-button{
+  /* position: fixed; */
+  /* display: flex; */
+  /* bottom: 20px; */
+  /* left: 50%; */
+  /* margin-top: -50px;
+  margin-left: -100px; */
+  padding: 2px;
+  border: 2px solid black;
+  background-color: rgb(22, 22, 22);
+  transition: 0.3s;
+  padding: 20px;
+  color: white;
+}
+.app-rec-button button{
+  background-color: rgb(22, 22, 22);
+  transition: 0.3s;
+  padding: 20px;
+  border: none;
+  margin-right: 10px;
+  /* margin-bottom: 50px; */
+  color: white;
+  cursor: pointer;
+}
+.app-rec-button button:hover{
+  background-color: rgb(0, 0, 0);
+  color: #f9be08;
+}
+.app-rec-button h1{
+  text-align: center;
+  margin: 30px 0;
+  color: rgb(8, 8, 8);
 }

@@ -18,8 +18,8 @@ export default function Confirmation () {
     try {
       await addTransaction({ variables: { input: barter } });
       localStorage.removeItem('barter');
-      alert('SUCCES');
-      history.push('/');
+      // alert('SUCCES');
+      history.push('/sukses');
     } catch (error) {
       console.log(error, '>>>>>>>>>>>EOROREO');
     }
@@ -91,6 +91,18 @@ export default function Confirmation () {
           <div className="confirmation-button">
             <button onClick={deal} >KIRIM PERMINTAAN BARTER</button>
           </div>
+        }
+        {
+          search.slice(1) === 'diajak' ?
+          <>
+            <div className="approve-reject-button">
+                <button className="app-rec-button" onClick={deal} >TERIMA</button>
+                <button className="app-rec-button" onClick={deal} >TOLAK</button>
+            </div>
+          </>
+          :
+          <>
+          </>
         }
       </>
     );

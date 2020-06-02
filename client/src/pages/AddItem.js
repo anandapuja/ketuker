@@ -213,10 +213,10 @@ export default function AddItem () {
               </div>
             ))}
           </div>
-          <Link to="/"><button className="btn-additem">CANCEL</button></Link>
+          {(image!=='') && <img src={image} alt="picture" className="img-additem"></img> }
+          <Link to="/"><button className="btn-register">CANCEL</button></Link>
         </div>
       </div>
-      {(image!=='') && <img src={image} alt="picture" className="img-additem"></img> }
     </div>
     {alertInput && (
       <div className="modalAlert">
