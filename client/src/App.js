@@ -25,6 +25,7 @@ import {
 //   HeaderSecond,
 // } from './components';
 import Confirmation from './pages/Confirmation';
+import Success from './pages/Success';
 
 
 function App () {
@@ -44,6 +45,7 @@ function App () {
                 <Route path="/edit/:id" component={ EditItem } />
                 <Route exact path="/konfirmasi" component={ Confirmation } />
                 <Route path="/konfirmasi/:id" component={ Confirmation } />
+                <Route path="/sukses" component={ Success } />
               </>
             )}
       </Router>

@@ -32,14 +32,14 @@ export default function DetailItemCustomerList ({ ready, product }) {
         status && (
           <div style={{textAlign: "center"}}>
             <img className="check-state" src={checkState} alt="check" />
-            <button onClick={checked}>Uncheck</button>
+            <button onClick={checked}>Batal</button>
           </div>
         )
       }
       {
         !status && (
           <div style={{textAlign: "center"}}>
-            <button onClick={checked}>Check</button>
+            <button onClick={checked}>Pilih</button>
           </div>
         )
       }

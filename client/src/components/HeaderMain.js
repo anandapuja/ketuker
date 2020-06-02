@@ -51,7 +51,7 @@ export default function HeaderMain () {
         </Link>
         <div>
           <div onClick={ShowSignOut}>
-            <img style={{border: "none", borderRadius: 0, marginLeft: 10,}} src={logoutIcon} alt="logout" />
+            <img style={{border: "none", borderRadius: 0, marginLeft: 10, cursor: "pointer"}} src={logoutIcon} alt="logout" />
           </div>
         </div>
       </div>
