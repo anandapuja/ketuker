@@ -8,7 +8,11 @@
     "coverage": "jest --coverage --runInBand --detectOpenHandles",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "dev": "nodemon --exec npx babel-node src/index.js"
+    "dev": "nodemon --exec npx babel-node src/index.js",
+    "clean": "rm -rf build && mkdir build",
+    "build-babel": "babel -d ./build ./src -s",
+    "build": "npm run clean && npm run build-babel",
+    "start": "npm run build && node ./build/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +20,7 @@
     "apollo-server": "^2.14.0",
     "apollo-server-express": "^2.14.1",
     "bcrypt": "^4.0.1",
+    "core-js": "^3.6.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
@@ -23,7 +28,8 @@
     "ioredis": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.16",
-    "nodemailer": "^6.4.8"
+    "nodemailer": "^6.4.8",
+    "puppeteer": "^3.2.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.1",

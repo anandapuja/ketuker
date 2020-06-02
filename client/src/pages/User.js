@@ -7,7 +7,9 @@ import {
   UserDiajak,
   HeaderMain,
   Navigation,
-  LoadMoreButton
+  LoadMoreButton,
+  CompError,
+  CompLoading
 } from '../components';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_TRANSACTION_USER } from '../services/schema';
@@ -71,15 +73,17 @@ export default function User () {
   }
 
   if(loading) {
-    return <p>Loading</p>;
+    return <CompLoading></CompLoading>;
   }
 
   if(error) {
     console.log(error);
-    return <p>error ... </p>;
+    return <CompError></CompError>;
   }
 
   if (data) {
+    const { productByUser } = data;
+    console.log(productByUser);
     return (
       <>
         <HeaderMain />

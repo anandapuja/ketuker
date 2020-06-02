@@ -1,0 +1,117 @@
+.delete-page {
+    position: relative;
+    border: 3px solid #f1f1f1;
+    z-index: 1;
+    width: 300px;
+    height: auto;
+    background-color: #FFF;
+    box-shadow: 5px 10px #888888
+}
+
+.delete-flex {
+    display: flex;
+    flex-direction: column;
+}
+
+.delete-title {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 0px;
+    background-color: #F9BE06;
+}
+
+.delete-content {
+    font-size: 20px;
+    padding: 10px 10px;
+    text-align: center;
+}
+
+.delete-button button{
+    font-weight: bold;
+    border: solid grey;
+    border-width: 1px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.edit-page {
+    position: fixed;
+    border: 3px solid #f1f1f1;
+    z-index: 1;
+    width: 300px;
+    height: auto;
+    background-color: #FFF;
+    box-shadow: 5px 10px #888888
+}
+
+.edititem {
+    background-color: #FFF;
+    text-align: center;
+    padding: 20px 20px
+}
+
+.title-edititem {
+    color: grey;
+    font-size: 40px;
+    font-weight: 800;
+    margin-top: 20px
+}
+
+.flex-edititem {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.form-edititem {
+    display: inline-block;
+    margin: center auto;
+    text-align: center;
+    width: 500px;
+    height: 300px;
+}
+
+.input-edititem {
+    width: 400px;
+    height: 60px;
+    font-size: 20px;
+    text-align: center;
+    margin: 20px 20px;
+    border-radius: 10px;
+}
+
+.textarea-edititem {
+    font-family: inherit;
+    width: 400px;
+    text-align: left;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: none;
+    border-bottom: 1px solid rgb(114, 112, 112);
+    background-color: rgb(240, 240, 240);
+}
+
+.category-edititem {
+    padding: 20px;
+    width: 400px;
+    height: 60px;
+    margin-bottom: 20px;
+    border: none;
+    border-bottom: 1px solid rgb(114, 112, 112);
+    background-color: rgb(240, 240, 240);
+}
+
+.btn-edititem {
+    width : 400px;
+    height: 60px;
+    color: white;
+    background-color: grey;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.img-edititem {
+    width: 300px;
+    height: 300px;
+}

@@ -16,7 +16,8 @@ import {
   AddItem,
   DetailItemUser,
   DetailItemCustomer,
-  User
+  User, 
+  EditItem
 } from './pages';
 // import {
 //   HeaderMain,
@@ -30,18 +31,21 @@ function App () {
   return (
     <ApolloProvider client={ client }>
       <Router>
-        <Switch>
-          <Route exact path="/" component={ Home } />
-          <Route path="/register" component={ Register } />
-          <Route path="/login" component={ Login } />
-          <Route path="/category=:cat" component={ Category } />
-          <Route path="/additem" component={ AddItem} />
-          <Route path="/me/barang/:id" component={ DetailItemUser } />
-          <Route path="/barang/:id" component={ DetailItemCustomer } />
-          <Route path="/my-profile" component={ User } />
-          <Route exact path="/konfirmasi" component={ Confirmation } />
-          <Route path="/konfirmasi/:id" component={ Confirmation } />
-        </Switch>
+            <Route exact path="/" component={ Home } />
+            <Route path="/register" component={ Register } />
+            <Route path="/login" component={ Login } />
+            <Route path="/category=:cat" component={ Category } />
+            <Route path="/barang/:id" component={ DetailItemCustomer } />
+            {localStorage.getItem('token') && (
+              <>
+                <Route path="/additem" component={ AddItem} />
+                <Route path="/me/barang/:id" component={ DetailItemUser } />
+                <Route path="/my-profile" component={ User } />
+                <Route path="/edit/:id" component={ EditItem } />
+                <Route path="/konfirmasi" component={ Confirmation } />
+                <Route path="/konfirmasi/:id" component={ Confirmation } />
+              </>
+            )}
       </Router>
     </ApolloProvider>
   );

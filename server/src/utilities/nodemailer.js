@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 
-const sendEmail = async () => {
+const sendEmail = async (mail, sub, text) => {
   let mailTransporter = nodemailer.createTransport({
     service: 'gmail',
     secure: false,
@@ -16,13 +16,13 @@ const sendEmail = async () => {
 
   let mailDetails = {
     from: process.env.EMAIL,
-    to: 'almasfikri0@gmail.com',
-    subject: 'Test mail',
-    text: 'Ngetest doang hahaha',
+    to: mail,
+    subject: sub,
+    text: text,
   };
 
-  const check = await mailTransporter.sendMail(mailDetails);
-  console.log(check);
+  const isSuccess = await mailTransporter.sendMail(mailDetails);
+  console.log(isSuccess);
 };
 
 export default sendEmail;
