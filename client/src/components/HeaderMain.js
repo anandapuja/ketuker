@@ -24,7 +24,12 @@ export default function HeaderMain () {
   }
 
   function ToUploadBarang () {
-    history.push('/additem'); 
+    if(localStorage.getItem('token')){
+      history.push('/additem');
+    } else {
+      history.push('/login')
+    }
+     
   }
 
   return (
