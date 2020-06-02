@@ -1,0 +1,42 @@
+.modalSignOut {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px solid #f1f1f1;
+    z-index: 1;
+    width: 300px;
+    height: auto;
+    background-color: #FFF;
+    box-shadow: 5px 10px #888888
+}
+
+.SignOut-flex {
+    display: flex;
+    flex-direction: column;
+}
+
+.SignOut-title {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 0px;
+    background-color: #F9BE06;
+}
+
+.SignOut-content {
+    font-size: 20px;
+    padding: 10px 10px;
+    text-align: center;
+}
+
+.SignOut-button{
+    width: auto;
+    height :auto;
+    font-weight: bold;
+    border: solid grey;
+    border-width: 1px;
+    border-radius: 10px;
+    margin: 10px 10px;
+    padding: 10px 10px;
+}
