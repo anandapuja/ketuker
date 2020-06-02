@@ -27,7 +27,7 @@ export default function Confirmation () {
       <HeaderMain />
       <Navigation />
       <div className="confirmation-title">
-        <h1>KONFIRMASI TRANSAKSI</h1>
+        <h1>KONFIRMASI</h1>
       </div>
       <div className="confirmation-container">
         <div class="confirmation-container-half">
