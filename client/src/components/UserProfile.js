@@ -1,6 +1,7 @@
 import React from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
+import dummyImage from '../assets/images/avatar.png';
 
 const GET_USER = gql`
   query getUser($id: ID!) {
@@ -37,7 +38,7 @@ export default function UserProfile () {
     return (
       <div className="user-profile-first">
         <div className="user-profile-container-image">
-          <img src={ data.getUser.avatar } alt="avatar" />
+          <img src={ data.getUser.avatar === '' ? dummyImage : data.getUser.avatar } alt="avatar" />
         </div>
         <div className="user-profile-container-description">
           <h2>{data.getUser.username}</h2>

@@ -121,7 +121,15 @@ export default function DetailItemCustomer () {
               <h2>{uangRupiah}</h2>
               <p>{product.description}</p>
               <Link to={`/category=${product.category}`}><p style={{ marginTop:20 }}>Kategori: {product.category}</p></Link>
-              <button type="button" onClick={changeBarterStatus}>AJAK BARTERAN</button>
+              {
+                localStorage.getItem('token') ? (
+                  <button type="button" onClick={changeBarterStatus}>AJAK BARTERAN</button>
+                ) : (
+                  <Link to="/login">
+                    <button>AJAK BARTERAN</button>
+                  </Link>
+                )
+              }
             </div>
           </div>
           {

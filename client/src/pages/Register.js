@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { storage } from '../storage/firebase';
 import { HeaderSecond, NavigationSecond } from '../components';
@@ -27,6 +27,12 @@ function Register () {
     history.push('/login');
   }
 
+  useEffect(() => {
+    if(localStorage.getItem('token')){
+      history.push('/');
+    }
+  },[]);
+
   async function SubmitRegister (e) {
     e.preventDefault();
     if(
@@ -38,7 +44,7 @@ function Register () {
       setNotif ('passwords are not same');
       setAlertInput(true);
     } else if (password.length<=6) {
-      setNotif('password must have minimum 6 characters');
+      setNotif('password must have minimum 7 characters');
       setAlertInput(true);
     } else {
       let data = {

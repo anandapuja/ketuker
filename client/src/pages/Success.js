@@ -1,10 +1,17 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { HeaderMain, Navigation, CompLoading, CompError } from '../components';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_USER } from '../services/schema';
 
 export default function Success () {
+  const history = useHistory();
+  useEffect(() => {
+    if(!localStorage.getItem('token')){
+      history.push('/');
+    };
+  },[])
+
   const { loading, error, data } = useQuery(GET_USER, { variables: { id: localStorage.getItem('userOriginal') } });
 
   if(loading) {

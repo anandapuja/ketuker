@@ -31,6 +31,8 @@ export default function AddItem () {
   useEffect(() => {
     if(localStorage.getItem('token')){
       setLocalStatus(true);
+    } else {
+      history.push('/');
     }
   },[])
 

@@ -24,6 +24,11 @@ export default function EditItem () {
   const[ category, setCategory ] = useState('');
   const[ whislist, setWishlist ] = useState('');
 
+  useEffect(() => {
+    if(!localStorage.getItem('token')){
+      history.push('/');
+    };
+  },[])
 
   function handlePrice (e) {
     setPrice(Number(e.target.value));
