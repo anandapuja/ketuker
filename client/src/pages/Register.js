@@ -104,7 +104,7 @@ function Register () {
             <input onChange={(e)=>setPassword2(e.target.value)} type="password" placeholder='re-type your password' className="input-register"></input>
             <input onChange={(e)=>setPhone(e.target.value)} type="number" placeholder='phone' className="input-register"></input>
             <input onChange={(e)=>setAddress(e.target.value)} type="text" placeholder='address' className="input-register"></input>
-            <input onChange={(e)=>setCity(e.target.value)} type="text" placeholder='city/districk' className="input-register"></input>
+            <input onChange={(e)=>setCity(e.target.value)} type="text" placeholder='city/district' className="input-register"></input>
             <br></br>
             <button className="btn-register">Register</button>
           </form>
@@ -123,7 +123,7 @@ function Register () {
         </div>
 
         <div className="footer-register">Already have an account ? Sign In
-          <a onClick={ToLogin}> here</a>
+          <a href="#" onClick={ToLogin}> here</a>
         </div>
       </div>
       {alertInput && (

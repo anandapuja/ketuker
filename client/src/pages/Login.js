@@ -36,7 +36,7 @@ function Login () {
     if( password=== '') {
       setNotif ('password is blank');
       setAlertInput(true);
-    } else if ( (username ==='') || (email==='')) {
+    } else if ( (username ==='') && (email==='')) {
       setNotif ('username or email is blank');
       setAlertInput(true);
     } else {
@@ -67,8 +67,8 @@ function Login () {
     <>
       <HeaderSecond />
       <NavigationSecond />
-      <div className="register">
-        <h3 className="title-register">SIGN IN</h3>
+      <div className="login">
+        <h3 className="title-login">SIGN IN</h3>
         <div className="div-form">
           <form onSubmit={SubmitLogin} className="form-login">
             <input onChange={onHandleLogin} 

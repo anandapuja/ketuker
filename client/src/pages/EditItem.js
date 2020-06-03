@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import '../additem.css';
 import { storage } from '../storage/firebase';
-import { HeaderSecond, NavigationSecond } from '../components';
+import { HeaderSecond, NavigationSecond, CompError, CompLoading } from '../components';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 // check query for submit edit
 import { GET_PRODUCT_DETAIL, updateProduct } from '../services/schema';
@@ -93,11 +93,11 @@ export default function EditItem () {
   
   
   if(error) {
-    return <div>Error ...</div>;
+    return <CompError />;
   }
 
   if(loading) {
-    return <div>Loading...</div>;
+    return <CompLoading />;
   }
 
   if (data) {     
@@ -110,11 +110,11 @@ export default function EditItem () {
           <div className="flex-edititem">
             <form onSubmit={SubmitEdit} className="form-edititem">
               <input onChange={(e)=>setTitle(e.target.value)} value = {title}
-                type="text" className="input-register"></input>
+                type="text" placeholder="Title" className="input-edititem"></input>
               <textarea onChange={(e)=>setDescription(e.target.value)} value = {description}
                 type="textarea" placeholder="Deskripsi" rows={5} className="textarea-edititem"></textarea>
               <input onChange={handlePrice} 
-                type="text" placeholder="Harga" value={price} className="input-register"></input>
+                type="text" placeholder="Harga" value={price} className="input-edititem"></input>
               <select onChange={(e)=>setCategory(e.target.value)} className="category-edititem" value={category}>
                 <option disabled >Category</option>
                 <option value="automotive" >Automotive</option>
@@ -125,9 +125,9 @@ export default function EditItem () {
                 <option value="household" >Household</option>
               </select>
               <input onChange={(e)=>setWishlist(e.target.value)} value={whislist}
-                type="text" placeholder="Barang apa yang kamu cari?" className="input-register"
+                type="text" placeholder="Barang apa yang kamu cari?" className="input-edititem"
               ></input>
-              <button className="btn-register">SUBMIT</button>
+              <button className="btn-edititem">SUBMIT</button>
             </form>
           
             <div>
@@ -139,8 +139,8 @@ export default function EditItem () {
                   className="input-upload"
                 />
                 <button type="submit" className="btn-upload">Upload</button>
-                {(image!=='') && <img src={image} alt="picture" className="img-edititem"></img> }
               </form>
+              {(image!=='') && <img src={image} alt="picture" className="img-edititem"></img> }
             </div>     
           </div>
         </div>

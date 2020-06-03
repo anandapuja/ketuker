@@ -43,7 +43,7 @@ export default function AddItem () {
 
   async function SubmitCreate (e) {
     e.preventDefault();
-    let harga1 = price.replace('Rp.','');
+    let harga1 = price.replace('IDR','');
     let harga2 = harga1.replace(/[^\w\s]/gi,'');
     let priceNum = Number(harga2);
     if((title === '') || (category === '') ) {
@@ -112,7 +112,7 @@ export default function AddItem () {
     }
    
     rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
-    return prefix === undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+    return prefix === undefined ? rupiah : (rupiah ? 'IDR ' + rupiah : '');
   }
     
 
@@ -121,15 +121,15 @@ export default function AddItem () {
       <HeaderSecond />
       <NavigationSecond />
       <div className="additem">
-        <div className="title-register">UPLOAD BARANG</div>
+        <div className="title-additem">UPLOAD BARANG</div>
         <div className="flex-additem">
           <form onSubmit={SubmitCreate} className="form-additem">
             <input onChange={handleTitle} onBlur={findPrice}
-              type="text" placeholder="Nama Barang" className="input-register"></input>
+              type="text" placeholder="Nama Barang" className="input-additem"></input>
             <textarea onChange={(e)=>setDescription(e.target.value)} 
-              type="textarea" placeholder="Deskripsi" rows={5} className="textarea-additem"></textarea>
+              type="textarea" placeholder="Deskripsi" rows={8} className="textarea-additem"></textarea>
             <input onChange={handlePrice} 
-              type="text" placeholder="Harga" value={price} className="input-register"></input>
+              type="text" placeholder="Harga" value={price} className="input-additem"></input>
             <select onChange={(e)=>setCategory(e.target.value)} className="category-additem">
               <option disabled selected value >Category</option>
               <option value="automotive">Automotive</option>
@@ -140,14 +140,14 @@ export default function AddItem () {
               <option value="household">Household</option>
             </select>
             <input onChange={(e)=>setWishlist(e.target.value)} 
-              type="text" placeholder="Barang apa yang kamu cari?" className="input-register"></input>
-            <button className="btn-register">SUBMIT</button>
+              type="text" placeholder="Barang apa yang kamu cari?" className="input-additem"></input>
+            <button className="btn-additem">SUBMIT</button>
             {/* <Link to="/"><button className="btn-register">BACK</button></Link> */}
           </form>
      
           <div>
             <form onSubmit={handleFireBaseUpload} className="form-upload">
-              <h4 className="title-upload-register">Upload gambar di sini.</h4>
+              <h4 className="title-upload">Upload gambar di sini.</h4>
               <input
                 type="file"
                 onChange={handleImageAsFile}
@@ -175,7 +175,7 @@ export default function AddItem () {
               </div>
             </div>
             {(image!=='') && <img src={image} alt="picture" className="img-additem"></img> }
-            <Link to="/"><button className="btn-register">CANCEL</button></Link>
+            {/* <Link to="/"><button className="btn-register">CANCEL</button></Link> */}
           </div>
         </div>
       </div>
