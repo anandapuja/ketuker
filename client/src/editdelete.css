@@ -18,7 +18,8 @@
     font-weight: bold;
     text-align: center;
     padding: 10px 0px;
-    background-color: #F9BE06;
+    background-color: black;
+    color: white;
 }
 
 .delete-content {
@@ -35,24 +36,16 @@
     margin-bottom: 10px;
 }
 
-.edit-page {
-    position: fixed;
-    border: 3px solid #f1f1f1;
-    z-index: 1;
-    width: 300px;
-    height: auto;
-    background-color: #FFF;
-    box-shadow: 5px 10px #888888
-}
-
 .edititem {
-    background-color: #FFF;
+    background-color: white;
     text-align: center;
-    padding: 20px 20px
+    padding: 20px 20px;
+    max-width: 1000px;
+    margin: 40px auto;
+    color: black;
 }
 
 .title-edititem {
-    color: grey;
     font-size: 40px;
     font-weight: 800;
     margin-top: 20px
@@ -61,57 +54,62 @@
 .flex-edititem {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .form-edititem {
-    display: inline-block;
-    margin: center auto;
-    text-align: center;
-    width: 500px;
-    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 10px 10px;
+    width: 400px;
 }
 
 .input-edititem {
-    width: 400px;
-    height: 60px;
-    font-size: 20px;
-    text-align: center;
-    margin: 20px 20px;
-    border-radius: 10px;
+    outline: 0;
+    border-width: 0 0 1px;
+    border-color: black;
+    background-color: rgb(240, 240, 240);
+    font-size: 18px;
+    margin-top: 20px;
+    padding: 10px
 }
 
 .textarea-edititem {
-    font-family: inherit;
-    width: 400px;
-    text-align: left;
-    margin-bottom: 20px;
-    padding: 20px;
-    border: none;
-    border-bottom: 1px solid rgb(114, 112, 112);
+    outline: 0;
+    border-width: 0 0 1px;
+    border-color: black;
     background-color: rgb(240, 240, 240);
+    font-size: 18px;
+    margin-top: 20px;
+    padding: 10px
 }
 
 .category-edititem {
-    padding: 20px;
-    width: 400px;
-    height: 60px;
-    margin-bottom: 20px;
-    border: none;
-    border-bottom: 1px solid rgb(114, 112, 112);
+    outline: 0;
+    border-width: 0 0 1px;
+    border-color: black;
     background-color: rgb(240, 240, 240);
+    font-size: 18px;
+    margin-top: 20px;
+    padding: 20px;
+    height: 40px
 }
 
 .btn-edititem {
-    width : 400px;
     height: 60px;
     color: white;
-    background-color: grey;
-    border-radius: 10px;
-    font-weight: bold;
+    background-color: black;
+    transition: 0.3s;
+    font-size: 24px;
+    margin-top: 20px;
+    transition: 0.3s
 }
 
 .img-edititem {
-    width: 300px;
-    height: 300px;
+    max-width: 200px;
+    max-height: 200px;
+    margin: 20px 20px;
+    padding: 10px 10px;
+    border: solid rgb(29, 29, 29);
 }

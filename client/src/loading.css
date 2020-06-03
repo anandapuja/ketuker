@@ -21,8 +21,8 @@ body {
 .loader {
     width: calc(100% - 0px);
     height: calc(100% - 0px);
-    border: 8px solid #F98A06;
-    border-top: 8px solid #5415CE;
+    border: 8px solid rgb(54, 54, 54);
+    border-top: 8px solid rgb(165, 165, 165);
     border-radius: 50%;
     animation: rotate 5s linear infinite;
 }

@@ -26,6 +26,13 @@ export default function AddItem () {
   const [ alertInput, setAlertInput ] = useState(false);
   const [ finalTitle, setFinalTitle ] = useState(null);
   const { loading, error, data } = useQuery(scrapPrice, { variables: { item: finalTitle } });
+  const [localStatus, setLocalStatus] = useState(false);
+
+  useEffect(() => {
+    if(localStorage.getItem('token')){
+      setLocalStatus(true);
+    }
+  },[])
 
   const findPrice = () => {
     setFinalTitle(title);
@@ -43,7 +50,7 @@ export default function AddItem () {
 
   async function SubmitCreate (e) {
     e.preventDefault();
-    let harga1 = price.replace('Rp.','');
+    let harga1 = price.replace('IDR','');
     let harga2 = harga1.replace(/[^\w\s]/gi,'');
     let priceNum = Number(harga2);
     if((title === '') || (category === '') ) {
@@ -112,84 +119,90 @@ export default function AddItem () {
     }
    
     rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
-    return prefix === undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+    return prefix === undefined ? rupiah : (rupiah ? 'IDR ' + rupiah : '');
   }
     
 
   return (
     <>
-      <HeaderSecond />
-      <NavigationSecond />
-      <div className="additem">
-        <div className="title-register">UPLOAD BARANG</div>
-        <div className="flex-additem">
-          <form onSubmit={SubmitCreate} className="form-additem">
-            <input onChange={handleTitle} onBlur={findPrice}
-              type="text" placeholder="Nama Barang" className="input-register"></input>
-            <textarea onChange={(e)=>setDescription(e.target.value)} 
-              type="textarea" placeholder="Deskripsi" rows={5} className="textarea-additem"></textarea>
-            <input onChange={handlePrice} 
-              type="text" placeholder="Harga" value={price} className="input-register"></input>
-            <select onChange={(e)=>setCategory(e.target.value)} className="category-additem">
-              <option disabled selected value >Category</option>
-              <option value="automotive">Automotive</option>
-              <option value="property">Property</option>
-              <option value="fashion">Fashion</option>
-              <option value="gadget">Gadget</option>
-              <option value="hobby">Hobby</option>
-              <option value="household">Household</option>
-            </select>
-            <input onChange={(e)=>setWishlist(e.target.value)} 
-              type="text" placeholder="Barang apa yang kamu cari?" className="input-register"></input>
-            <button className="btn-register">SUBMIT</button>
-            {/* <Link to="/"><button className="btn-register">BACK</button></Link> */}
-          </form>
-     
-          <div>
-            <form onSubmit={handleFireBaseUpload} className="form-upload">
-              <h4 className="title-upload-register">Upload gambar di sini.</h4>
-              <input
-                type="file"
-                onChange={handleImageAsFile}
-                className="input-upload"
-                accept="image/x-png,image/jpeg"
-              />
-              <button type="submit" className="btn-upload">Upload</button>
+    {
+      localStatus && (
+        <>
+        <HeaderSecond />
+        <NavigationSecond />
+        <div className="additem">
+          <div className="title-additem">UPLOAD BARANG</div>
+          <div className="flex-additem">
+            <form onSubmit={SubmitCreate} className="form-additem">
+              <input onChange={handleTitle} onBlur={findPrice}
+                type="text" placeholder="Nama Barang" className="input-additem"></input>
+              <textarea onChange={(e)=>setDescription(e.target.value)} 
+                type="textarea" placeholder="Deskripsi" rows={8} className="textarea-additem"></textarea>
+              <input onChange={handlePrice} 
+                type="text" placeholder="Harga" value={price} className="input-additem"></input>
+              <select onChange={(e)=>setCategory(e.target.value)} className="category-additem">
+                <option disabled selected value>Category</option>
+                <option value="automotive">Automotive</option>
+                <option value="property">Property</option>
+                <option value="fashion">Fashion</option>
+                <option value="gadget">Gadget</option>
+                <option value="hobby">Hobby</option>
+                <option value="household">Household</option>
+              </select>
+              <input onChange={(e)=>setWishlist(e.target.value)} 
+                type="text" placeholder="Barang apa yang kamu cari?" className="input-additem"></input>
+              <button className="btn-additem">SUBMIT</button>
+              {/* <Link to="/"><button className="btn-register">BACK</button></Link> */}
             </form>
-            <div className="suggestion-additem">
-              <h4>Suggestion Price</h4>
-              <div>
-                {data ? 
-                  <>
-                    {data.getScrap.items.map((item, idx) => (
-                      <>
-                        <div key={'a' + idx}>{item.title}</div>
-                        <div key={'b' + idx}>{item.price}</div>
-                      </>
-                    ))}
-                    <div><b>{data.getScrap.average}</b></div>
-                  </>
-                  : null
-                }
-                <hr></hr>
+      
+            <div>
+              <form onSubmit={handleFireBaseUpload} className="form-upload">
+                <h4 className="title-upload">Upload gambar di sini.</h4>
+                <input
+                  type="file"
+                  onChange={handleImageAsFile}
+                  className="input-upload"
+                  accept="image/x-png,image/jpeg"
+                />
+                <button type="submit" className="btn-upload">Upload</button>
+              </form>
+              <div className="suggestion-additem">
+                <h4>Suggestion Price</h4>
+                <div>
+                  {data ? 
+                    <>
+                      {data.getScrap.items.map((item, idx) => (
+                        <>
+                          <div key={'a' + idx}>{item.title}</div>
+                          <div key={'b' + idx}>{item.price}</div>
+                        </>
+                      ))}
+                      <div><b>{data.getScrap.average}</b></div>
+                    </>
+                    : null
+                  }
+                  <hr></hr>
+                </div>
+              </div>
+              {(image!=='') && <img src={image} alt="picture" className="img-additem"></img> }
+              {/* <Link to="/"><button className="btn-register">CANCEL</button></Link> */}
+            </div>
+          </div>
+        </div>
+        </>
+      )
+    }
+        {alertInput && (
+          <div className="modalAlert">
+            <div className="Alert-flex">
+              <div className="Alert-title">ALERT</div>
+              <div className="Alert-content">Notification: {notif}</div>
+              <div >
+                <button onClick={()=>setAlertInput(false)} className="Alert-button">OK</button>
               </div>
             </div>
-            {(image!=='') && <img src={image} alt="picture" className="img-additem"></img> }
-            <Link to="/"><button className="btn-register">CANCEL</button></Link>
           </div>
-        </div>
-      </div>
-      {alertInput && (
-        <div className="modalAlert">
-          <div className="Alert-flex">
-            <div className="Alert-title">ALERT</div>
-            <div className="Alert-content">Notification: {notif}</div>
-            <div >
-              <button onClick={()=>setAlertInput(false)} className="Alert-button">OK</button>
-            </div>
-          </div>
-        </div>
-      )}
+        )}
     </>
   );
 }

@@ -5,6 +5,9 @@ import { Link, useHistory } from 'react-router-dom';
 import logoutIcon from '../assets/images/logout.png';
 import faqIcon from '../assets/images/faq.jpg';
 import alertify from 'alertifyjs';
+import logoBw from '../assets/images/logo-bw.png';
+import logoBwInvert from '../assets/images/logo-bw-invert.png';
+import logoutIconRound from '../assets/images/logout-round.png';
 
 export default function HeaderMain () {
 
@@ -19,6 +22,7 @@ export default function HeaderMain () {
   function ConfirmSignOut () {
     localStorage.clear();
     alertify.notify('LOGOUT SUCCESS', 'success', 5, function () { console.log('dismissed'); });
+    setShowOut(false);
     history.push('/');
   }
 
@@ -39,14 +43,16 @@ export default function HeaderMain () {
     <div className="header-container">
       <Link to="/">
         <div className="logo-container">
-          <img src={logo} alt="logo" />
+          <img src={logoBwInvert} alt="logo" />
         </div>
       </Link>
       <div className="header-search-container">
         <input type="text" placeholder="cari barang lalu tekan enter" />
       </div>
       <div className="header-user-container">
-        <button onClick={ToUploadBarang}>Upload Barang</button>
+      <Link to={ localStorage.getItem('token') ? '/additem' : '/login' }>
+        <button>UPLOAD BARANG</button>
+      </Link>
         <Link to={ localStorage.getItem('token') ? '/my-profile' : '/login' }>
           <img src={avatar} alt="avatar" />
         </Link>
@@ -59,7 +65,7 @@ export default function HeaderMain () {
          
           {localStorage.getItem('token') && (
             <div onClick={ShowSignOut}>
-              <img style={{ border: 'none', borderRadius: 0, marginLeft: 10, }} src={logoutIcon} alt="logout" />
+              <img style={{ border: 'none', borderRadius: 0, marginLeft: 10, cursor: "pointer" }} src={logoutIconRound} alt="logout" />
             </div>
           )}
           
@@ -70,7 +76,7 @@ export default function HeaderMain () {
           <div className="SignOut-flex">
             <div className="SignOut-title">Sign Out Confirmation</div>
             <div className="SignOut-content">Are you sure to sign out ?</div>
-            <div >
+            <div style={{display:"flex", justifyContent: "space-around"}} >
               <button onClick={ConfirmSignOut} className="SignOut-button">CONFIRM</button>
               <button onClick={CancelSignOut} className="SignOut-button">CANCEL</button>
             </div>

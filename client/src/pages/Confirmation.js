@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { HeaderMain, Navigation } from '../components';
+import { HeaderMain, Navigation, CompError, CompLoading } from '../components';
 import ConfirmationItem from '../components/ConfirmationItem';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { TRANSACTION, GET_TRANSACTION_BYID, updateTransaction, deleteTransaction } from '../services/schema';
@@ -46,14 +46,27 @@ export default function Confirmation () {
   }
 
   if (loading) {
-    return <p>loading</p>;
+    return <CompLoading />;
+  }
+
+  if (error) {
+    if(!localStorage.getItem('user_id')) {
+      history.push('/')
+    }
+    return <CompError />
   }
  
-  if (data || error) {
-    console.log(data);
-    if (data.transactionById && !search) {
-      if (data.transactionById.status) history.push('/sukses?status=selesai');
+  if (data) {
+    if(data) {
+      if (data.transactionById && !search) {
+        if (data.transactionById.status) history.push('/sukses?status=selesai');
+      }
+      if (data.transactionById && search) {
+        if (data.transactionById.status) history.push('/sukses?status=selesai');
+      }
+
     }
+
     return (
       <>
         <HeaderMain />

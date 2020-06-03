@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '../assets/images/logo.png';
 import { Link } from 'react-router-dom';
+import logoBwInvert from '../assets/images/logo-bw-invert.png';
 
 export default function HeaderSecond () {
   return (
@@ -8,7 +9,7 @@ export default function HeaderSecond () {
       {/* <div className="arrow-header-left"></div> */}
       <Link to="/">
         <div className="logo-container">
-          <img src={logo} alt="logo" />
+          <img src={logoBwInvert} alt="logo" />
         </div>
       </Link>
     </div>

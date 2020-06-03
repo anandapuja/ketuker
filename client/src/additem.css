@@ -1,11 +1,13 @@
 .additem {
-    background-color: #FFF;
+    background-color: white;
     text-align: center;
-    padding: 20px 20px
+    padding: 20px 20px;
+    max-width: 1000px;
+    margin: 40px auto;
+    color: black;
 }
 
 .title-additem {
-    color: grey;
     font-size: 40px;
     font-weight: 800;
     margin-top: 20px
@@ -14,94 +16,97 @@
 .flex-additem {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .form-additem {
-    display: inline-block;
-    margin: center auto;
-    text-align: center;
-    width: 500px;
-    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 10px 10px;
+    width: 400px;
 }
 
 .input-additem {
-    width: 400px;
-    height: 60px;
-    font-size: 20px;
-    text-align: center;
-    margin: 20px 20px;
-    border-radius: 10px;
+    outline: 0;
+    border-width: 0 0 1px;
+    border-color: black;
+    background-color: rgb(240, 240, 240);
+    font-size: 18px;
+    margin-top: 20px;
+    padding: 10px
 }
 
 .textarea-additem {
-    /* width: 400px;
-    font-size: 20px;
-    text-align: center;
-    margin: 20px 20px;
-    border-radius: 10px;
- */
-    font-family: inherit;
-    width: 400px;
-    text-align: left;
-    margin-bottom: 20px;
-    padding: 20px;
-    border: none;
-    border-bottom: 1px solid rgb(114, 112, 112);
+    outline: 0;
+    border-width: 0 0 1px;
+    border-color: black;
     background-color: rgb(240, 240, 240);
+    font-size: 18px;
+    margin-top: 20px;
+    padding: 10px
 }
 
 .category-additem {
-    padding: 20px;
-    width: 400px;
-    height: 60px;
-    margin-bottom: 20px;
-    border: none;
-    border-bottom: 1px solid rgb(114, 112, 112);
+    outline: 0;
+    color: black;
+    border-width: 0 0 1px;
+    border-color: black;
     background-color: rgb(240, 240, 240);
-    color: grey;
+    font-size: 18px;
+    margin-top: 20px;
+    padding: 20px;
+    height: 40px
 }
 
 .btn-additem {
-    width : 400px;
     height: 60px;
     color: white;
-    background-color: grey;
-    border-radius: 10px;
-    font-weight: bold;
+    background-color: black;
+    transition: 0.3s;
+    font-size: 24px;
+    margin-top: 20px;
+    transition: 0.3s
 }
 
 button:hover {
-    background-color: silver;
+    background-color: white;
+    border: solid black;
+    color: black;
 }
 
 .form-upload {
-    display: inline-block;
     text-align: center;
-    width: 400px;
+    margin: 10px 10px;
 }
 
 .title-upload {
-    color: black;
-    margin: 5px 0px
+    color: white;
+    background-color:  #595959;
+    padding: 20px;
+    margin-bottom: 30px;
 }
 
 .input-upload {
     width: 300px;
-    height : 50px;
+    font-size: 20px;
 }
 
 .btn-upload {
-    padding: 10px 20px;
+    padding: 10px 10px;
+    font-size: 15px;
     border: none;
-    background-color: grey;
+    background-color: black;
     color: white
 }
 
+.btn-upload:hover {
+    background-color: white;
+    border: solid black;
+    color: black;
+}
+
 .img-additem {
-    position: fixed;
-    right: 0px;
-    top: 30%;
     max-width: 200px;
     max-height: 200px;
     margin: 20px 20px;
@@ -113,11 +118,14 @@ button:hover {
     width: 400px;
     height: 220px;
     overflow: scroll;
-    margin-bottom: 25px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     border: none;
     border-bottom: 1px solid rgb(114, 112, 112);
     background-color: rgb(240, 240, 240);
     padding: 20px;
+    color: black;
+    text-align: left;
 }
 .suggestion-additem h4{
     text-align: left;

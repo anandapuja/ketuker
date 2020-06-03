@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { storage } from '../storage/firebase';
-import { HeaderSecond } from '../components';
+import { HeaderSecond, NavigationSecond } from '../components';
 import { useMutation } from '@apollo/react-hooks';
 import { CREATE_ACCOUNT } from '../services/schema';
 import alertify from 'alertifyjs';
@@ -56,7 +56,7 @@ function Register () {
       localStorage.setItem('token', token); //dummy token
       localStorage.setItem('user_id', _id);
       localStorage.setItem('username', username);
-      alertify.notify('SUCCESS REGISTER', 'success', 5, function () { console.log('dismissed'); });
+      alertify.notify('SUCCESS REGISTER', 'dark', 5, function () { console.log('dismissed'); });
       history.push('/');
     }
   }
@@ -94,6 +94,7 @@ function Register () {
   return (
     <>
       <HeaderSecond />
+      <NavigationSecond />
       <div className="register">
         <h3 className="title-register">CREATE ACCOUNT</h3>
         <div className="div-register">
@@ -104,9 +105,9 @@ function Register () {
             <input onChange={(e)=>setPassword2(e.target.value)} type="password" placeholder='re-type your password' className="input-register"></input>
             <input onChange={(e)=>setPhone(e.target.value)} type="number" placeholder='phone' className="input-register"></input>
             <input onChange={(e)=>setAddress(e.target.value)} type="text" placeholder='address' className="input-register"></input>
-            <input onChange={(e)=>setCity(e.target.value)} type="text" placeholder='city/districk' className="input-register"></input>
+            <input onChange={(e)=>setCity(e.target.value)} type="text" placeholder='city/district' className="input-register"></input>
             <br></br>
-            <button className="btn-register">Register</button>
+            <button className="btn-register">REGISTER</button>
           </form>
 
           <form onSubmit={handleFireBaseUpload} className="form-upload-register">
@@ -123,7 +124,7 @@ function Register () {
         </div>
 
         <div className="footer-register">Already have an account ? Sign In
-          <a onClick={ToLogin}> here</a>
+          <a href="#" onClick={ToLogin}> here</a>
         </div>
       </div>
       {alertInput && (
