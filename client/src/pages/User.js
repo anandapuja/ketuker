@@ -115,7 +115,7 @@ export default function User () {
             <div className="user-mengajak-container">
               {data.transactionByOriginal.map(product => (
                 <Link to={'/konfirmasi/' + product._id} onClick={setUserId(product, 'mengajak')} key={product._id}>
-                  <UserMengajak product={product.productTarget} />
+                  <UserMengajak product={product.productTarget} status={data.transactionByOriginal.status}/>
                 </Link>
               ))}
             </div>

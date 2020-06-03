@@ -36,7 +36,7 @@ function Login () {
     if( password=== '') {
       setNotif ('password is blank');
       setAlertInput(true);
-    } else if ( (username ==='') || (email==='')) {
+    } else if ( null ) {
       setNotif ('username or email is blank');
       setAlertInput(true);
     } else {
