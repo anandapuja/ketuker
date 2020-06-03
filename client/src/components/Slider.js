@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import slide1 from '../assets/images/slide-1-01-01.jpg';
-import slide2 from '../assets/images/slide-2-01-01.jpg';
+import slide1 from '../assets/images/slide-1-01.jpg';
+import slide2 from '../assets/images/slide-2-01.jpg';
 // import './puja-style.css';
 
 class SliderApp extends Component {

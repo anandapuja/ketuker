@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 
 export default function LoadMoreButton ({ page }) {
   return (
-    <div className="home-load-more">
-      <button onClick={page}>Load more ...</button>
+    <div className="centerButton">
+      <div className="button">
+        <a onClick={page}><span>
+          Load more ..
+        </span></a>
+      </div>
     </div>
   );
 }

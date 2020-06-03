@@ -63,7 +63,8 @@ export default function UserBarang ({ product }) {
   },[]);
 
   return (
-    <div className="product-item-list-container">
+    <>
+    {/* <div className="product-item-list-container">
       <div className="product-item-list-image">
         <img src={product.image} alt="item" />
         <div className="product-item-list-action-img">
@@ -93,7 +94,51 @@ export default function UserBarang ({ product }) {
         <p className="product-item-list-price">{uangRupiah}</p>
       </div>
       <p className="product-item-list-title">{product.title}</p>
+    </div> */}
+
+    <div class="aneh">
+        <div class="container" style={{background: `url(${product.image })`, backgroundSize: 'contain'}}>
+        <div class="overlay">
+          <div class = "items"></div>
+          <div class = "items head">
+            <p>{product.title}</p>
+            <hr/>
+          </div>
+          <div class = "items price">
+            <p class="new">{uangRupiah}</p>
+          </div>
+          <div class="items cart">
+            {pageDelete ? (
+              <div className="delete-page">
+                <div className="delete-flex">
+                  <div className="delete-title">Delete Confirmation</div>
+                  <div className="delete-content">Are you sure to delete this product ?</div>
+                  <div className="delete-button">
+                    <button onClick={ConfirmDelete}>CONFIRM</button>
+                    <button onClick={CancelDelete}>CANCEL</button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              // <div onClick={()=>ShowDelete(product._id)}>
+              //   <img src={deleteIcon} alt="delete" />
+              // </div>
+              <div style={{marginLeft: '10px'}} onClick={()=>ShowDelete(product._id)}>
+                <i class="fas fa-trash" ></i>
+                <span>Delete</span>
+              </div>
+            )
+            }
+            <div style={{marginLeft: '10px'}} onClick={()=>ShowEdit(product._id)}>
+              <i class="fas fa-edit" ></i>
+              <span>Edit</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    </>
   );
 }
 

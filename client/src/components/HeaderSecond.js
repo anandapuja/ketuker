@@ -9,7 +9,7 @@ export default function HeaderSecond () {
       {/* <div className="arrow-header-left"></div> */}
       <Link to="/">
         <div className="logo-container">
-          <img src={logoBwInvert} alt="logo" />
+          <img src={logo} alt="logo" />
         </div>
       </Link>
     </div>

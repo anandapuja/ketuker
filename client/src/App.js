@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import './style.scss';
 import { ApolloProvider } from '@apollo/react-hooks';
 import client from './services/graphql';
 import {

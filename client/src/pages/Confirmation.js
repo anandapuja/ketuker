@@ -126,7 +126,11 @@ export default function Confirmation () {
         </div>
         { !id &&
           <div className="confirmation-button">
-            <button onClick={deal} >KIRIM PERMINTAAN BARTER</button>
+            <div className="button">
+              <a onClick={deal}><span>
+                KIRIM PERMINTAAN BARTER
+              </span></a>
+            </div>
           </div>
         }
         {
