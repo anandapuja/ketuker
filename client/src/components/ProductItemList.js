@@ -47,8 +47,10 @@ export default function ProductItemList ({ product }) {
 
   // if(userData) {
   //   const { getUser: { city } } = userData; 
+  console.log(product)
   return (
-    <div className="product-item-list-container">
+    <>
+    {/* <div className="product-item-list-container">
       <div className="product-item-list-image">
         <img src={product.image ? product.image : dummyImage} alt="item" />
         <p className="product-item-list-price">{uangRupiah  }</p>
@@ -56,8 +58,30 @@ export default function ProductItemList ({ product }) {
       <Link to={ '/barang/' + product._id } >
         <p className="product-item-list-title">{ product.title }</p>
       </Link>
-      {/* <p className="product-item-list-location">Lokasi: {product.city}</p> */}
-    </div>
+    </div> */}
+    
+      <div class="aneh">
+          <Link to={ '/barang/' + product._id } >
+        <div class="container" style={{background: `url(${product.image ? product.image : dummyImage})`, backgroundSize: 'contain'}}>
+        <div class="overlay">
+          <div class = "items"></div>
+          <div class = "items head">
+            <p>{product.title}</p>
+            <hr/>
+          </div>
+          <div class = "items price">
+            <p class="new">{uangRupiah}</p>
+            {/* <p class="new">{}</p> */}
+          </div>
+          <div class="items cart">
+            <i class="fa fa-shopping-cart"></i>
+            <span>Ajak Barter</span>
+          </div>
+      </div>
+      </div>
+          </Link>
+      </div>
+    </>
   );
 }
 ProductItemList.propTypes = {

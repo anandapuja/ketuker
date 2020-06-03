@@ -63,7 +63,8 @@ export default function UserBarang ({ product }) {
   },[]);
 
   return (
-    <div className="product-item-list-container">
+    <>
+    {/* <div className="product-item-list-container">
       <div className="product-item-list-image">
         <img src={product.image} alt="item" />
         <div className="product-item-list-action-img">
@@ -93,7 +94,29 @@ export default function UserBarang ({ product }) {
         <p className="product-item-list-price">{uangRupiah}</p>
       </div>
       <p className="product-item-list-title">{product.title}</p>
+    </div> */}
+    <div class="aneh">
+          {/* <Link to={ '/barang/' + product._id } > */}
+        <div class="container" style={{background: `url(${product.image })`, backgroundSize: 'contain'}}>
+        <div class="overlay">
+          <div class = "items"></div>
+          <div class = "items head">
+            <p>{product.title}</p>
+            <hr/>
+          </div>
+          <div class = "items price">
+            <p class="new">{uangRupiah}</p>
+            {/* <p class="new">{}</p> */}
+          </div>
+          <div class="items cart">
+            <i class="fa fa-shopping-cart"></i>
+            <span>Ajak Barter</span>
+          </div>
+        </div>
+      </div>
+          {/* </Link> */}
     </div>
+    </>
   );
 }
 

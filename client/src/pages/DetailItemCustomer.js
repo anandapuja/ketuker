@@ -4,6 +4,7 @@ import { DetailItemCustomerList, HeaderMain, Navigation, CompError,
 import { Link, useParams, useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_PRODUCT_USER_AND_DETAIL } from '../services/schema';
+import DetailOptions from '../components/Options';
 
 export default function DetailItemCustomer () {
   const history = useHistory();
@@ -132,14 +133,18 @@ export default function DetailItemCustomer () {
               }
             </div>
           </div>
+
           {
             barterStatus ? (
               <div className="detail-item-user-second">
                 <h1>PILIH BARANGMU</h1>
                 <div className="detail-item-customer-list">
-                  { productByUser.map(product => (
-                    <DetailItemCustomerList ready={readyToExchange} product={product} key={product._id} />
-                  ))}
+                  <div className="taek">
+                    { productByUser.map(product => (
+                      // <DetailItemCustomerList ready={readyToExchange} product={product} key={product._id} />
+                      <DetailOptions ready={readyToExchange} product={product} key={product._id} />
+                    ))}
+                  </div>
                 </div>
               </div>      
             ) : (
