@@ -77,13 +77,14 @@ export default function User () {
   }
 
   if(error) {
-    console.log(error);
+    if(!localStorage.getItem('user_id')) {
+      history.push('/')
+    }
     return <CompError></CompError>;
   }
 
   if (data) {
     const { productByUser } = data;
-    console.log(productByUser);
     return (
       <>
         <HeaderMain />
@@ -115,7 +116,7 @@ export default function User () {
             <div className="user-mengajak-container">
               {data.transactionByOriginal.map(product => (
                 <Link to={'/konfirmasi/' + product._id} onClick={setUserId(product, 'mengajak')} key={product._id}>
-                  <UserMengajak product={product.productTarget} />
+                  <UserMengajak product={product.productTarget} status={product.status}/>
                 </Link>
               ))}
             </div>

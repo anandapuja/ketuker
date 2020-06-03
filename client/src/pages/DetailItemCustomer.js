@@ -10,7 +10,8 @@ export default function DetailItemCustomer () {
   const { id } = useParams();
   const [ barterStatus, setBarterStatus ] = useState(false);
   const [ readyExchange, setReadyExchange ] = useState(false);
-  const { loading, error, data } = useQuery(GET_PRODUCT_USER_AND_DETAIL, { variables: { userId: localStorage.getItem('user_id'), id } });
+  const { loading, error, data } = useQuery(GET_PRODUCT_USER_AND_DETAIL, { variables: { 
+    userId: localStorage.getItem('user_id') ? localStorage.getItem('user_id') : 'def3', id } });
   const [ productOriginal, setProductOriginal ] = useState([]);
   const [ productTarget, setProductTarget ] = useState([]);
   // const [uangRupiah, setUangRupiah] = useState('')
