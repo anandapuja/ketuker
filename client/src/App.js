@@ -37,11 +37,11 @@ function App () {
         <Route exact path="/" component={ Home } />
         <Route path="/register" component={ Register } />
         <Route path="/login" component={ Login } />
-        <Route path="/category/:cat" component={ Category } />
+        <Route path="/category=:cat" component={ Category } />
         <Route path="/barang/:id" component={ DetailItemCustomer } />
         <Route path="/faq" component={ FAQ } />
-        {localStorage.getItem('token') && (
-          <>
+        {/* {localStorage.getItem('token') && ( */}
+          {/* <> */}
             <Route path="/additem" component={ AddItem} />
             <Route path="/me/barang/:id" component={ DetailItemUser } />
             <Route path="/my-profile" component={ User } />
@@ -50,8 +50,8 @@ function App () {
             <Route path="/konfirmasi/:id" component={ Confirmation } />
             <Route path="/sukses" component={ Success } />
             <Route path="/waiting" component={ waiting } />
-          </>
-        )}
+          {/* </> */}
+        {/* )} */}
       </Router>
     </ApolloProvider>
   );

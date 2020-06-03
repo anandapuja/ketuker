@@ -33,7 +33,6 @@
     border-width: 0 0 1px;
     border-color: black;
     background: transparent;
-    color: white;
     font-size: 18px;
     width: 400px;
     height: 30px;
@@ -61,13 +60,6 @@
 .footer-login {
     color: black
 }
-
-a {
-    color: black;
-    font-style: italic;
-    font-weight: bold;
-}
-
 
 .register {
     padding: 50px 0 100px;
@@ -109,7 +101,6 @@ a {
     border-width: 0 0 1px;
     border-color: black;
     background: transparent;
-    color: white;
     font-size: 18px;
     width: 400px;
     height: 30px;

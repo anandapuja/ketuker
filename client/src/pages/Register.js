@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { storage } from '../storage/firebase';
-import { HeaderSecond } from '../components';
+import { HeaderSecond, NavigationSecond } from '../components';
 import { useMutation } from '@apollo/react-hooks';
 import { CREATE_ACCOUNT } from '../services/schema';
 import alertify from 'alertifyjs';
@@ -56,7 +56,7 @@ function Register () {
       localStorage.setItem('token', token); //dummy token
       localStorage.setItem('user_id', _id);
       localStorage.setItem('username', username);
-      alertify.notify('SUCCESS REGISTER', 'success', 5, function () { console.log('dismissed'); });
+      alertify.notify('SUCCESS REGISTER', 'dark', 5, function () { console.log('dismissed'); });
       history.push('/');
     }
   }
@@ -94,6 +94,7 @@ function Register () {
   return (
     <>
       <HeaderSecond />
+      <NavigationSecond />
       <div className="register">
         <h3 className="title-register">CREATE ACCOUNT</h3>
         <div className="div-register">

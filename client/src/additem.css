@@ -49,6 +49,7 @@
 
 .category-additem {
     outline: 0;
+    color: black;
     border-width: 0 0 1px;
     border-color: black;
     background-color: rgb(240, 240, 240);
@@ -124,6 +125,7 @@ button:hover {
     background-color: rgb(240, 240, 240);
     padding: 20px;
     color: black;
+    text-align: left;
 }
 .suggestion-additem h4{
     text-align: left;
