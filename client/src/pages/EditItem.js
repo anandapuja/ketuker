@@ -7,6 +7,17 @@ import { useMutation, useQuery } from '@apollo/react-hooks';
 // check query for submit edit
 import { GET_PRODUCT_DETAIL, updateProduct } from '../services/schema';
 import { useHistory, useParams, Link } from 'react-router-dom';
+import Select from 'react-select'
+
+
+let options = [
+  { value: "automotive", label: "automotive" },
+  { value: "property", label: "property" },
+  { value: "fashion", label: "fashion" },
+  { value: "gadget", label: "gadget" },
+  { value: "hobby", label: "hobby" },
+  { value: "household", label: "household" }
+];
 
 export default function EditItem () {
   
@@ -28,25 +39,30 @@ export default function EditItem () {
     if(!localStorage.getItem('token')){
       history.push('/');
     };
-  },[])
+  },[data])
 
   function handlePrice (e) {
-    setPrice(Number(e.target.value));
+    let harga1 = e.target.value.replace('Rp. ','');
+    let harga2 = harga1.replace(/[^\w\s]/gi,'');
+    let priceNum = Number(harga2);
+    setPrice(Number(priceNum));
   }
 
   async function SubmitEdit (e) {
     e.preventDefault();
+    let harga1 = String(price).replace('Rp. ','');
+    let harga2 = harga1.replace(/[^\w\s]/gi,'');
+    let priceNum = Number(harga2);
     try {
       let data={ 
         title: title,
         description: description,
         image: image,
-        price: price,
+        price: priceNum,
         category: category,
         whislist: whislist,
         submit: false
       };
-      console.log(data, 'fiansiodn');
       await editProduct({ variables:{ input: data, id: id } }); //------check query for submit
       history.push('/my-profile');
     } catch (error) {
@@ -90,10 +106,28 @@ export default function EditItem () {
       setImage(oldImage);
       setDescription(oldDesc);
       setCategory(oldCat);
-      setPrice(oldPrice);
+      setPrice(formatRupiah(oldPrice, 'Rp. '));
       setWishlist(oldWis);
     }
   }, [ data ]);
+
+  function formatRupiah (angka, prefix) {
+    var number_string = String(angka).replace(/[^,\d]/g, '').toString(),
+      split = number_string.split(','),
+      sisa = split[0].length % 3,
+      rupiah = split[0].substr(0, sisa),
+      ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+   
+    let separator;
+    // tambahkan titik jika yang di input sudah menjadi angka ribuan
+    if(ribuan) {
+      separator = sisa ? '.' : '';
+      rupiah += separator + ribuan.join('.');
+    }
+   
+    rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
+    return prefix === undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+  }
 
   
   
@@ -120,18 +154,10 @@ export default function EditItem () {
                 type="textarea" placeholder="Deskripsi" rows={5} className="textarea-edititem"></textarea>
               <input onChange={handlePrice} 
                 type="text" placeholder="Harga" value={price} className="input-edititem"></input>
-              <select onChange={(e)=>setCategory(e.target.value)} className="category-edititem" value={category}>
-                <option disabled >Category</option>
-                <option value="automotive" >Automotive</option>
-                <option value="property" >Property</option>
-                <option value="fashion" >Fashion</option>
-                <option value="gadget" >Gadget</option>
-                <option value="hobby" >Hobby</option>
-                <option value="household" >Household</option>
-              </select>
-              <input onChange={(e)=>setWishlist(e.target.value)} value={whislist}
-                type="text" placeholder="Barang apa yang kamu cari?" className="input-edititem"
-              ></input>
+              <Select 
+                onChange={(option)=>setCategory(option.value)} 
+                options={options} getOptionValue={option => option.value} />    
+              
               <button className="btn-edititem">SUBMIT</button>
             </form>
           

@@ -27,13 +27,17 @@ export default function Success () {
       <>
         <HeaderMain />
         <Navigation />
-        <div className="success-container">
+        <div className="success-container" style={{position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)'}}>
           <div className="success-message">
             <h1>Waiting</h1>
             <p>Menunggu {data.getUser.username.toUpperCase()} untuk merespons.</p>
             <p>Cek status permintaan barter Anda di halaman user di <Link to="/my-profile">sini!</Link></p>
             <Link to="/">
-              <button>Back To Home</button>
+              <div className="button">
+                <a style={{position: 'relative', left: '30%'}}><span>
+                  Back to home
+                </span></a>
+              </div>
             </Link>
           </div>
         </div>

@@ -6,6 +6,7 @@ import checkState from '../assets/images/check.png';
 
 export default function DetailOptions ({ ready, product }) {
   const [ status, setStatus ] = useState(false);
+  const [ price, setPrice ] = useState('')
   function checked () {
     let data = {
       _id: product._id,
@@ -21,6 +22,25 @@ export default function DetailOptions ({ ready, product }) {
     setStatus(val => !val);
     ready(data);
   }
+  useState(() => {
+    var number_string = String(product.price).replace(/[^,\d]/g, '').toString(),
+    split = number_string.split(','),
+    sisa = split[0].length % 3,
+    rupiah = split[0].substr(0, sisa),
+    ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+ 
+    let separator;
+    // tambahkan titik jika yang di input sudah menjadi angka ribuan
+    if(ribuan) {
+      separator = sisa ? '.' : '';
+      rupiah += separator + ribuan.join('.');
+    }
+  
+    rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
+    // setUangRupiah('Rp. ' + rupiah);
+    const uangRupiah = 'Rp. ' + rupiah;
+    setPrice(uangRupiah)
+  }, [])
   return (
     <>
     <div className="product-item-list-container">
@@ -29,11 +49,10 @@ export default function DetailOptions ({ ready, product }) {
           <>
             <div className="product-item-list-image">
               <img src={product.image} alt="item" className="checked"/>
-              <p className="product-item-list-price">IDR {product.price},-</p>
+              <p className="product-item-list-price">{price}</p>
             </div>
             <p className="product-item-list-title">{product.title}</p>
             <div style={{ textAlign: 'center' }}>
-              <img className="check-state" src={checkState} alt="check" />
               <button onClick={checked}>Batal</button>
             </div>
           </>
@@ -44,7 +63,7 @@ export default function DetailOptions ({ ready, product }) {
           <>
             <div className="product-item-list-image">
               <img src={product.image} alt="item" className="unChecked"/>
-              <p className="product-item-list-price">IDR {product.price},-</p>
+              <p className="product-item-list-price">{price}</p>
             </div>
             <p className="product-item-list-title">{product.title}</p>
             <div style={{ textAlign: 'center' }}>

@@ -16,6 +16,8 @@ export default function DetailItemCustomer () {
   const [ productOriginal, setProductOriginal ] = useState([]);
   const [ productTarget, setProductTarget ] = useState([]);
   // const [uangRupiah, setUangRupiah] = useState('')
+  const [ showOut, setShowOut] = useState(false)
+  const [ totalPrice, setTotal ] = useState(0)
 
   useEffect(() => {
     setReadyExchange(() => {
@@ -49,10 +51,35 @@ export default function DetailItemCustomer () {
       productTarget,
       productOriginal
     };
-    localStorage.setItem('barter', JSON.stringify(barter));
-    localStorage.setItem('userOriginal', productTarget[0].userId);
-    localStorage.setItem('userTarget', localStorage.getItem('user_id'));
-    history.push('/konfirmasi');
+    console.log(barter, '<<<<<ABBBRRETSD>>>>')
+    const targetPrice = barter.productTarget[0].price
+    let priceBarteran = 0
+    barter.productOriginal.forEach(el => priceBarteran += el.price)
+    var number_string = String(priceBarteran).replace(/[^,\d]/g, '').toString(),
+    split = number_string.split(','),
+    sisa = split[0].length % 3,
+    rupiah = split[0].substr(0, sisa),
+    ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+    
+    let separator;
+    // tambahkan titik jika yang di input sudah menjadi angka ribuan
+    if(ribuan) {
+      separator = sisa ? '.' : '';
+      rupiah += separator + ribuan.join('.');
+    }
+    
+    rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
+    // setUangRupiah('Rp. ' + rupiah);
+    const uangRupiah = 'Rp. ' + rupiah;
+    setTotal(uangRupiah)
+    if (priceBarteran >= targetPrice) {
+      localStorage.setItem('barter', JSON.stringify(barter));
+      localStorage.setItem('userOriginal', productTarget[0].userId);
+      localStorage.setItem('userTarget', localStorage.getItem('user_id'));
+      history.push('/konfirmasi');
+    } else {
+      setShowOut(true)
+    }
   }
 
   // useEffect(() => {
@@ -89,7 +116,6 @@ export default function DetailItemCustomer () {
     const { getProduct: product } = data;
     const { productByUser } = data;
     const productPrice = String(product.price);
-    console.log(productPrice)
     // if(product.price){
       var number_string = productPrice.replace(/[^,\d]/g, '').toString(),
         split = number_string.split(','),
@@ -154,9 +180,28 @@ export default function DetailItemCustomer () {
           }
           {
             readyExchange && (
-              <button className="readyToExchange" onClick={confirmation}>SELESAIKAN BARTER</button>
+              <div className="button readyToExchange">
+                <a onClick={confirmation}><span>
+                  SELESAIKAN BARTER
+                </span></a>
+              </div>
             )
           }
+
+          {showOut && (
+            <div className="modalSignOut">
+              <div className="SignOut-flex">
+                <div className="SignOut-title">Harga barangmu tidak sebanding</div>
+                <div className="SignOut-content">
+                  <p>Total harga barang yang kamu barter adalah sebesar {totalPrice}</p>
+                </div>
+                <div style={{display:"flex", justifyContent: "space-around"}} >
+                  <button onClick={() => setShowOut(false)} className="SignOut-button">CLOSE</button>
+                  {/* <button onClick={CancelSignOut} className="SignOut-button">CANCEL</button> */}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </>
     );

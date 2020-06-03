@@ -95,8 +95,8 @@ export default function UserBarang ({ product }) {
       </div>
       <p className="product-item-list-title">{product.title}</p>
     </div> */}
+
     <div class="aneh">
-          {/* <Link to={ '/barang/' + product._id } > */}
         <div class="container" style={{background: `url(${product.image })`, backgroundSize: 'contain'}}>
         <div class="overlay">
           <div class = "items"></div>
@@ -106,16 +106,38 @@ export default function UserBarang ({ product }) {
           </div>
           <div class = "items price">
             <p class="new">{uangRupiah}</p>
-            {/* <p class="new">{}</p> */}
           </div>
           <div class="items cart">
-            <i class="fa fa-shopping-cart"></i>
-            <span>Ajak Barter</span>
+            {pageDelete ? (
+              <div className="delete-page">
+                <div className="delete-flex">
+                  <div className="delete-title">Delete Confirmation</div>
+                  <div className="delete-content">Are you sure to delete this product ?</div>
+                  <div className="delete-button">
+                    <button onClick={ConfirmDelete}>CONFIRM</button>
+                    <button onClick={CancelDelete}>CANCEL</button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              // <div onClick={()=>ShowDelete(product._id)}>
+              //   <img src={deleteIcon} alt="delete" />
+              // </div>
+              <div style={{marginLeft: '10px'}} onClick={()=>ShowDelete(product._id)}>
+                <i class="fas fa-trash" ></i>
+                <span>Delete</span>
+              </div>
+            )
+            }
+            <div style={{marginLeft: '10px'}} onClick={()=>ShowEdit(product._id)}>
+              <i class="fas fa-edit" ></i>
+              <span>Edit</span>
+            </div>
           </div>
         </div>
       </div>
-          {/* </Link> */}
     </div>
+
     </>
   );
 }

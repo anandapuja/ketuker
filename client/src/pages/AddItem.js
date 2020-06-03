@@ -7,6 +7,17 @@ import { useMutation, useQuery } from '@apollo/react-hooks';
 import { ADD_PRODUCT, GET_PRODUCTS_AND_USERS, scrapPrice } from '../services/schema';
 import { useHistory, Link } from 'react-router-dom';
 import alertify from 'alertifyjs';
+import Select from 'react-select'
+
+
+let options = [
+  { value: "automotive", label: "automotive" },
+  { value: "property", label: "property" },
+  { value: "fashion", label: "fashion" },
+  { value: "gadget", label: "gadget" },
+  { value: "hobby", label: "hobby" },
+  { value: "household", label: "household" }
+];
 
 export default function AddItem () {
 
@@ -46,13 +57,13 @@ export default function AddItem () {
   }
 
   function handlePrice (e) {
-    setPrice(formatRupiah(e.target.value, 'IDR '));
+    setPrice(formatRupiah(e.target.value, 'Rp. '));
     //setPrice(Number(e.target.value));
   }
 
   async function SubmitCreate (e) {
     e.preventDefault();
-    let harga1 = price.replace('IDR','');
+    let harga1 = price.replace('Rp. ','');
     let harga2 = harga1.replace(/[^\w\s]/gi,'');
     let priceNum = Number(harga2);
     if((title === '') || (category === '') ) {
@@ -66,7 +77,7 @@ export default function AddItem () {
           image: image,
           price: priceNum,
           category: category,
-          whislist: wishlist,
+          whislist: 'pull me up',
           submit: false
         };
         await addProduct({ variables:{ input: data } });
@@ -121,7 +132,7 @@ export default function AddItem () {
     }
    
     rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
-    return prefix === undefined ? rupiah : (rupiah ? 'IDR ' + rupiah : '');
+    return prefix === undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
   }
     
 
@@ -142,17 +153,11 @@ export default function AddItem () {
                 type="textarea" placeholder="Deskripsi" rows={8} className="textarea-additem"></textarea>
               <input onChange={handlePrice} 
                 type="text" placeholder="Harga" value={price} className="input-additem"></input>
-              <select onChange={(e)=>setCategory(e.target.value)} className="category-additem">
-                <option disabled selected value>Category</option>
-                <option value="automotive">Automotive</option>
-                <option value="property">Property</option>
-                <option value="fashion">Fashion</option>
-                <option value="gadget">Gadget</option>
-                <option value="hobby">Hobby</option>
-                <option value="household">Household</option>
-              </select>
-              <input onChange={(e)=>setWishlist(e.target.value)} 
-                type="text" placeholder="Barang apa yang kamu cari?" className="input-additem"></input>
+              <Select 
+                onChange={(option)=>setCategory(option.value)} 
+                options={options} getOptionValue={option => option.value} />              
+              {/* <input onChange={(e)=>setWishlist(e.target.value)} 
+                type="text" placeholder="Barang apa yang kamu cari?" className="input-additem"></input> */}
               <button className="btn-additem">SUBMIT</button>
               {/* <Link to="/"><button className="btn-register">BACK</button></Link> */}
             </form>
@@ -179,7 +184,7 @@ export default function AddItem () {
                           <div key={'b' + idx}>{item.price}</div>
                         </>
                       ))}
-                      <div><b>{data.getScrap.average}</b></div>
+                      <div><b>{formatRupiah(data.getScrap.average, 'Rp. ')}</b></div>
                     </>
                     : null
                   }

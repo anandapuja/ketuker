@@ -44,7 +44,7 @@ export default function Home () {
   }
 
   if(error) {
-    return <CompError></CompError>;
+    return <CompError message={error.message}></CompError>;
   }
 
   if(data) {

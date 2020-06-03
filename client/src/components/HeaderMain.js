@@ -7,7 +7,9 @@ import faqIcon from '../assets/images/faq.jpg';
 import alertify from 'alertifyjs';
 import logoBw from '../assets/images/logo-bw.png';
 import logoBwInvert from '../assets/images/logo-bw-invert.png';
-import logoutIconRound from '../assets/images/logout-round.png';
+import logoutIconRound from '../assets/images/logout.png';
+import { useQuery } from '@apollo/react-hooks';
+import { GET_USER } from '../services/schema';
 
 export default function HeaderMain () {
 
@@ -15,6 +17,7 @@ export default function HeaderMain () {
 
   const [ showOut, setShowOut ] = useState(false);
   const [ filter, setFilter] = useState('')
+  const { loding, error, data } = useQuery(GET_USER, {variables: {id: localStorage.getItem('user_id')}})
 
   function ShowSignOut () {
     setShowOut(true);
@@ -49,7 +52,7 @@ export default function HeaderMain () {
     <div className="header-container">
       <Link to="/">
         <div className="logo-container">
-          <img src={logoBwInvert} alt="logo" />
+          <img src={logo} alt="logo" />
         </div>
       </Link>
       <div className="header-search-container">
@@ -58,11 +61,17 @@ export default function HeaderMain () {
         </form>
       </div>
       <div className="header-user-container">
-      <Link to={ localStorage.getItem('token') ? '/additem' : '/login' }>
-        <button>UPLOAD BARANG</button>
-      </Link>
+        {localStorage.getItem('token') &&
+          <Link to={ localStorage.getItem('token') ? '/additem' : '/login' }>
+            <div className="button">
+              <a><span>
+                Upload Barang
+              </span></a>
+            </div>
+          </Link>
+        }
         <Link to={ localStorage.getItem('token') ? '/my-profile' : '/login' }>
-          <img src={avatar} alt="avatar" />
+          <img src={data ? data.getUser.avatar : avatar} alt="avatar" />
         </Link>
         <Link to="/faq">
           <div style={{ border: 'none', borderRadius: 0, marginLeft: 10, }}>
