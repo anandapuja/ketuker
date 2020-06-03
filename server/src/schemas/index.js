@@ -486,7 +486,6 @@ export const resolvers = {
       const userAuth = await authen(token);
       const user = await User.findOne({ _id: userAuth.id });
       if (!user) throw new Error('You have to login!');
-      if (!author({ userId: user._id, prodId: id })) throw new Error('You are not authorized!');
       const updateTransaction = await Transaction.findOneAndUpdate({ _id: id }, { status: input });
       await updateTransaction.save();
       
@@ -497,7 +496,6 @@ export const resolvers = {
       const userAuth = await authen(token);
       const user = await User.findOne({ _id: userAuth.id });
       if (!user) throw new Error('You have to login!');
-      if (!author({ userId: user._id, prodId: id })) throw new Error('You are not authorized!');
       await Transaction.findByIdAndRemove(id);
       return {
         result: 'Successfully deleted transaction!',
