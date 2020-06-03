@@ -43,8 +43,8 @@ export default function AddItem () {
 
   async function SubmitCreate (e) {
     e.preventDefault();
-    let harga1 = price.replace('IDR ','');
-    let harga2 = harga1.replace('.','');
+    let harga1 = price.replace('Rp.','');
+    let harga2 = harga1.replace(/[^\w\s]/gi,'');
     let priceNum = Number(harga2);
     if((title === '') || (category === '') ) {
       setNotif ('title or category must be filled');
