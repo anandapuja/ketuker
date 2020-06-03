@@ -27,6 +27,7 @@ import {
 // } from './components';
 import Confirmation from './pages/Confirmation';
 import Success from './pages/Success';
+import waiting from './pages/waiting';
 
 
 function App () {
@@ -48,6 +49,7 @@ function App () {
             <Route exact path="/konfirmasi" component={ Confirmation } />
             <Route path="/konfirmasi/:id" component={ Confirmation } />
             <Route path="/sukses" component={ Success } />
+            <Route path="/waiting" component={ waiting } />
           </>
         )}
       </Router>

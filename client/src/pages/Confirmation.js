@@ -21,7 +21,7 @@ export default function Confirmation () {
       await addTransaction({ variables: { input: barter } });
       localStorage.removeItem('barter');
       // alert('SUCCES');
-      history.push('/sukses');
+      history.push('/waiting');
     } catch (error) {
       console.log(error, '>>>>>>>>>>>EOROREO');
     }
@@ -50,7 +50,8 @@ export default function Confirmation () {
   }
  
   if (data || error) {
-    if (data) {
+    console.log(data);
+    if (data.transactionById) {
       if (data.transactionById.status) history.push('/sukses?status=selesai');
     }
     return (
