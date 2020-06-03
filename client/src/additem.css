@@ -1,11 +1,10 @@
 .additem {
-    background-color: black;
-    box-shadow: 10px 10px  #595959;
+    background-color: white;
     text-align: center;
     padding: 20px 20px;
     max-width: 1000px;
     margin: 40px auto;
-    color: white;
+    color: black;
 }
 
 .title-additem {
@@ -30,45 +29,49 @@
 
 .input-additem {
     outline: 0;
-    border-width: 0 0 2px;
-    border-color: white;
-    background: transparent;
-    color: white;
+    border-width: 0 0 1px;
+    border-color: black;
+    background-color: rgb(240, 240, 240);
     font-size: 18px;
-    margin-top: 20px
+    margin-top: 20px;
+    padding: 10px
 }
 
 .textarea-additem {
     outline: 0;
-    border-width: 0 0 2px;
-    border-color: white;
-    background: transparent;
-    color: white;
+    border-width: 0 0 1px;
+    border-color: black;
+    background-color: rgb(240, 240, 240);
     font-size: 18px;
-    margin-top: 20px
+    margin-top: 20px;
+    padding: 10px
 }
 
 .category-additem {
     outline: 0;
-    border-width: 0 0 2px;
-    border-color: white;
-    background: transparent;
-    color: white;
-    font-size: 18px;   
-    margin-top: 20px
+    border-width: 0 0 1px;
+    border-color: black;
+    background-color: rgb(240, 240, 240);
+    font-size: 18px;
+    margin-top: 20px;
+    padding: 20px;
+    height: 40px
 }
 
 .btn-additem {
     height: 60px;
     color: white;
-    background-color: rgb(80, 80, 80);
+    background-color: black;
     transition: 0.3s;
     font-size: 24px;
     margin-top: 20px;
+    transition: 0.3s
 }
 
 button:hover {
-    background-color: silver;
+    background-color: white;
+    border: solid black;
+    color: black;
 }
 
 .form-upload {
@@ -89,16 +92,20 @@ button:hover {
 }
 
 .btn-upload {
-    padding: 10px 20px;
+    padding: 10px 10px;
+    font-size: 15px;
     border: none;
-    background-color: grey;
+    background-color: black;
     color: white
 }
 
+.btn-upload:hover {
+    background-color: white;
+    border: solid black;
+    color: black;
+}
+
 .img-additem {
-    /* position: fixed;
-    right: 0px;
-    top: 30%; */
     max-width: 200px;
     max-height: 200px;
     margin: 20px 20px;
@@ -110,7 +117,8 @@ button:hover {
     width: 400px;
     height: 220px;
     overflow: scroll;
-    margin-bottom: 25px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     border: none;
     border-bottom: 1px solid rgb(114, 112, 112);
     background-color: rgb(240, 240, 240);

@@ -106,7 +106,7 @@ function Register () {
             <input onChange={(e)=>setAddress(e.target.value)} type="text" placeholder='address' className="input-register"></input>
             <input onChange={(e)=>setCity(e.target.value)} type="text" placeholder='city/district' className="input-register"></input>
             <br></br>
-            <button className="btn-register">Register</button>
+            <button className="btn-register">REGISTER</button>
           </form>
 
           <form onSubmit={handleFireBaseUpload} className="form-upload-register">

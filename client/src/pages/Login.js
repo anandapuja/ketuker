@@ -81,7 +81,7 @@ function Login () {
               placeholder='password'
               className="input-login"
             ></input>
-            <button className="btn-register">SIGN IN</button>
+            <button className="btn-login">SIGN IN</button>
           </form>
         </div>
         

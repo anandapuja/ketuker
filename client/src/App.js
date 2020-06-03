@@ -37,7 +37,7 @@ function App () {
         <Route exact path="/" component={ Home } />
         <Route path="/register" component={ Register } />
         <Route path="/login" component={ Login } />
-        <Route path="/category=:cat" component={ Category } />
+        <Route path="/category/:cat" component={ Category } />
         <Route path="/barang/:id" component={ DetailItemCustomer } />
         <Route path="/faq" component={ FAQ } />
         {localStorage.getItem('token') && (
