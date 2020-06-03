@@ -2,8 +2,6 @@ import { gql } from 'apollo-server';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
-import getTokoPedia from '../utilities/scraping';
-import sendEmail from '../utilities/nodemailer';
 import redis from '../utilities/redis';
 import User from '../models/User';
 import Product from '../models/Product';
@@ -66,7 +64,7 @@ export const typeDefs = gql`
   }
 
   type MedianPrices {
-    items: [Item],
+    items: [Item]
     average: String
   }
 
@@ -108,12 +106,6 @@ export const typeDefs = gql`
     getProducts: [Product]!
     getProduct(id: ID!): Product!
 
-    ##### nodemailer
-    nodemailer: Output!
-
-    ##### scrapping
-    getScrap(item: String!): MedianPrices
-
     productByUser(userId: ID!): [Product]!
     productByCategory(category: String): [Product]!
 
@@ -153,7 +145,7 @@ export const resolvers = {
         const users = JSON.parse(await redis.get('users'));
         const user = users.filter((el) => el._id == id);
         if (user.length) {
-          const [ data ] = user;
+          const [data] = user;
           return data;
         } else {
           const getOneUser = await User.findOne({ _id: id });
@@ -180,7 +172,7 @@ export const resolvers = {
       try {
         const products = JSON.parse(await redis.get('products'));
         if (products) {
-          const [ product ] = products.filter((el) => el._id == id);
+          const [product] = products.filter((el) => el._id == id);
           if (product) return product;
           else {
             const getOneProduct = await Product.findOne({ _id: id });
@@ -210,7 +202,7 @@ export const resolvers = {
         }
         const getProduct = await Product.findOne({ userId: userId });
         if (products) {
-          newProducts = [ ...products, getProduct ];
+          newProducts = [...products, getProduct];
         } else {
           newProducts = await Product.find();
         }
@@ -277,40 +269,6 @@ export const resolvers = {
         return error;
       }
     },
-
-    nodemailer: async () => {
-      //nanti diisi sesuai data client nya. dibawah hanya template contoh
-      try {
-        const mail = 'smpoern4mild@gmail.com';
-        const subs = 'Invitation bartering goods';
-        const text =
-          ' Hai, I would like to barter my goods with your goods. give me reaction if you are interesting or we can talk first before get deal :)';
-
-        await sendEmail(mail, subs, text);
-
-        return {
-          result: 'Succesfully sent email to our lovely client!',
-        };
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
-    getScrap: async (_, { item }) => {
-      const scrappedData = await getTokoPedia(item);
-      let harga = 0;
-      scrappedData.forEach(el => {
-        let num = el.price.slice(3);
-        let newNum = num.replace(/[^\w\s]/gi, '');
-        harga += Number(newNum);
-        return harga/scrappedData.length;
-      });
-      let data = {
-        items: scrappedData,
-        average: harga/scrappedData.length
-      };
-      return data;
-    },
   },
   Mutation: {
     register: async (_, { input }) => {
@@ -330,7 +288,7 @@ export const resolvers = {
           users.push(newUser);
           await redis.set('users', JSON.stringify(users));
         } else {
-          await redis.set('users', JSON.stringify([ res ]));
+          await redis.set('users', JSON.stringify([res]));
         }
         return { _id: res._id, ...res._doc, token };
       }
@@ -491,7 +449,9 @@ export const resolvers = {
         return error;
       }
     },
-    updateTransaction: async ( _, { id, input },
+    updateTransaction: async (
+      _,
+      { id, input },
       {
         req: {
           headers: { token },
@@ -503,11 +463,19 @@ export const resolvers = {
       if (!user) throw new Error('You have to login!');
       const updateTransaction = await Transaction.findOneAndUpdate({ _id: id }, { status: input });
       await updateTransaction.save();
-      
+
       return updateTransaction;
     },
 
-    deleteTransaction: async ( _, { id }, { req: { headers: { token } } }) => {
+    deleteTransaction: async (
+      _,
+      { id },
+      {
+        req: {
+          headers: { token },
+        },
+      }
+    ) => {
       const userAuth = await authen(token);
       const user = await User.findOne({ _id: userAuth.id });
       if (!user) throw new Error('You have to login!');
@@ -515,6 +483,6 @@ export const resolvers = {
       return {
         result: 'Successfully deleted transaction!',
       };
-    }
+    },
   },
 };
