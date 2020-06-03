@@ -51,7 +51,7 @@ export default function Confirmation () {
  
   if (data || error) {
     console.log(data);
-    if (data.transactionById) {
+    if (data.transactionById && !search) {
       if (data.transactionById.status) history.push('/sukses?status=selesai');
     }
     return (
