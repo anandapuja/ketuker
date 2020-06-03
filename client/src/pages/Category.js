@@ -9,8 +9,9 @@ import {
 } from '../components';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_PRODUCTS_AND_USERS } from '../services/schema';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useHistory, Link } from 'react-router-dom';
 import SliderApp from '../components/Slider';
+import notFoundImage from '../assets/images/404.jpg';
 
 export default function Home () {
   const { search, pathname } = useLocation();
@@ -43,17 +44,25 @@ export default function Home () {
   }
 
   if(error) {
-    console.log(error);
     return <CompError></CompError>;
   }
 
   if(data) {
+    console.log(data)
     return (
       <>
         <HeaderMain />
         <Navigation />
         {/* <SliderApp /> */}
         <div className="home-list-container">
+          { data.productByCategory.length === 0 ? (
+            <div className="not-found-container">
+              <img src={notFoundImage} alt="not-found" />
+              <Link to="/"><button>BACK TO HOME</button></Link>
+            </div>
+          ) : (
+            ""
+          ) }
           <div className="home-product-list-item-container">
             {
               products.map(product => (
