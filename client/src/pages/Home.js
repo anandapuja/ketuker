@@ -24,9 +24,10 @@ export default function Home () {
       const notMine = data.getProducts.filter((el) => el.userId != localStorage.getItem('user_id'));
       if(search.substr(0, 7) == '?filter') {
         const filtered = search.slice(8);
-        const filterProduct = notMine.filter(el => {
-          return el.title.includes(filtered)
-        })
+        const filterProduct = notMine.filter(el => el.title.toLowerCase().includes(filtered.toLowerCase()))
+        // console.log(filterProduct, '>>>>FAAAAA<<,,')
+
+
         return setProducts(filterProduct)
       }
       if(page !== 1) {
