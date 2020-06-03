@@ -289,16 +289,12 @@ describe('Test product mutation', () => {
       expect(userTarget).not.toBeNull();
     });
 
-
-    
     it('It should delete transaction', async () => {
       const res = await graphqlTestCall(deleteTransaction, { id: transId }, tokenUser);
       const { data: { deleteTransaction: { result } } } = res;
       expect(result).not.toBeNull();
     });
   });
-  
-  
 
   it('It should delete product', async () => {
     const res = await graphqlTestCall(deleteProduct, { id: prodId }, tokenUser);

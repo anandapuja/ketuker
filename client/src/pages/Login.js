@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { HeaderSecond, NavigationSecond } from '../components';
 import { useMutation } from '@apollo/react-hooks';
 import { LOGIN_USER } from '../services/schema';
-import alertify from 'alertifyjs'
+import alertify from 'alertifyjs';
 
 function Login () {
 
@@ -11,7 +11,7 @@ function Login () {
   const [ username, setUsername ] = useState('');
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
-  const [ notif, setNotif ] = useState('')
+  const [ notif, setNotif ] = useState('');
   const [ alertInput, setAlertInput ] = useState(false);
 
   const [ loginUser ] = useMutation(LOGIN_USER);
@@ -22,11 +22,11 @@ function Login () {
 
   function onHandleLogin (e) {
     let str = e.target.value;
-      if(str.match(/@/g)) {
-        setEmail(str);
-      } else {
-        setUsername(str);
-      }
+    if(str.match(/@/g)) {
+      setEmail(str);
+    } else {
+      setUsername(str);
+    }
   }
   
   
@@ -36,31 +36,31 @@ function Login () {
     if( password=== '') {
       setNotif ('password is blank');
       setAlertInput(true);
-    } else if ( (username ==='') || (email==='')){
+    } else if ( (username ==='') || (email==='')) {
       setNotif ('username or email is blank');
       setAlertInput(true);
     } else {
-        if(email) {
-          data = {
-            email: email,
-            password: password
-          };
-          const response = await loginUser({ variables: { input: data } });
-          if(response.data.login.token) {
-            console.log(response);
-            localStorage.setItem('token',response.data.login.token); //dummy token
-            localStorage.setItem('user_id',response.data.login._id);
-            localStorage.setItem('username',response.data.login.username);
-            alertify.notify('SUCCESS LOGIN', 'success', 5, function(){  console.log('dismissed'); });
-            history.push('/'); 
-          }
-        } else {
-          data = {
-            username: username,
-            password: password
-          };
+      if(email) {
+        data = {
+          email: email,
+          password: password
+        };
+        const response = await loginUser({ variables: { input: data } });
+        if(response.data.login.token) {
+          console.log(response);
+          localStorage.setItem('token',response.data.login.token); //dummy token
+          localStorage.setItem('user_id',response.data.login._id);
+          localStorage.setItem('username',response.data.login.username);
+          alertify.notify('SUCCESS LOGIN', 'success', 5, function () { console.log('dismissed'); });
+          history.push('/'); 
         }
+      } else {
+        data = {
+          username: username,
+          password: password
+        };
       }
+    }
   }
 
   return (
@@ -90,15 +90,15 @@ function Login () {
         </div>
       </div>
       {alertInput && (
-      <div className="modalAlert">
-        <div className="Alert-flex">
-          <div className="Alert-title">ALERT</div>
-          <div className="Alert-content">Notification: {notif}</div>
-          <div >
-            <button onClick={()=>setAlertInput(false)} className="Alert-button">OK</button>
+        <div className="modalAlert">
+          <div className="Alert-flex">
+            <div className="Alert-title">ALERT</div>
+            <div className="Alert-content">Notification: {notif}</div>
+            <div >
+              <button onClick={()=>setAlertInput(false)} className="Alert-button">OK</button>
+            </div>
           </div>
         </div>
-      </div>
       )}
     </>
   );

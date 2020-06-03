@@ -273,7 +273,7 @@ mutation ($id: ID!, $input: Boolean!) {
     }
   }
 }
-`
+`;
 
 export const deleteTransaction = gql`
 mutation ($id: ID!) {
@@ -281,7 +281,7 @@ mutation ($id: ID!) {
     result
   }
 }
-`
+`;
 
 export const updateProduct = gql`
 mutation ($id: ID!, $input: InputProduct!) {
@@ -289,7 +289,7 @@ mutation ($id: ID!, $input: InputProduct!) {
     result
   }
 }
-`
+`;
 
 export const deleteProduct = gql`
 mutation ($id: ID!) {
@@ -297,4 +297,16 @@ mutation ($id: ID!) {
     result
   }
 }
-`
+`;
+
+export const scrapPrice = gql`
+query ($item: String!) {
+  getScrap (item: $item) {
+    items {
+      title
+      price
+    }
+    average
+  }
+}
+`;

@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../src/utilities/redis.js"],"names":["redis","Redis"],"mappings":";;;;;;;AAAA;;;;AAEA,IAAMA,KAAK,GAAG,IAAIC,mBAAJ,EAAd;eAEeD,K","sourcesContent":["import Redis from 'ioredis';\n\nconst redis = new Redis();\n\nexport default redis;\n"],"file":"redis.js"}

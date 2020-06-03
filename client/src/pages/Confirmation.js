@@ -29,19 +29,19 @@ export default function Confirmation () {
 
   async function terima () {
     try {
-      await updateTrans({ variables: { id: id, input: true }});
-      history.push('/sukses')
+      await updateTrans({ variables: { id: id, input: true } });
+      history.push('/sukses');
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
   
   async function tolak () {
     try {
-      await deleteTrans({ variables: { id }})
-      history.push('/my-profile')
+      await deleteTrans({ variables: { id } });
+      history.push('/my-profile');
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
@@ -51,7 +51,7 @@ export default function Confirmation () {
  
   if (data || error) {
     if (data) {
-      if (data.transactionById.status) history.push('/sukses?status=selesai')
+      if (data.transactionById.status) history.push('/sukses?status=selesai');
     }
     return (
       <>
@@ -117,15 +117,15 @@ export default function Confirmation () {
         }
         {
           search.slice(1) === 'diajak' ?
-          <>
-            <div className="approve-reject-button">
+            <>
+              <div className="approve-reject-button">
                 <button className="app-rec-button" onClick={terima} >TERIMA</button>
                 <button className="app-rec-button" onClick={tolak} >TOLAK</button>
-            </div>
-          </>
-          :
-          <>
-          </>
+              </div>
+            </>
+            :
+            <>
+            </>
         }
       </>
     );

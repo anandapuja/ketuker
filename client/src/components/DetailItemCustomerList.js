@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import checkState from '../assets/images/check.png'
+import checkState from '../assets/images/check.png';
 
 
 export default function DetailItemCustomerList ({ ready, product }) {
@@ -30,7 +30,7 @@ export default function DetailItemCustomerList ({ ready, product }) {
       <p className="product-item-list-title">{product.title}</p>
       {
         status && (
-          <div style={{textAlign: "center"}}>
+          <div style={{ textAlign: 'center' }}>
             <img className="check-state" src={checkState} alt="check" />
             <button onClick={checked}>Batal</button>
           </div>
@@ -38,7 +38,7 @@ export default function DetailItemCustomerList ({ ready, product }) {
       }
       {
         !status && (
-          <div style={{textAlign: "center"}}>
+          <div style={{ textAlign: 'center' }}>
             <button onClick={checked}>Pilih</button>
           </div>
         )

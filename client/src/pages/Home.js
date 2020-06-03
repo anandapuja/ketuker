@@ -21,7 +21,7 @@ export default function Home () {
 
   useEffect(() => {
     if(data) {
-      const notMine = data.getProducts.filter((el) => el.userId != localStorage.getItem('user_id'))
+      const notMine = data.getProducts.filter((el) => el.userId != localStorage.getItem('user_id'));
       if(page !== 1) {
         return setProducts(notMine.slice(0, page*9));
       } else {
@@ -35,12 +35,12 @@ export default function Home () {
     history.push('/?page=' + (page + 1));
   }
 
-  if(loading){
-    return <CompLoading />
+  if(loading) {
+    return <CompLoading />;
   }
 
-  if(error){
-    return <CompError />
+  if(error) {
+    return <CompError />;
   }
 
   if(data) {

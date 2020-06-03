@@ -5,14 +5,14 @@ import { useQuery } from '@apollo/react-hooks';
 import { GET_USER } from '../services/schema';
 
 export default function Success () {
-  const { loading, error, data } = useQuery(GET_USER, {variables: {id: localStorage.getItem('userOriginal')}})
+  const { loading, error, data } = useQuery(GET_USER, { variables: { id: localStorage.getItem('userOriginal') } });
 
-  if(loading){
-    return <CompLoading />
+  if(loading) {
+    return <CompLoading />;
   }
 
-  if(error){
-    return <CompError />
+  if(error) {
+    return <CompError />;
   }
 
   if(data) {

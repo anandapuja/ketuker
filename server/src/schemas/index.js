@@ -65,6 +65,11 @@ export const typeDefs = gql`
     price: String!
   }
 
+  type MedianPrices {
+    items: [Item],
+    average: String
+  }
+
   type Output {
     result: String!
   }
@@ -107,7 +112,7 @@ export const typeDefs = gql`
     nodemailer: Output!
 
     ##### scrapping
-    getScrap(item: String!): [Item]!
+    getScrap(item: String!): MedianPrices
 
     productByUser(userId: ID!): [Product]!
     productByCategory(category: String): [Product]!
@@ -293,8 +298,18 @@ export const resolvers = {
 
     getScrap: async (_, { item }) => {
       const scrappedData = await getTokoPedia(item);
-
-      return scrappedData;
+      let harga = 0;
+      scrappedData.forEach(el => {
+        let num = el.price.slice(3);
+        let newNum = num.replace(/[^\w\s]/gi, '');
+        harga += Number(newNum);
+        return harga/scrappedData.length;
+      });
+      let data = {
+        items: scrappedData,
+        average: harga/scrappedData.length
+      };
+      return data;
     },
   },
   Mutation: {

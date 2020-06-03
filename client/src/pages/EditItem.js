@@ -14,7 +14,7 @@ export default function EditItem () {
   // const [ addProduct ] = useMutation(ADD_PRODUCT, { refetchQueries: () => [ { query: GET_PRODUCTS_AND_USERS } ] });
   const history = useHistory();
   const { id } = useParams();
-  const { loading, error, data } = useQuery(GET_PRODUCT_DETAIL, {variables: {id: id}});
+  const { loading, error, data } = useQuery(GET_PRODUCT_DETAIL, { variables: { id: id } });
   const [ editProduct ] = useMutation(updateProduct);
 
   const[ title, setTitle ] = useState('');
@@ -29,7 +29,7 @@ export default function EditItem () {
     setPrice(Number(e.target.value));
   }
 
-  async function SubmitEdit(e) {
+  async function SubmitEdit (e) {
     e.preventDefault();
     try {
       let data={ 
@@ -41,8 +41,8 @@ export default function EditItem () {
         whislist: whislist,
         submit: false
       };
-      console.log(data, 'fiansiodn')
-      await editProduct({ variables:{ input: data, id: id } });   //------check query for submit
+      console.log(data, 'fiansiodn');
+      await editProduct({ variables:{ input: data, id: id } }); //------check query for submit
       history.push('/my-profile');
     } catch (error) {
       console.log(error, 'ERRORNY');
@@ -52,29 +52,29 @@ export default function EditItem () {
   const [ imageAsFile, setImageAsFile ] = useState('');
 
   const handleImageAsFile = (e) => {
-  const pic = e.target.files[0];
-  setImageAsFile(imageFile => (pic));
+    const pic = e.target.files[0];
+    setImageAsFile(imageFile => (pic));
   };
 
   const handleFireBaseUpload = e => {
-  e.preventDefault();
-  console.log('start of upload');
-  if (imageAsFile === '') {
-    console.error(`not an image, the image file is a ${typeof (imageAsFile)}`);
-  }
-  const uploadTask = storage.ref(`/images/${imageAsFile.name}`).put(imageAsFile);
-  uploadTask.on('state_changed',
-    (snapShot) => {
-      console.log(snapShot);
-    }, (err) => {
-      console.log(err);
-    }, () => {
-      storage.ref('images').child(imageAsFile.name).getDownloadURL()
-        .then(fireBaseUrl => {
-          console.log(fireBaseUrl, '---firebaseURl');
-          setImage(fireBaseUrl);
-        });
-    });
+    e.preventDefault();
+    console.log('start of upload');
+    if (imageAsFile === '') {
+      console.error(`not an image, the image file is a ${typeof (imageAsFile)}`);
+    }
+    const uploadTask = storage.ref(`/images/${imageAsFile.name}`).put(imageAsFile);
+    uploadTask.on('state_changed',
+      (snapShot) => {
+        console.log(snapShot);
+      }, (err) => {
+        console.log(err);
+      }, () => {
+        storage.ref('images').child(imageAsFile.name).getDownloadURL()
+          .then(fireBaseUrl => {
+            console.log(fireBaseUrl, '---firebaseURl');
+            setImage(fireBaseUrl);
+          });
+      });
   };
 
   useEffect(() => {
@@ -88,16 +88,16 @@ export default function EditItem () {
       setPrice(oldPrice);
       setWishlist(oldWis);
     }
-  }, [data])
+  }, [ data ]);
 
   
   
   if(error) {
-    return <div>Error ...</div>
+    return <div>Error ...</div>;
   }
 
   if(loading) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   if (data) {     
@@ -126,7 +126,7 @@ export default function EditItem () {
               </select>
               <input onChange={(e)=>setWishlist(e.target.value)} value={whislist}
                 type="text" placeholder="Barang apa yang kamu cari?" className="input-register"
-                ></input>
+              ></input>
               <button className="btn-register">SUBMIT</button>
             </form>
           
@@ -145,6 +145,6 @@ export default function EditItem () {
           </div>
         </div>
       </>
-    )
+    );
   }
 }

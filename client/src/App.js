@@ -33,23 +33,23 @@ function App () {
   return (
     <ApolloProvider client={ client }>
       <Router>
-            <Route exact path="/" component={ Home } />
-            <Route path="/register" component={ Register } />
-            <Route path="/login" component={ Login } />
-            <Route path="/category=:cat" component={ Category } />
-            <Route path="/barang/:id" component={ DetailItemCustomer } />
-            <Route path="/faq" component={ FAQ } />
-            {localStorage.getItem('token') && (
-              <>
-                <Route path="/additem" component={ AddItem} />
-                <Route path="/me/barang/:id" component={ DetailItemUser } />
-                <Route path="/my-profile" component={ User } />
-                <Route path="/edit/:id" component={ EditItem } />
-                <Route exact path="/konfirmasi" component={ Confirmation } />
-                <Route path="/konfirmasi/:id" component={ Confirmation } />
-                <Route path="/sukses" component={ Success } />
-              </>
-            )}
+        <Route exact path="/" component={ Home } />
+        <Route path="/register" component={ Register } />
+        <Route path="/login" component={ Login } />
+        <Route path="/category=:cat" component={ Category } />
+        <Route path="/barang/:id" component={ DetailItemCustomer } />
+        <Route path="/faq" component={ FAQ } />
+        {localStorage.getItem('token') && (
+          <>
+            <Route path="/additem" component={ AddItem} />
+            <Route path="/me/barang/:id" component={ DetailItemUser } />
+            <Route path="/my-profile" component={ User } />
+            <Route path="/edit/:id" component={ EditItem } />
+            <Route exact path="/konfirmasi" component={ Confirmation } />
+            <Route path="/konfirmasi/:id" component={ Confirmation } />
+            <Route path="/sukses" component={ Success } />
+          </>
+        )}
       </Router>
     </ApolloProvider>
   );
