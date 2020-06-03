@@ -21,7 +21,7 @@ export default function Home () {
 
   useEffect(() => {
     if(data) {
-      const notMine = data.productByCategory.filter((el) => el.userId != localStorage.getItem('user_id'))
+      const notMine = data.productByCategory.filter((el) => el.userId != localStorage.getItem('user_id'));
       if(page !== 1) {
         return setProducts(notMine.slice(0, page*9));
       } else {

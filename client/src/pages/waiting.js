@@ -22,9 +22,8 @@ export default function Success () {
         <Navigation />
         <div className="success-container">
           <div className="success-message">
-            <h1>SUCCESS</h1>
-            <p>Silahkan hubungin {data.getUser.username.toUpperCase()} untuk proses selanjutnya.</p>
-            <p>Phone: {data.getUser.phone}</p>
+            <h1>Waiting</h1>
+            <p>Menunggu {data.getUser.username.toUpperCase()} untuk merespons.</p>
             <p>Cek status permintaan barter Anda di halaman user di <Link to="/my-profile">sini!</Link></p>
             <Link to="/">
               <button>Back To Home</button>

@@ -20,23 +20,23 @@ export default function ProductItemList ({ product }) {
   //   return <p> error ... </p>;
   // }
   
-  const city = 'jak'
+  const city = 'jak';
 
   // if(userData) {
   //   const { getUser: { city } } = userData; 
-    return (
-      <div className="product-item-list-container">
-        <div className="product-item-list-image">
-          <img src={product.image} alt="item" />
-          <p className="product-item-list-price">IDR {product.price}</p>
-        </div>
-        <Link to={ '/barang/' + product._id } >
-          <p className="product-item-list-title">{ product.title }</p>
-        </Link>
-        <p className="product-item-list-location">Lokasi: {city}</p>
+  return (
+    <div className="product-item-list-container">
+      <div className="product-item-list-image">
+        <img src={product.image} alt="item" />
+        <p className="product-item-list-price">IDR {product.price}</p>
       </div>
-    );
-  }
+      <Link to={ '/barang/' + product._id } >
+        <p className="product-item-list-title">{ product.title }</p>
+      </Link>
+      <p className="product-item-list-location">Lokasi: {city}</p>
+    </div>
+  );
+}
 ProductItemList.propTypes = {
   product: PropTypes.object
 };

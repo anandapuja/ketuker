@@ -5,7 +5,7 @@ import { storage } from '../storage/firebase';
 import { HeaderSecond } from '../components';
 import { useMutation } from '@apollo/react-hooks';
 import { CREATE_ACCOUNT } from '../services/schema';
-import alertify from 'alertifyjs'
+import alertify from 'alertifyjs';
 
 function Register () {
   const history = useHistory(); 
@@ -17,7 +17,7 @@ function Register () {
   const [ address, setAddress ] = useState('');
   const [ city, setCity ] = useState('');
   const [ phone, setPhone ] = useState('');
-  const [ notif, setNotif ] = useState('')
+  const [ notif, setNotif ] = useState('');
   const [ alertInput, setAlertInput ] = useState(false);
 
   // const [signup] = useMutation(SIGNUP)
@@ -30,14 +30,14 @@ function Register () {
   async function SubmitRegister (e) {
     e.preventDefault();
     if(
-        (username === '') || (email === '') || (password=== '') || (address === '') ||  (city=== '') ||  (phone === '')
+      (username === '') || (email === '') || (password=== '') || (address === '') || (city=== '') || (phone === '')
     ) {
       setNotif ('form is not complete');
       setAlertInput(true);
     } else if (password!==password2) {
       setNotif ('passwords are not same');
       setAlertInput(true);
-    } else if (password.length<=6){
+    } else if (password.length<=6) {
       setNotif('password must have minimum 6 characters');
       setAlertInput(true);
     } else {
@@ -56,7 +56,7 @@ function Register () {
       localStorage.setItem('token', token); //dummy token
       localStorage.setItem('user_id', _id);
       localStorage.setItem('username', username);
-      alertify.notify('SUCCESS REGISTER', 'success', 5, function(){  console.log('dismissed'); });
+      alertify.notify('SUCCESS REGISTER', 'success', 5, function () { console.log('dismissed'); });
       history.push('/');
     }
   }
@@ -73,7 +73,7 @@ function Register () {
     console.log('start of upload');
     if (imageAsFile === '') {
       console.error(`not an image, the image file is a ${typeof (imageAsFile)}`);
-      setNotif (`no file is uploaded`);
+      setNotif ('no file is uploaded');
       setAlertInput(true);
     }
     const uploadTask = storage.ref(`/images/${imageAsFile.name}`).put(imageAsFile);
@@ -127,15 +127,15 @@ function Register () {
         </div>
       </div>
       {alertInput && (
-      <div className="modalAlert">
-        <div className="Alert-flex">
-          <div className="Alert-title">ALERT</div>
-          <div className="Alert-content">Notification: {notif}</div>
-          <div >
-            <button onClick={()=>setAlertInput(false)} className="Alert-button">OK</button>
+        <div className="modalAlert">
+          <div className="Alert-flex">
+            <div className="Alert-title">ALERT</div>
+            <div className="Alert-content">Notification: {notif}</div>
+            <div >
+              <button onClick={()=>setAlertInput(false)} className="Alert-button">OK</button>
+            </div>
           </div>
         </div>
-      </div>
       )}
     </>
   );
