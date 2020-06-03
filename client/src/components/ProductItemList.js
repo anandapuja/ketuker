@@ -47,7 +47,6 @@ export default function ProductItemList ({ product }) {
 
   // if(userData) {
   //   const { getUser: { city } } = userData; 
-  console.log(product)
   return (
     <>
     {/* <div className="product-item-list-container">

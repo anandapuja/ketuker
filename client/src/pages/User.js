@@ -127,9 +127,9 @@ export default function User () {
               <div className="gatauApa">
 
               {data.transactionByTarget.map(product => (
-                // <Link to={'/konfirmasi/' + product._id + '?diajak'} onClick={setUserId(product, 'diajak')} key={product._id}>
+                <Link to={'/konfirmasi/' + product._id + '?diajak'} onClick={setUserId(product, 'diajak')} key={product._id}>
                 <UserDiajak product={product.productTarget} status={product.status}/>
-                // </Link>
+                </Link>
                 ))}
               </div>
             </div>

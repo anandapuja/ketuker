@@ -14,6 +14,7 @@ export default function HeaderMain () {
   const history = useHistory();
 
   const [ showOut, setShowOut ] = useState(false);
+  const [ filter, setFilter] = useState('')
 
   function ShowSignOut () {
     setShowOut(true);
@@ -36,7 +37,12 @@ export default function HeaderMain () {
     } else {
       history.push('/login');
     }
-     
+  }
+
+  function search (e) {
+    e.preventDefault()
+    setFilter('')
+    history.push('/?filter=' + filter)
   }
 
   return (
@@ -47,7 +53,9 @@ export default function HeaderMain () {
         </div>
       </Link>
       <div className="header-search-container">
-        <input type="text" placeholder="cari barang lalu tekan enter" />
+        <form onSubmit={search}>
+          <input type="text" placeholder="cari barang lalu tekan enter" onChange={(e) => setFilter(e.target.value)} value={filter}/>
+        </form>
       </div>
       <div className="header-user-container">
       <Link to={ localStorage.getItem('token') ? '/additem' : '/login' }>

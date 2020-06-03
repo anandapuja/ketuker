@@ -22,13 +22,21 @@ export default function Home () {
   useEffect(() => {
     if(data) {
       const notMine = data.getProducts.filter((el) => el.userId != localStorage.getItem('user_id'));
+      if(search.substr(0, 7) == '?filter') {
+        const filtered = search.slice(8);
+        const filterProduct = notMine.filter(el => {
+          return el.title.includes(filtered)
+        })
+        return setProducts(filterProduct)
+      }
       if(page !== 1) {
         return setProducts(notMine.slice(0, page*9));
       } else {
         return setProducts(notMine.slice(0, 9));
       }
-    }
-  }, [ data, page ]);
+
+    } 
+  }, [ data, page, search ]);
 
   function nextPage () {
     setPage((val)=> val+1);
