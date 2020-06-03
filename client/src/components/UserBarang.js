@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import deleteIcon from '../assets/images/trash.png';
 import editIcon from '../assets/images/edit.png';
 import PropTypes from 'prop-types';
@@ -16,6 +16,7 @@ export default function UserBarang ({ product }) {
   const [ pageDelete, setPageDelete ] = useState(false);
   const [ idDelete, setIdDelete ] = useState('');
   const [ deleteProd ] = useMutation(deleteProduct, { refetchQueries: () => [ { query: GET_TRANSACTION_USER , variables: { userId: localStorage.getItem('user_id') } } ] });
+  const [uangRupiah, setUangRupiah] = useState('')
 
   function ShowDelete (id) {
     setIdDelete(id);
@@ -37,6 +38,29 @@ export default function UserBarang ({ product }) {
     // console.log(object)
     // tembak server
   }
+
+  useEffect(() => {
+    const productPrice = String(product.price);
+    if(product.price){
+      var number_string = productPrice.replace(/[^,\d]/g, '').toString(),
+        split = number_string.split(','),
+        sisa = split[0].length % 3,
+        rupiah = split[0].substr(0, sisa),
+        ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+     
+      let separator;
+      // tambahkan titik jika yang di input sudah menjadi angka ribuan
+      if(ribuan) {
+        separator = sisa ? '.' : '';
+        rupiah += separator + ribuan.join('.');
+      }
+     
+      rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
+      setUangRupiah('Rp. ' + rupiah);
+    } else {
+      console.log(product.price)
+    }
+  },[]);
 
   return (
     <div className="product-item-list-container">
@@ -66,7 +90,7 @@ export default function UserBarang ({ product }) {
           </div>
           
         </div>
-        <p className="product-item-list-price">IDR {product.price},-</p>
+        <p className="product-item-list-price">{uangRupiah}</p>
       </div>
       <p className="product-item-list-title">{product.title}</p>
     </div>

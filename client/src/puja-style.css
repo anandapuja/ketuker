@@ -28,10 +28,10 @@ h5{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 30px;
+  padding: 20px 30px 10px 30px;
   /* background-color: #5415CE; */
   /* background-color: #232323; */
-  background-image: url('./assets/images/bg-copy.jpg');
+  /* background-image: url('./assets/images/bg-copy.jpg'); */
 }
 .logo-container{
   width: 300px;
@@ -53,12 +53,16 @@ h5{
   height: 50px;
   border: 1px solid white;
   border-radius: 50%;
+  transition: 0.3s;
+}
+.header-user-container img:hover{
+  opacity: 0.7;
 }
 .header-user-container button{
-  padding: 10px;
+  padding: 13px;
   margin-right: 10px;
-  background-color: #F9BE06;
-  border: none;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid black;
   transition: 0.3s;
 }
 .header-user-container button:hover{
@@ -72,9 +76,9 @@ h5{
 .header-second-container{
   display: flex;
   align-items: center;
-  padding: 10px 30px;
+  padding: 20px 30px 10px 30px;
   /* background-color: #5415CE; */
-  background-image: url('./assets/images/bg-copy.jpg');
+  /* background-image: url('./assets/images/bg-copy.jpg'); */
 }
 .arrow-header-left {
   width: 0; 
@@ -90,21 +94,25 @@ h5{
   display: flex;
   border-top: 1px solid #fff;
   /* background-color: #F98A06; */
-  background-image: url('./assets/images/bg-copy.jpg');
+  background-image: url('./assets/images/bg_blackbox.png');
   justify-content: center;
 }
 .navigation-container-second{
+  padding: 15px 30px;
   display: flex;
-  background-color: #F98A06;
+  background-image: url('./assets/images/bg_blackbox.png');
 }
 .navigation-container p{
-  padding: 10px 30px;
+  padding: 15px 30px;
   transition: 0.3s;
   color: white;
   font-weight: bold;
+  text-transform: uppercase;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 30px;
 }
 .navigation-container p:hover{
-  background-color: #F9BE06;
+  background-color: rgb(255, 255, 255);
   cursor: pointer;
   color: black;
 }
@@ -129,19 +137,33 @@ h5{
 .product-item-list-container{
   width: 30%;
   background: rgb(240, 240, 240);
+  background-image: url('./assets/images/bg_blackbox.png');
   margin: 10px;
   border: 1px solid rgb(228, 228, 228);
   padding-bottom: 20px;
   transition: 0.3s;
 }
 .product-item-list-container:hover {
-  border: 2px solid rgb(43, 43, 43);
+  /* border: 2px solid rgb(43, 43, 43); */
+  box-shadow: 0 1px 2px rgba(0,0,0,0.07), 
+                0 2px 4px rgba(0,0,0,0.07), 
+                0 4px 8px rgba(0,0,0,0.07), 
+                0 8px 16px rgba(0,0,0,0.07),
+                0 16px 32px rgba(0,0,0,0.07), 
+                0 32px 64px rgba(0,0,0,0.07);
 }
 .product-item-list-container p{
   padding: 10px 20px;
+  color: white;
 }
 .product-item-list-image{
   position: relative;
+}
+.product-item-list-image img{
+  filter: grayscale();
+}
+.product-item-list-image img:hover{
+  filter: none;
 }
 .product-item-list-image p{
   position: absolute;
@@ -160,7 +182,7 @@ h5{
   transition: 0.3s;
 }
 .product-item-list-title:hover{
-  color: rgb(80, 80, 80);
+  color: rgb(190, 190, 190);
 }
 .product-item-list-location{
   font-size: 14px;
@@ -227,7 +249,7 @@ h5{
   margin-bottom: 20px;
   font-size: 20px;
   background-color: rgb(7, 7, 7);
-  color: #F9BE06;
+  color: rgb(255, 255, 255);
   padding: 10px 20px;
 }
 .item-user-whislist-image{
@@ -272,14 +294,14 @@ h5{
 .detail-item-user-descwhis button{
   margin-top: 50px;
   padding: 10px 25px;
-  background-color: #F9BE08;
-  border: none;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid black;
   color: black;
   transition: 0.3s;
   cursor: pointer;
 }
 .detail-item-user-descwhis button:hover {
-  color: #F9BE08;
+  color: rgb(255, 255, 255);
   background-color: black;
 }
 
@@ -305,15 +327,15 @@ h5{
   right: 20px;
   position: fixed;
   padding: 20px 30px;
-  background-color: #F9BE06;
-  border: none;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid black;
   color: black;
   transition: 0.3s;
   cursor: pointer;
 }
 .readyToExchange:hover{
   background-color: black;
-  color: #F9BE06;
+  color: rgb(255, 255, 255);
 }
 
 /* USER PROFILE COMPONENT */
@@ -478,10 +500,12 @@ h5{
   /* margin-bottom: 50px; */
   color: white;
   cursor: pointer;
+  border: 1px solid black;
 }
 .confirmation-button button:hover{
-  background-color: rgb(0, 0, 0);
-  color: #f9be08;
+  background-color: rgb(255, 255, 255);
+  color: #000000;
+  border: 1px solid black;
 }
 .confirmation-title h1{
   text-align: center;
@@ -497,7 +521,7 @@ h5{
 .success-container{
   width: 600px;
   margin: 50px auto;
-  background-image: url('./assets/images/bg-copy.jpg');
+  background-image: url('./assets/images/bg_blackbox.png');
   display: flex;
   padding: 50px;
   height: 500px;
@@ -514,7 +538,11 @@ h5{
   text-align: center;
 }
 .success-message a{
-  color: #f9be08;
+  color: #ffffff;
+  font-weight: bold;
+}
+.success-message a:hover{
+  color: rgb(175, 175, 175);
 }
 .success-message p{
   padding: 20px;
@@ -522,12 +550,15 @@ h5{
 .success-message button{
   padding: 10px 30px;
   border: none;
-  background-color: #f9be08;
+  background-color: #ffffff;
   cursor: pointer;
   transition: 0.3s;
+  border: 1px solid white;
 }
 .success-message button:hover{
-  background-color: white;
+  background-color: rgb(12, 12, 12);
+  color: white;
+  border: 1px solid white;
 }
 .approve-reject-button{
   display: flex;
@@ -571,4 +602,20 @@ h5{
   text-align: center;
   margin: 30px 0;
   color: rgb(8, 8, 8);
+}
+.not-found-container{
+  width: 500px;
+  margin: auto;
+}
+.not-found-container button{
+  text-align: center;
+  width: 100%;
+  padding: 20px 0;
+  cursor: pointer;
+  transition: 0.3s;
+  border: none;
+}
+.not-found-container button:hover{
+  background-color: #000000;
+  color: #fff;
 }

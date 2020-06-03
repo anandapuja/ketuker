@@ -13,6 +13,7 @@ export default function DetailItemCustomer () {
   const { loading, error, data } = useQuery(GET_PRODUCT_USER_AND_DETAIL, { variables: { userId: localStorage.getItem('user_id'), id } });
   const [ productOriginal, setProductOriginal ] = useState([]);
   const [ productTarget, setProductTarget ] = useState([]);
+  // const [uangRupiah, setUangRupiah] = useState('')
 
   useEffect(() => {
     setReadyExchange(() => {
@@ -51,6 +52,29 @@ export default function DetailItemCustomer () {
     localStorage.setItem('userTarget', localStorage.getItem('user_id'));
     history.push('/konfirmasi');
   }
+
+  // useEffect(() => {
+  //   const productPrice = String(product.price);
+  //   if(product.price){
+  //     var number_string = productPrice.replace(/[^,\d]/g, '').toString(),
+  //       split = number_string.split(','),
+  //       sisa = split[0].length % 3,
+  //       rupiah = split[0].substr(0, sisa),
+  //       ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+     
+  //     let separator;
+  //     // tambahkan titik jika yang di input sudah menjadi angka ribuan
+  //     if(ribuan) {
+  //       separator = sisa ? '.' : '';
+  //       rupiah += separator + ribuan.join('.');
+  //     }
+     
+  //     rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
+  //     setUangRupiah('Rp. ' + rupiah);
+  //   } else {
+  //     console.log(product.price)
+  //   }
+  // },[]);
   
   if (loading) {
     return <CompLoading></CompLoading>;
@@ -62,6 +86,26 @@ export default function DetailItemCustomer () {
   if (data) {
     const { getProduct: product } = data;
     const { productByUser } = data;
+    const productPrice = String(product.price);
+    console.log(productPrice)
+    // if(product.price){
+      var number_string = productPrice.replace(/[^,\d]/g, '').toString(),
+        split = number_string.split(','),
+        sisa = split[0].length % 3,
+        rupiah = split[0].substr(0, sisa),
+        ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+     
+      let separator;
+      // tambahkan titik jika yang di input sudah menjadi angka ribuan
+      if(ribuan) {
+        separator = sisa ? '.' : '';
+        rupiah += separator + ribuan.join('.');
+      }
+     
+      rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
+      // setUangRupiah('Rp. ' + rupiah);
+      const uangRupiah = 'Rp. ' + rupiah;
+ 
     return (
       <>
         <HeaderMain />
@@ -73,9 +117,9 @@ export default function DetailItemCustomer () {
               <img src={product.image} alt="item" />
             </div>
             <div className="detail-item-user-descwhis">
-              <h2>IDR {product.price}</h2>
+              <h2>{uangRupiah}</h2>
               <p>{product.description}</p>
-              <Link to={`/?category=${product.category}`}><p style={{ marginTop:20 }}>Kategori: {product.category}</p></Link>
+              <Link to={`/category=${product.category}`}><p style={{ marginTop:20 }}>Kategori: {product.category}</p></Link>
               <button type="button" onClick={changeBarterStatus}>AJAK BARTERAN</button>
             </div>
           </div>
