@@ -26,7 +26,7 @@ export default function Success () {
     return (
       <>
         <HeaderMain />
-        <Navigation />
+        {/* <Navigation /> */}
         <div className="success-container" style={{position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)'}}>
           <div className="success-message">
             <h1>SUCCESS</h1>

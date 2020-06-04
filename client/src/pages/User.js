@@ -88,7 +88,7 @@ export default function User () {
     return (
       <>
         <HeaderMain />
-        <Navigation />
+        {/* <Navigation /> */}
         <div className="user-profile-container">
           <UserProfile />
           <UserNavigation
@@ -123,7 +123,7 @@ export default function User () {
           ) }
   
           { diajak && (
-            <div className="aneh">
+            <div className="aneh user-barang-container">
               <div className="gatauApa">
 
               {data.transactionByTarget.map(product => (

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { HeaderSecond, NavigationSecond } from '../components';
+import { HeaderSecond, NavigationSecond, HeaderMain } from '../components';
 import { useMutation } from '@apollo/react-hooks';
 import { LOGIN_USER } from '../services/schema';
 import alertify from 'alertifyjs';
@@ -76,8 +76,8 @@ function Login () {
 
   return (
     <>
-      <HeaderSecond />
-      <NavigationSecond />
+        <HeaderMain />
+      {/* <NavigationSecond /> */}
       <div className="login">
         <h3 className="title-login">SIGN IN</h3>
         <div className="div-form">

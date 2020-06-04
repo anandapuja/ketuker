@@ -58,8 +58,8 @@ export default function Home () {
     return (
       <>
         <HeaderMain />
-        <Navigation />
-        <SliderApp />
+        {/* <Navigation /> */}
+        {/* <SliderApp /> */}
         <div className="home-list-container">
           <div className="home-product-list-item-container">
             {

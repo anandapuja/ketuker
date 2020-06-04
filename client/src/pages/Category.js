@@ -52,7 +52,7 @@ export default function Home () {
     return (
       <>
         <HeaderMain />
-        <Navigation />
+        {/* <Navigation /> */}
         {/* <SliderApp /> */}
         <div className="home-list-container">
           { data.productByCategory.length === 0 ? (

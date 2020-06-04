@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { storage } from '../storage/firebase';
-import { HeaderSecond, NavigationSecond } from '../components';
+import { HeaderSecond, NavigationSecond, HeaderMain } from '../components';
 import { useMutation } from '@apollo/react-hooks';
 import { CREATE_ACCOUNT } from '../services/schema';
 import alertify from 'alertifyjs';
@@ -99,8 +99,8 @@ function Register () {
 
   return (
     <>
-      <HeaderSecond />
-      <NavigationSecond />
+        <HeaderMain />
+      {/* <NavigationSecond /> */}
       <div className="register">
         <h3 className="title-register">CREATE ACCOUNT</h3>
         <div className="div-register">
