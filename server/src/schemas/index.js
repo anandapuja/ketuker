@@ -1,14 +1,26 @@
-import { gql } from 'apollo-server';
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+// import { gql } from 'apollo-server';
+// import jwt from 'jsonwebtoken';
+// import bcrypt from 'bcrypt';
 
-import getTokoPedia from '../utilities/scraping';
-import sendEmail from '../utilities/nodemailer';
-import redis from '../utilities/redis';
-import User from '../models/User';
-import Product from '../models/Product';
-import { authen, author } from '../utilities/authenticagtion';
-import Transaction from '../models/Transaction';
+// import getTokoPedia from '../utilities/scraping';
+// import sendEmail from '../utilities/nodemailer';
+// import redis from '../utilities/redis';
+// import User from '../models/User';
+// import Product from '../models/Product';
+// import { authen, author } from '../utilities/authenticagtion';
+// import Transaction from '../models/Transaction';
+
+const { gql } = require('apollo-server');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+
+const getTokoPedia = require('../utilities/scraping');
+const sendEmail = require('../utilities/nodemailer');
+const redis = require('../utilities/redis');
+const User = require('../models/User');
+const Product = require('../models/Product');
+const { authen, author } = require('../utilities/authenticagtion');
+const Transaction = require('../models/Transaction');
 
 export const typeDefs = gql`
   type User {

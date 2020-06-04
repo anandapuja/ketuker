@@ -1,4 +1,5 @@
-import Redis from 'ioredis';
+// import Redis from 'ioredis';
+const Redis = require('ioredis');
 
 const redis = new Redis();
 

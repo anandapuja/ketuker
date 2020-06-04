@@ -1,4 +1,5 @@
-import nodemailer from 'nodemailer';
+// import nodemailer from 'nodemailer';
+const nodemailer = require('nodemailer');
 
 const sendEmail = async (mail, sub, text) => {
   let mailTransporter = nodemailer.createTransport({

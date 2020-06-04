@@ -1,5 +1,8 @@
-import jwt from 'jsonwebtoken';
-import Product from '../models/Product';
+// import jwt from 'jsonwebtoken';
+// import Product from '../models/Product';
+
+const jwt = require('jsonwebtoken');
+const Product = require('../models/Product');
 
 export const authen = async auth => {
   if (!auth) throw new Error('You have to login!');
