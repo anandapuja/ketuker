@@ -48,7 +48,9 @@ export default function HeaderMain () {
     setFilter('')
     history.push('/?filter=' + filter)
   }
-
+if(data) {
+  console.log(data, 'INI DATAAA')
+}
   return (
     // <div className="header-container">
     //   <Link to="/">
@@ -111,7 +113,7 @@ export default function HeaderMain () {
           <ul>
               <li><a >
                 <Link to={ localStorage.getItem('token') ? '/my-profile' : '/login' }>
-                  {data&&data.getUser.username ? data.getUser.username : 'Login/Register'}
+                  {localStorage.getItem('user_id') ? localStorage.getItem('username') : 'Login/Register'}
                 </Link>
               </a></li>
               <li><a >
