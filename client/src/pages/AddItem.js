@@ -156,7 +156,7 @@ export default function AddItem () {
                 type="text" placeholder="Harga" value={price} className="input-additem"></input>
               <Select 
                 onChange={(option)=>setCategory(option.value)} 
-                options={options} getOptionValue={option => option.value} />              
+                options={options} getOptionValue={option => option.value} className="margin-atas"/>              
               {/* <input onChange={(e)=>setWishlist(e.target.value)} 
                 type="text" placeholder="Barang apa yang kamu cari?" className="input-additem"></input> */}
               <button className="btn-additem">SUBMIT</button>

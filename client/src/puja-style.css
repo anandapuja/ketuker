@@ -364,6 +364,9 @@ h2,h1{
   margin-right: 30px;
   opacity: 1.2;
 }
+.margin-atas {
+  margin-top: 20px;
+}
 .user-profile-container-image img{
   /* border-radius: 50%; */
   border: 5px solid black;

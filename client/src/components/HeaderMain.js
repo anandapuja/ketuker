@@ -105,7 +105,7 @@ export default function HeaderMain () {
     // </div>
     <div className="headerAdvance">
       <nav>
-          <img src={logoBw} alt="logo" className="logocustom"/>
+          {/* <img src={logoBw} alt="logo" className="logocustom"/> */}
           <div class="logo">
           </div>
           <ul>
@@ -217,8 +217,7 @@ export default function HeaderMain () {
       <header>
           <div class="headline">
               <div class="inner">
-                  <h1>KETUKER</h1>
-                  <p>Barterin [ Barang ] Mu Bro..</p>
+              <img src={logoBw} alt="logo" className="logocustom"/>
               </div>
           </div>
       </header>
