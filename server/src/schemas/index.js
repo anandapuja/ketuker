@@ -356,7 +356,7 @@ const resolvers = {
           throw new Error('Wrong Password / Wrong Email');
         } else {
           //kalo secretPrivateKey gw taruh di .env masih error. sementara gtu.
-          const token = jwt.sign({ id: getUser._id }, process.env.JWT_SECRET);
+          const token = jwt.sign({ id: getUser._id }, 'rahasia');
           const { _id, username, email, avatar, address, phone } = getUser;
           return {
             _id: _id,
