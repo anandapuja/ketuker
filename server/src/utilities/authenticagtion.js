@@ -4,7 +4,7 @@
 const jwt = require('jsonwebtoken');
 const Product = require('../models/Product');
 
-export const authen = async auth => {
+const authen = async auth => {
   if (!auth) throw new Error('You have to login!');
   const token = auth;
 
@@ -15,10 +15,13 @@ export const authen = async auth => {
   return user;
 };
 
-export const author = async ({ userId, prodId }) => {
+const author = async ({ userId, prodId }) => {
   if (!userId) throw new Error('You have to login!');
   if (!prodId) throw new Error('Product not found!');
   const product = await Product.findById(prodId);
   if (product.userId != userId) throw new Error('You are not authorized!');
   return true;
 };
+
+module.exports = authen;
+module.exports = author;

@@ -26,4 +26,5 @@ const sendEmail = async (mail, sub, text) => {
   console.log(isSuccess);
 };
 
-export default sendEmail;
+// export default sendEmail;
+module.exports = sendEmail;
