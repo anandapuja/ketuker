@@ -22,7 +22,7 @@ const Product = require('../models/Product');
 const { authen, author } = require('../utilities/authenticagtion');
 const Transaction = require('../models/Transaction');
 
-export const typeDefs = gql`
+const typeDefs = gql`
   type User {
     _id: ID!
     username: String!
@@ -148,7 +148,7 @@ export const typeDefs = gql`
   }
 `;
 
-export const resolvers = {
+const resolvers = {
   Query: {
     getUsers: async () => {
       const checkUsers = JSON.parse(await redis.get('users'));
@@ -530,3 +530,6 @@ export const resolvers = {
     }
   },
 };
+
+module.exports = resolvers;
+module.exports = typeDefs;
