@@ -7,6 +7,7 @@ const session = require('express-session');
 // import { typeDefs, resolvers } from './schemas/index';
 const mongoose = require('mongoose');
 const { typeDefs, resolvers } = require('./schemas/index');
+// const resolvers = require('./schemas/index').resolvers;
 
 const startServer = async () => {
   const server = new ApolloServer({

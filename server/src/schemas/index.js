@@ -531,5 +531,8 @@ const resolvers = {
   },
 };
 
-module.exports = resolvers;
-module.exports = typeDefs;
+// module.exports = resolvers;
+// module.exports = typeDefs;
+module.exports = {
+  resolvers, typeDefs
+};
