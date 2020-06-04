@@ -336,7 +336,7 @@ const resolvers = {
         }
       } else {
         const res = await newUser.save();
-        const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
+        const token = jwt.sign({ id: newUser._id }, 'rahasia');
         const users = JSON.parse(await redis.get('users'));
         if (users) {
           users.push(newUser);
