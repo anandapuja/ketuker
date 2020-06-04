@@ -4,6 +4,7 @@ import ConfirmationItem from '../components/ConfirmationItem';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { TRANSACTION, GET_TRANSACTION_BYID, updateTransaction, deleteTransaction } from '../services/schema';
 import { useHistory, useParams, useLocation } from 'react-router-dom';
+import alertify from 'alertifyjs';
 
 export default function Confirmation () {
   const [ barter ] = useState(JSON.parse(localStorage.getItem('barter')));
@@ -15,6 +16,7 @@ export default function Confirmation () {
   const { search } = useLocation();
   const { loading, error, data } = useQuery(GET_TRANSACTION_BYID, { variables: { 
     id: id ? id : null, userId1: localStorage.getItem('userOriginal'), userId2: localStorage.getItem('userTarget') } });
+  const [err, setErr] = useState(false);
 
   async function deal () {
     try {
@@ -23,7 +25,9 @@ export default function Confirmation () {
       // alert('SUCCES');
       history.push('/waiting');
     } catch (error) {
+      setErr(error);
       console.log(error, '>>>>>>>>>>>EOROREO');
+      alertify.notify(error.message, 'error', 5, function () { console.log('dismissed'); });
     }
   }
 
@@ -53,7 +57,8 @@ export default function Confirmation () {
     if(!localStorage.getItem('user_id')) {
       history.push('/')
     }
-    return <CompError />
+
+    return <CompError message={error ? error.message : err.message}/>
   }
  
   if (data) {

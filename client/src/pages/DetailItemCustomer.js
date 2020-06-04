@@ -5,6 +5,7 @@ import { Link, useParams, useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_PRODUCT_USER_AND_DETAIL } from '../services/schema';
 import DetailOptions from '../components/Options';
+import alertify from 'alertifyjs'
 
 export default function DetailItemCustomer () {
   const history = useHistory();
@@ -51,8 +52,12 @@ export default function DetailItemCustomer () {
       productTarget,
       productOriginal
     };
-    console.log(barter, '<<<<<ABBBRRETSD>>>>')
     const targetPrice = barter.productTarget[0].price
+    if(barter.productTarget[0].submit) {
+      return alertify.notify('Barang yang kamu inginkan sudah tertukar', 'error', 5, function () { console.log('dismissed'); })
+    };
+    // const data = barter.productOriginal.filter
+    // if(barter.productTarget[0].submit) alertify.notify('Barang yang kamu inginkan sudah tertukar', 'error', 5, function () { console.log('dismissed'); });
     let priceBarteran = 0
     barter.productOriginal.forEach(el => priceBarteran += el.price)
     var number_string = String(priceBarteran).replace(/[^,\d]/g, '').toString(),
