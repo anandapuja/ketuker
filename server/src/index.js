@@ -36,7 +36,7 @@ const startServer = async () => {
     app,
     cors: {
       credentials: true,
-      origin: 'http://localhost:3000'
+      origin: 'http://ketuker.s3-website-ap-southeast-1.amazonaws.com'
     }
   }); 
 
