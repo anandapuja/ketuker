@@ -6,7 +6,7 @@ export default function UserDiajak ({ product, status }) {
         status ? 
           <div className="doasat">
             <div class="container coverApproved" style={{
-              background: `url(${product[0].image })`, backgroundSize: 'contain',
+              background: `url(${product[0].image })`, backgroundSize: 'cover',
               filter: 'grayscale(1) opacity(.8)'
               }}>
               <div class="overlay">

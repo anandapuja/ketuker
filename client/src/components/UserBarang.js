@@ -97,7 +97,7 @@ export default function UserBarang ({ product }) {
     </div> */}
 
     <div class="aneh">
-        <div class="container" style={{background: `url(${product.image })`, backgroundSize: 'contain'}}>
+        <div class="container" style={{background: `url(${product.image })`, backgroundSize: 'cover'}}>
         <div class="overlay">
           <div class = "items"></div>
           <div class = "items head">
