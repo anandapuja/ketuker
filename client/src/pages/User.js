@@ -28,6 +28,7 @@ export default function User () {
 
   useEffect(() => {
     if(data) {
+      console.log(data.productByUser, 'bsjahff')
       if(page !== 1) {
         return setProducts(data.productByUser.slice(0, page*9));
       } else {

@@ -711,7 +711,7 @@ h2,h1{
 .gatauApa {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 50px;
+  grid-gap: 20px;
 }
 
 .doasat {

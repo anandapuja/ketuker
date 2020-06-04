@@ -8,21 +8,21 @@ import {
   CompLoading
 } from '../components';
 import { useQuery } from '@apollo/react-hooks';
-import { GET_ALL_PRODUCT } from '../services/schema';
+import { GET_ALL_PRODUCT, GET_ALL_PRODUCT_Filter } from '../services/schema';
 import { useLocation, useHistory } from 'react-router-dom';
 import SliderApp from '../components/Slider';
 
 export default function Home () {
   const { search } = useLocation();
   const history = useHistory();
-  const { loading, error, data } = useQuery(GET_ALL_PRODUCT, { fetchPolicy: 'cache-and-network' });
+  const { loading, error, data } = useQuery(GET_ALL_PRODUCT_Filter, { variables: { where: 'false' } , fetchPolicy: 'cache-and-network' });
   const [ page, setPage ] = useState(search ? Number(search.slice(6)) : 1);
   const [ products, setProducts ] = useState([]);
   const [ allProd, setAll ] = useState();
 
   useEffect(() => {
     if(data) {
-      const notMine = data.getProducts.filter((el) => el.userId != localStorage.getItem('user_id'));
+      const notMine = data.getProductsFilter.filter((el) => el.userId != localStorage.getItem('user_id'));
       console.log(notMine)
       setAll(notMine);
       if(search.substr(0, 7) == '?filter') {
@@ -70,7 +70,7 @@ export default function Home () {
           </div>
           <div className="home-load-more-container">
             {
-              allProd && products.length < allProd.length && (data.getProducts.length > 9) && 
+              allProd && products.length < allProd.length && (data.getProductsFilter.length > 9) && 
               <LoadMoreButton page={nextPage}/>
             }
           </div>

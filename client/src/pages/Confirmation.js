@@ -17,6 +17,8 @@ export default function Confirmation () {
   const { loading, error, data } = useQuery(GET_TRANSACTION_BYID, { variables: { 
     id: id ? id : null, userId1: localStorage.getItem('userOriginal'), userId2: localStorage.getItem('userTarget') } });
   const [err, setErr] = useState(false);
+  const [alertInput, setAlert] = useState();
+  const [notif, setNotif] = useState();
 
   async function deal () {
     try {
@@ -36,6 +38,8 @@ export default function Confirmation () {
       await updateTrans({ variables: { id: id, input: true } });
       history.push('/sukses');
     } catch (error) {
+      setAlert(true);
+      setNotif(error.message)
       console.log(error);
     }
   }
@@ -76,6 +80,17 @@ export default function Confirmation () {
       <>
         <HeaderMain />
         {/* <Navigation /> */}
+        {alertInput && (
+        <div className="modalAlert">
+          <div className="Alert-flex">
+            <div className="Alert-title">ALERT</div>
+            <div className="Alert-content">Notification: {notif}</div>
+            <div >
+              <button onClick={()=>setAlert(false)} className="Alert-button">OK</button>
+            </div>
+          </div>
+        </div>
+      )}
         <div className="confirmation-title">
           <h1>KONFIRMASI TRANSAKSI</h1>
         </div>
