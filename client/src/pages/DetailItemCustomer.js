@@ -137,7 +137,7 @@ export default function DetailItemCustomer () {
     return (
       <>
         <HeaderMain />
-        <Navigation />
+        {/* <Navigation /> */}
         <div className="detail-item-user-container">
           <h1>{product.title}</h1>
           <div className="detail-item-user-picwhis">

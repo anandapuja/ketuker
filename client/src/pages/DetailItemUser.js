@@ -13,7 +13,7 @@ export default function DetailItemUser () {
   return (
     <>
       <HeaderMain />
-      <Navigation />
+      {/* <Navigation /> */}
       <div className="detail-item-user-container">
         <h1>TITLE BARANG</h1>
         <div className="detail-item-user-picwhis">

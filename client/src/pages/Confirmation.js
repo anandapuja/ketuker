@@ -70,7 +70,7 @@ export default function Confirmation () {
     return (
       <>
         <HeaderMain />
-        <Navigation />
+        {/* <Navigation /> */}
         <div className="confirmation-title">
           <h1>KONFIRMASI TRANSAKSI</h1>
         </div>

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import '../additem.css';
 import { storage } from '../storage/firebase';
-import { HeaderSecond, NavigationSecond, CompError, CompLoading } from '../components';
+import { HeaderSecond, NavigationSecond, CompError, CompLoading, HeaderMain } from '../components';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 // check query for submit edit
 import { GET_PRODUCT_DETAIL, updateProduct } from '../services/schema';
@@ -142,8 +142,9 @@ export default function EditItem () {
   if (data) {     
     return (
       <>
-        <HeaderSecond />
-        <NavigationSecond />
+        <HeaderMain />
+        {/* <HeaderSecond /> */}
+        {/* <NavigationSecond /> */}
         <div className="edititem">
           <div className="title-register">EDIT BARANG</div>
           <div className="flex-edititem">

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import '../additem.css';
 import { storage } from '../storage/firebase';
-import { HeaderSecond, NavigationSecond } from '../components';
+import { HeaderSecond, NavigationSecond, HeaderMain } from '../components';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { ADD_PRODUCT, GET_PRODUCTS_AND_USERS, scrapPrice } from '../services/schema';
 import { useHistory, Link } from 'react-router-dom';
@@ -141,8 +141,9 @@ export default function AddItem () {
     {
       localStatus && (
         <>
-        <HeaderSecond />
-        <NavigationSecond />
+        {/* <HeaderSecond /> */}
+        <HeaderMain/>
+        {/* <NavigationSecond /> */}
         <div className="additem">
           <div className="title-additem">UPLOAD BARANG</div>
           <div className="flex-additem">

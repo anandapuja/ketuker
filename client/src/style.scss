@@ -261,3 +261,298 @@ body {
     background-image: url('data:image/gif;base64,R0lGODlhBAAEAIABAAAAAAAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjEgNjQuMTQwOTQ5LCAyMDEwLzEyLzA3LTEwOjU3OjAxICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1LjEgV2luZG93cyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo5NUY1OENCRDdDMDYxMUUyOTEzMEE1MEM5QzM0NDVBMyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo5NUY1OENCRTdDMDYxMUUyOTEzMEE1MEM5QzM0NDVBMyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjk1RjU4Q0JCN0MwNjExRTI5MTMwQTUwQzlDMzQ0NUEzIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjk1RjU4Q0JDN0MwNjExRTI5MTMwQTUwQzlDMzQ0NUEzIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+Af/+/fz7+vn49/b19PPy8fDv7u3s6+rp6Ofm5eTj4uHg397d3Nva2djX1tXU09LR0M/OzczLysnIx8bFxMPCwcC/vr28u7q5uLe2tbSzsrGwr66trKuqqainpqWko6KhoJ+enZybmpmYl5aVlJOSkZCPjo2Mi4qJiIeGhYSDgoGAf359fHt6eXh3dnV0c3JxcG9ubWxramloZ2ZlZGNiYWBfXl1cW1pZWFdWVVRTUlFQT05NTEtKSUhHRkVEQ0JBQD8+PTw7Ojk4NzY1NDMyMTAvLi0sKyopKCcmJSQjIiEgHx4dHBsaGRgXFhUUExIREA8ODQwLCgkIBwYFBAMCAQAAIfkEAQAAAQAsAAAAAAQABAAAAgYEEpdoeQUAOw==');
   }
 }
+
+// SIDENAV
+.sideNav {
+  // body {
+    // }
+    // position: fixed;
+    // background-color: #e74c3c;
+  
+  h1 {
+    font-family: verdana, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+    top: 5px;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  #btn1 {
+    top: 100px;
+  }
+  
+  #btn2 {
+    top: 200px;
+  }
+  
+  #btn3 {
+    top: 300px;
+  }
+  #btn4 {
+    top: 400px;
+  }
+  #btn5 {
+    top: 500px;
+  }
+  #btn6 {
+    top: 600px;
+  }
+  #btn7 {
+    top: 700px;
+  }
+  
+  div.button {
+    background-image: url('./assets/images/bg.jpg');
+    color: white;
+    border: none;
+    border-radius: 30px;
+    width: 500px;
+    height: 60px;
+    position: fixed;
+    left: -435px;
+    transition: .7s ease;
+  }
+  
+  div.button:hover {
+    // background-color: #ffffff;
+    position: fixed;
+    left: -50px;
+    width: 600px;
+    // border-radius: 0px;
+    box-shadow: 0px 5px 0px #7e4f3a9a;
+  }
+  
+  div.button:active {
+    background-color: #2c3e50;
+    transition: 0s;
+    color: #ecf0f1;
+  }
+}
+
+// ASDBJBSFJLBUABFUABUFASUF
+
+.headerAdvance {
+  @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+
+  header {
+    background:black;
+
+  }
+
+.headline {
+  position: relative;
+  height: 400px;
+  color: #fff;
+  text-align: center;
+  background: url('./assets/images/bg_blackbox.png') no-repeat center center;
+  background-size: cover;
+  &:after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(black, 0.5);
+  }
+}
+
+.inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  z-index: 10;
+  transform: translateX(-50%) translateY(-50%);
+  animation: fade-in 0.75s 0.25s ease-in forwards;
+  h1 {
+    margin: 0;
+    font-size: 4em;
+    line-height: 1.2em;
+  }
+  p {
+    margin: 0;
+    font-size: 1.4em;
+    font-style: italic;
+    font-family: serif;
+  }
+}
+
+nav {
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+  background-color: black;
+  opacity: 0.8;
+  &.scrolled {
+    background-color: red;
+  }
+  ul {
+    float: right;
+    list-style: none;
+    padding: 25px;
+    margin: 0;
+  }
+  li {
+    float: left;
+  }
+  a {
+    font-size: 0.9em;
+    text-transform: capitalize;
+    color: #fff;
+    text-decoration: none;
+    margin: 5px 0 0 20px;
+    display: block;
+    &:hover {
+      color: darken(#fff, 7%);
+      cursor: pointer;
+    }
+  }
+  .secondTab {
+    top: 20px;
+    position: fixed;
+    width: 100%;
+    z-index: -1;
+    background-color: black;
+    // opacity: 0.8;
+    &.scrolled {
+      background-color: red;
+    }
+    ul {
+      float: left;
+      list-style: none;
+      padding: 25px;
+      margin: 0;
+    }
+    li {
+      float: left;
+    }
+    a {
+      font-size: 0.9em;
+      color: #fff;
+      text-decoration: none;
+      margin: 5px 0 0 20px;
+      display: block;
+      &:hover {
+        color: darken(#fff, 7%);
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.logo {
+  // height: 100px;
+  // float: left;
+  // width: 500px;
+  // background-image: url('./assets/images/logo.png');
+  // &:before, &:after {
+  //   position: absolute;
+  //   font-size: 7em;
+  //   font-weight: 300;
+  //   line-height: 0;
+  //   color: #fff;
+  //   top: 25px;
+  // }
+  // &:before {
+  //   content: '\00BB';
+  //   left: 20px;
+  // }
+  // &:after {
+  //   content: '\00AB';
+  //   left: 34px;
+  // }
+}
+
+.logocustom {
+  float: left;
+  width: 10%;
+  margin-top: 1%;
+}
+
+section {
+  width: 100%;
+  margin: 25px auto;
+  padding: 20px;
+  max-width: 800px;
+  font-size: 1.2em;
+  line-height: 1.6em;
+  box-sizing: border-box;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+}
+
+@media only screen and (max-width : 1224px)  {
+
+  nav{
+    height: 30px;
+    ul {
+      display: none;
+      flex-direction: column;
+      justify-content: right;
+      align-content: flex-end;
+      align-items: flex-end;
+    }
+    a {
+      font-size: 0.9em;
+    }
+    .secondTab {
+      height: 30px;
+      ul {
+        display: none;
+        flex-direction: column;
+        justify-content: right;
+        align-content: flex-end;
+        align-items: flex-start;
+        align-self: flex-start;
+        position: relative;
+        left: -60px;
+      }
+      a h1{
+        font-size: 0.5em;
+      }
+    }
+  }
+  nav:hover{
+    ul {
+      display: flex;
+      flex-direction: column;
+      justify-content: right;
+      align-content: flex-end;
+      align-items: flex-end;
+      background-color: black;
+    }
+    a {
+      font-size: 0.9em;
+    }
+    .secondTab {
+      background-color: black;
+      ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: right;
+        align-content: flex-end;
+        align-items: flex-start;
+        align-self: flex-start;
+        position: relative;
+        left: -60px;
+      }
+      a h1{
+        font-size: 0.5em;
+      }
+    }
+  }
+  
+}

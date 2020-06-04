@@ -19,7 +19,7 @@ export default function Faq () {
   return (
     <>
       <HeaderMain />
-      <Navigation />
+      {/* <Navigation /> */}
       <div className="faq-page">
         <div className="faq-title">
           <h3>Pertanyaan yang sering ditanyakan:</h3>
