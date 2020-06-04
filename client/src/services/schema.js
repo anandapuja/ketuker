@@ -50,6 +50,21 @@ query getProducts{
 }
 `;
 
+export const GET_ALL_PRODUCT_Filter = gql`
+query getProductsFilter($where: String){
+  getProductsFilter(where: $where) {
+    _id
+    title
+    description
+    userId
+    category
+    image
+    submit
+    price
+  }
+}
+`;
+
 export const GET_PRODUCT_DETAIL = gql`
 query productDetail($id: ID!) {
   getProduct(id: $id) {

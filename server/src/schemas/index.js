@@ -106,6 +106,7 @@ export const typeDefs = gql`
     getUser(id: ID!): User!
 
     getProducts: [Product]!
+    getProductsFilter(where: String): [Product]!
     getProduct(id: ID!): Product!
 
     ##### nodemailer
@@ -150,15 +151,21 @@ export const resolvers = {
     },
     getUser: async (_, { id }) => {
       try {
+        console.log('masuk ga');
         const users = JSON.parse(await redis.get('users'));
-        const user = users.filter((el) => el._id == id);
-        if (user.length) {
+        let user;
+        if(users) {
+          user = users.filter((el) => el._id == id);
+        } 
+        if (user && user.length) {
           const [ data ] = user;
           return data;
         } else {
           const getOneUser = await User.findOne({ _id: id });
-          users.push(getOneUser);
-          await redis.set('users', JSON.stringify(users));
+          if(users) {
+            users.push(getOneUser);
+            await redis.set('users', JSON.stringify(users));
+          }
           return getOneUser;
         }
       } catch (e) {
@@ -172,6 +179,17 @@ export const resolvers = {
         return getProducts;
       } else {
         const getAllProducts = await Product.find();
+        await redis.set('products', JSON.stringify(getAllProducts));
+        return getAllProducts;
+      }
+    },
+    getProductsFilter: async (_, { where }) => {
+      const products = JSON.parse(await redis.get('products'));
+      const getProducts = products.filter(el => el.submit == where);
+      if (getProducts.length) {
+        return getProducts;
+      } else {
+        const getAllProducts = await Product.find({ submit: where });
         await redis.set('products', JSON.stringify(getAllProducts));
         return getAllProducts;
       }
@@ -477,6 +495,9 @@ export const resolvers = {
         const userAuth = await authen(token);
         const user = await User.findOne({ _id: userAuth.id });
         const { userTarget, productOriginal, productTarget } = input;
+        if (productTarget[0].submit) throw new Error('Barang yang kamu inginkan sudah laku');
+        // let checkOriginal = productOriginal.filter(el => el.submit === true);
+        // if (checkOriginal.length) throw new Error('Barang punya kamu sudah tertukar');
         if (!user) throw new Error('You have to login!');
         const transaction = new Transaction({
           userOriginal: userAuth.id,
@@ -487,7 +508,7 @@ export const resolvers = {
         const newTrans = await transaction.save();
         return newTrans;
       } catch (error) {
-        console.log(error);
+        console.log(error, 'Erroororor');
         return error;
       }
     },
@@ -498,13 +519,34 @@ export const resolvers = {
         },
       }
     ) => {
-      const userAuth = await authen(token);
-      const user = await User.findOne({ _id: userAuth.id });
-      if (!user) throw new Error('You have to login!');
-      const updateTransaction = await Transaction.findOneAndUpdate({ _id: id }, { status: input });
-      await updateTransaction.save();
-      
-      return updateTransaction;
+      try {
+        await redis.del('products');
+        const userAuth = await authen(token);
+        const user = await User.findOne({ _id: userAuth.id });
+        if (!user) throw new Error('You have to login!');
+        const updateTransaction = await Transaction.findOne({ _id: id });
+        updateTransaction.status = input;
+        const target = await Product.findById(updateTransaction.productTarget[0]._id);
+        if(target.submit) throw new Error('Barang yang kamu inginkan sudah tertukar');
+        target.submit = true;
+        await target.save();
+        let data;
+        for (let el of updateTransaction.productOriginal) {
+          data = await Product.findOne({ _id: el._id });
+          if (data.submit) throw new Error('Barang kamu sudah tertukar');
+          data.submit = true;
+          await data.save();
+        }
+        updateTransaction.productTarget[0].submit = input;
+        updateTransaction.productOriginal.forEach(el => el.submit = input);
+        await updateTransaction.save();
+        const newPro = Product.find();
+        redis.set('products', JSON.stringify(newPro));
+        return updateTransaction;
+      } catch (error) {
+        console.log(error.message);
+        return error;
+      }
     },
 
     deleteTransaction: async ( _, { id }, { req: { headers: { token } } }) => {

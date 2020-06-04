@@ -4,6 +4,7 @@ import ConfirmationItem from '../components/ConfirmationItem';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { TRANSACTION, GET_TRANSACTION_BYID, updateTransaction, deleteTransaction } from '../services/schema';
 import { useHistory, useParams, useLocation } from 'react-router-dom';
+import alertify from 'alertifyjs';
 
 export default function Confirmation () {
   const [ barter ] = useState(JSON.parse(localStorage.getItem('barter')));
@@ -15,6 +16,9 @@ export default function Confirmation () {
   const { search } = useLocation();
   const { loading, error, data } = useQuery(GET_TRANSACTION_BYID, { variables: { 
     id: id ? id : null, userId1: localStorage.getItem('userOriginal'), userId2: localStorage.getItem('userTarget') } });
+  const [err, setErr] = useState(false);
+  const [alertInput, setAlert] = useState();
+  const [notif, setNotif] = useState();
 
   async function deal () {
     try {
@@ -23,7 +27,9 @@ export default function Confirmation () {
       // alert('SUCCES');
       history.push('/waiting');
     } catch (error) {
+      setErr(error);
       console.log(error, '>>>>>>>>>>>EOROREO');
+      alertify.notify(error.message, 'error', 5, function () { console.log('dismissed'); });
     }
   }
 
@@ -32,6 +38,8 @@ export default function Confirmation () {
       await updateTrans({ variables: { id: id, input: true } });
       history.push('/sukses');
     } catch (error) {
+      setAlert(true);
+      setNotif(error.message)
       console.log(error);
     }
   }
@@ -53,7 +61,8 @@ export default function Confirmation () {
     if(!localStorage.getItem('user_id')) {
       history.push('/')
     }
-    return <CompError />
+
+    return <CompError message={error ? error.message : err.message}/>
   }
  
   if (data) {
@@ -71,6 +80,17 @@ export default function Confirmation () {
       <>
         <HeaderMain />
         {/* <Navigation /> */}
+        {alertInput && (
+        <div className="modalAlert">
+          <div className="Alert-flex">
+            <div className="Alert-title">ALERT</div>
+            <div className="Alert-content">Notification: {notif}</div>
+            <div >
+              <button onClick={()=>setAlert(false)} className="Alert-button">OK</button>
+            </div>
+          </div>
+        </div>
+      )}
         <div className="confirmation-title">
           <h1>KONFIRMASI TRANSAKSI</h1>
         </div>

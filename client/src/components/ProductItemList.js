@@ -61,7 +61,7 @@ export default function ProductItemList ({ product }) {
     
       <div class="aneh">
           <Link to={ '/barang/' + product._id } >
-        <div class="container" style={{background: `url(${product.image ? product.image : dummyImage})`, backgroundSize: 'contain'}}>
+        <div class="container" style={{background: `url(${product.image ? product.image : dummyImage})`, backgroundSize: 'cover'}}>
         <div class="overlay">
           <div class = "items"></div>
           <div class = "items head">

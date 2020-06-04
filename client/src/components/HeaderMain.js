@@ -48,7 +48,9 @@ export default function HeaderMain () {
     setFilter('')
     history.push('/?filter=' + filter)
   }
-
+if(data) {
+  console.log(data, 'INI DATAAA')
+}
   return (
     // <div className="header-container">
     //   <Link to="/">
@@ -105,13 +107,13 @@ export default function HeaderMain () {
     // </div>
     <div className="headerAdvance">
       <nav>
-          <img src={logoBw} alt="logo" className="logocustom"/>
+          {/* <img src={logoBw} alt="logo" className="logocustom"/> */}
           <div class="logo">
           </div>
           <ul>
               <li><a >
                 <Link to={ localStorage.getItem('token') ? '/my-profile' : '/login' }>
-                  {data&&data.getUser.username}
+                  {localStorage.getItem('user_id') ? localStorage.getItem('username') : 'Login/Register'}
                 </Link>
               </a></li>
               <li><a >
@@ -217,8 +219,7 @@ export default function HeaderMain () {
       <header>
           <div class="headline">
               <div class="inner">
-                  <h1>KETUKER</h1>
-                  <p>Barterin [ Barang ] Mu Bro..</p>
+              <img src={logoBw} alt="logo" className="logocustom"/>
               </div>
           </div>
       </header>

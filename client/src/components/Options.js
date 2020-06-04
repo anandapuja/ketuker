@@ -41,8 +41,11 @@ export default function DetailOptions ({ ready, product }) {
     const uangRupiah = 'Rp. ' + rupiah;
     setPrice(uangRupiah)
   }, [])
+  console.log(product, 'PSANFISNGIPSANGIPSNDJ DJS ')
   return (
+    
     <>
+  {!product.submit &&
     <div className="product-item-list-container">
       {
         status && (
@@ -73,12 +76,7 @@ export default function DetailOptions ({ ready, product }) {
         )
       }
     </div>
-      {/* <div class="images-selector">
-        <input type="radio" id="duck" name="image" value="duck" />
-        <label for="duck" class="img-card" style={{background: `url(${product.image})`, backgroundSize: 'contain'}}>
-          {product.title}
-        </label>
-      </div> */}
+    }
     </>
   );
 }
