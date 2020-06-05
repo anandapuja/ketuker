@@ -1,16 +1,28 @@
-import { gql } from 'apollo-server';
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+// import { gql } from 'apollo-server';
+// import jwt from 'jsonwebtoken';
+// import bcrypt from 'bcrypt';
 
-import getTokoPedia from '../utilities/scraping';
-import sendEmail from '../utilities/nodemailer';
-import redis from '../utilities/redis';
-import User from '../models/User';
-import Product from '../models/Product';
-import { authen, author } from '../utilities/authenticagtion';
-import Transaction from '../models/Transaction';
+// import getTokoPedia from '../utilities/scraping';
+// import sendEmail from '../utilities/nodemailer';
+// import redis from '../utilities/redis';
+// import User from '../models/User';
+// import Product from '../models/Product';
+// import { authen, author } from '../utilities/authenticagtion';
+// import Transaction from '../models/Transaction';
 
-export const typeDefs = gql`
+const { gql } = require('apollo-server');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+
+const getTokoPedia = require('../utilities/scraping');
+const sendEmail = require('../utilities/nodemailer');
+const redis = require('../utilities/redis');
+const User = require('../models/User');
+const Product = require('../models/Product');
+const { authen, author } = require('../utilities/authenticagtion');
+const Transaction = require('../models/Transaction');
+
+const typeDefs = gql`
   type User {
     _id: ID!
     username: String!
@@ -137,7 +149,7 @@ export const typeDefs = gql`
   }
 `;
 
-export const resolvers = {
+const resolvers = {
   Query: {
     getUsers: async () => {
       const checkUsers = JSON.parse(await redis.get('users'));
@@ -342,7 +354,7 @@ export const resolvers = {
         }
       } else {
         const res = await newUser.save();
-        const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
+        const token = jwt.sign({ id: newUser._id }, 'rahasia');
         const users = JSON.parse(await redis.get('users'));
         if (users) {
           users.push(newUser);
@@ -362,7 +374,7 @@ export const resolvers = {
           throw new Error('Wrong Password / Wrong Email');
         } else {
           //kalo secretPrivateKey gw taruh di .env masih error. sementara gtu.
-          const token = jwt.sign({ id: getUser._id }, process.env.JWT_SECRET);
+          const token = jwt.sign({ id: getUser._id }, 'rahasia');
           const { _id, username, email, avatar, address, phone } = getUser;
           return {
             _id: _id,
@@ -559,4 +571,10 @@ export const resolvers = {
       };
     }
   },
+};
+
+// module.exports = resolvers;
+// module.exports = typeDefs;
+module.exports = {
+  resolvers, typeDefs
 };

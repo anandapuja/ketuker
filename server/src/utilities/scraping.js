@@ -37,4 +37,5 @@ async function getTokoPedia(item) {
   return productNames;
 }
 
-export default getTokoPedia;
+// export default getTokoPedia;
+module.exports = getTokoPedia;
