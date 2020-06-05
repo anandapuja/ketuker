@@ -15,7 +15,7 @@ import SliderApp from '../components/Slider';
 export default function Home () {
   const { search } = useLocation();
   const history = useHistory();
-  const { loading, error, data } = useQuery(GET_ALL_PRODUCT_Filter, { variables: { where: 'false' } , fetchPolicy: 'cache-and-network' });
+  const { loading, error, data } = useQuery(GET_ALL_PRODUCT, { fetchPolicy: 'cache-and-network' });
   const [ page, setPage ] = useState(search ? Number(search.slice(6)) : 1);
   const [ products, setProducts ] = useState([]);
   const [ allProd, setAll ] = useState();
