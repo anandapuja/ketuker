@@ -21,7 +21,7 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_PRODUCT = gql`
-mutation addProduct($input: InputProduct!) {
+mutation addProduct($input: InputProduct) {
   addProduct(input: $input) {
     title
     description
@@ -66,7 +66,7 @@ query getProductsFilter($where: String){
 `;
 
 export const GET_PRODUCT_DETAIL = gql`
-query productDetail($id: ID!) {
+query productDetail($id: ID) {
   getProduct(id: $id) {
     _id
     title
@@ -82,7 +82,7 @@ query productDetail($id: ID!) {
 `;
 
 export const GET_PRODUCT_USER = gql`
-query productByUser($userId: ID!) {
+query productByUser($userId: ID) {
   productByUser(userId: $userId) {
     _id
     title
@@ -97,7 +97,7 @@ query productByUser($userId: ID!) {
 `;
 
 export const GET_PRODUCT_USER_AND_DETAIL = gql`
-query ($id: ID!, $userId: ID!) {
+query ($id: ID, $userId: ID) {
   productByUser(userId: $userId) {
     _id
     title
@@ -158,7 +158,7 @@ export const GET_PRODUCTS_AND_USERS = gql`
 `;
 
 export const GET_USER = gql`
-query getUser($id: ID!) {
+query getUser($id: ID) {
   getUser(id: $id) {
     username,
     address,
@@ -181,7 +181,7 @@ query getUsers{
 `;
 
 export const TRANSACTION = gql`
-mutation addTransaction($input: InputTransaction!) {
+mutation addTransaction($input: InputTransaction) {
   addTransaction(input: $input) {
     _id
     userTarget
@@ -192,7 +192,7 @@ mutation addTransaction($input: InputTransaction!) {
 `;
 
 export const GET_TRANSACTION_BYID = gql`
-query ($id: ID, $userId1: ID!, $userId2: ID!) {
+query ($id: ID, $userId1: ID, $userId2: ID) {
   transactionById(id: $id) {
     _id
     userTarget
@@ -227,7 +227,7 @@ query ($id: ID, $userId1: ID!, $userId2: ID!) {
 `;
 
 export const GET_TRANSACTION_USER = gql`
-query ($userId: ID!) {
+query ($userId: ID) {
   transactionByOriginal(userId: $userId) {
     _id
     userTarget
@@ -270,7 +270,7 @@ query ($userId: ID!) {
 `;
 
 export const updateTransaction = gql`
-mutation ($id: ID!, $input: Boolean!) {
+mutation ($id: ID, $input: Boolean) {
   updateTransaction(id: $id, input: $input) {
     _id
     userTarget
@@ -291,7 +291,7 @@ mutation ($id: ID!, $input: Boolean!) {
 `;
 
 export const deleteTransaction = gql`
-mutation ($id: ID!) {
+mutation ($id: ID) {
   deleteTransaction(id: $id) {
     result
   }
@@ -299,7 +299,7 @@ mutation ($id: ID!) {
 `;
 
 export const updateProduct = gql`
-mutation ($id: ID!, $input: InputProduct!) {
+mutation ($id: ID, $input: InputProduct) {
   updateProduct(id: $id, input: $input) {
     result
   }
@@ -307,7 +307,7 @@ mutation ($id: ID!, $input: InputProduct!) {
 `;
 
 export const deleteProduct = gql`
-mutation ($id: ID!) {
+mutation ($id: ID) {
   deleteProduct(id: $id) {
     result
   }
@@ -315,7 +315,7 @@ mutation ($id: ID!) {
 `;
 
 export const scrapPrice = gql`
-query ($item: String!) {
+query ($item: String) {
   getScrap (item: $item) {
     items {
       title
